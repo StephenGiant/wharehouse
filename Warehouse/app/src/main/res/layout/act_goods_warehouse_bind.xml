@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    >
+    <include
+        layout="@layout/layout_toolbar"
+
+        />
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/white_rec"
+        >
+<TextView
+    android:layout_marginLeft="10dp"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:text="@string/tv_goods_num"
+    android:textSize="16sp"
+    android:textColor="@color/text_title"
+
+    />
+        <cn.wochu.wh.view.SearchEditText
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:background="@null"
+            android:id="@+id/goodsCode"
+            android:singleLine="true"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/white_rec"
+        >
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/tv_scan_goods_name"
+            android:textSize="16sp"
+            android:textColor="@color/text_title"
+
+            />
+        <TextView
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/layout_bg_green"
+
+            android:id="@+id/goodsName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/white_rec"
+        >
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="@string/huowei_num"
+            android:textSize="16sp"
+            android:textColor="@color/text_title"
+
+            />
+        <EditText
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="9dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:background="@null"
+            android:id="@+id/huowei_id"
+            android:singleLine="true"
+            />
+    </LinearLayout>
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:background="@drawable/test"
+
+        android:id="@+id/btn_submit" />
+</LinearLayout>

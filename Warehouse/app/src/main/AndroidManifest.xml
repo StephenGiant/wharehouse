@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.wochu.wh"
+   >
+
+    <application
+        android:name=".base.BaseApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".ui.LoginAct">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.MainPageAct" />
+        <activity android:name=".ui.GoodsWarehouseSearchAct" />
+        <activity android:name=".ui.GoodsCheckAct" />
+        <activity android:name=".ui.GoodsTransferWarehouseAct" />
+        <activity android:name=".ui.OrdersOffSaleAct" />
+        <activity android:name=".ui.GoodsTransferOnWarehouseAct" />
+        <activity android:name=".ui.ThridOrderSearchAct" />
+        <activity android:name=".ui.GoodsOnShelvesAct" />
+        <activity android:name=".ui.GoodsWharehouseBindAct"></activity>
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+</manifest>

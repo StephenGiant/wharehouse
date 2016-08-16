@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backfround_gray"
+    >
+<include
+    layout="@layout/toolbar_layout"
+    />
+    <Button
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="连接ufh"
+        android:textSize="@dimen/text_title"
+        android:id="@+id/connect_nfc"
+        android:layout_gravity="center_horizontal"
+        android:elevation="2dp"
+        android:background="@drawable/button_selector"
+        />
+
+
+    <LinearLayout
+        android:paddingTop="9dp"
+        android:paddingBottom="9dp"
+        android:layout_marginTop="9dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="UFHID:"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/text_black"
+            />
+        <EditText
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:id="@+id/et_ufhID"
+            android:layout_marginLeft="9dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
+            />
+    </LinearLayout>
+    <View
+
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_black_5e"
+        />
+    <LinearLayout
+        android:background="@color/white"
+        android:paddingTop="9dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:text="商品条码:"
+            android:textSize="@dimen/text_title"
+            android:textColor="@color/text_black"
+            />
+        <EditText
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:id="@+id/et_goodsCode"
+            android:layout_marginLeft="9dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:maxLines="1"
+            />
+    </LinearLayout>
+
+    <View
+
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_black_5e"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/progress"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:layout_gravity="center"
+        android:visibility="visible"
+        app:indicator="LineScale"
+        app:indicator_color="@color/colorPrimary" />
+    </FrameLayout>
+
+</LinearLayout>

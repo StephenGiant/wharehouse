@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backfround_gray"
+    >
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RFID扫描登陆界面\n(不支持扫描登陆)"
+        android:textSize="20sp"
+       android:layout_gravity="center_horizontal"
+        />
+
+    <LinearLayout
+        android:paddingTop="5dp"
+    android:layout_marginTop="35dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/white"
+    >
+    <TextView
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="工号"
+        android:textSize="16sp"
+        android:textColor="#444444"
+
+        />
+        <wochu.com.rfpdaapp.wiget.ClearEditText
+            android:id="@+id/et_userName"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:maxLength="11"
+            android:inputType="text"
+            />
+</LinearLayout>
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="密码"
+            android:textSize="16sp"
+            android:textColor="#444444"
+
+            />
+        <wochu.com.rfpdaapp.wiget.ClearEditText
+            android:id="@+id/et_password"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="numberPassword"
+            android:maxLines="1"
+            android:maxLength="8"
+            />
+    </LinearLayout>
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_login"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="登陆"
+        android:textSize="16sp"
+        android:textColor="#666666"
+        android:elevation="2dp"
+        android:background="@drawable/button_selector"
+        />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/progress"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicator="LineScale"
+        app:indicator_color="#883CB371"
+        android:layout_gravity="center_horizontal|center_vertical"
+        />
+</LinearLayout>
