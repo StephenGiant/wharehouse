@@ -9,11 +9,17 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.wms_erp.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context=".ui.MainActivity"
+    tools:showIn="@layout/app_bar_main"
+    android:background="@color/background_gray"
+    >
 
 
-    <include
-        layout="@layout/on_offshelve_layout"
-        />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_functions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|top">
+
+    </android.support.v4.view.ViewPager>
 </FrameLayout>

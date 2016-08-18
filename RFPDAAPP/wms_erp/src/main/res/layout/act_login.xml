@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include
+    layout="@layout/toolbar_layout"
+
+    />
+<com.example.wms_erp.view.ClearEditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="18sp"
+    android:hint="输入账号"
+    android:textColorHint="#999999"
+    android:textColor="#666666"
+    android:background="@null"
+    />
+    <com.example.wms_erp.view.ClearEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:hint="输入密码"
+        android:textColorHint="#999999"
+        android:textColor="#666666"
+        android:background="@null"
+        />
+<Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/MyButtonTheme"
+    android:text="登陆"
+
+    />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyButtonTheme"
+        android:text="注销"
+
+        />
+</LinearLayout>
