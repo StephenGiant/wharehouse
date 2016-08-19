@@ -22,5 +22,23 @@
         android:textColor="#FFFFFF"
 
         />
+
 </LinearLayout>
+    <com.example.wms_erp.view.SearchEditText
+        android:id="@+id/se_barCode"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:hint="输入条码"
+        android:textColor="#666666"
+        android:textColorHint="#999999"
+        android:background="@null"
+        />
+
 </LinearLayout>

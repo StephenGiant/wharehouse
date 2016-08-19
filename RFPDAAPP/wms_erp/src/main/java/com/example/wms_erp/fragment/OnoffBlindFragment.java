@@ -1,32 +1,5 @@
 package com.example.wms_erp.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.wms_erp.R;
-
-
-
-
-/**
- * Created by Administrator on 2016/8/18.
- */
-public class OnoffBlindFragment extends BaseFragment {
-
-    public OnoffBlindFragment() {
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.on_offshelve_layout, null);
-//        return super.onCreateView(inflater, container, savedInstanceState);
-        return view;
-    }
-}
 //                                      LWKKKKKKKWKKEGGDEEGGDfLEEKDLDKEEKDEGGEKKEDKG:
 //                                     i##W######EEKKW######LEKLLD#fGKKK#EEEKDGE#WK#K
 //                                     E#####WWEDK###########K#KfGDGf#EEKEKDLDDKK###KD:
@@ -91,6 +64,62 @@ public class OnoffBlindFragment extends BaseFragment {
 //..:.....::,,;,,::......................::,,:,itjLGfi,,,tD#LG:jD.Lj,            j: .
 //.........:::,,i,,::.....:................:::,;ifLLKWKEDEDfDLGKGDtj      .     :t
 //
+//
+//                                         美女镇楼！！！
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.example.wms_erp.R;
+import com.example.wms_erp.view.SearchEditText;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+/**
+ * Created by Administrator on 2016/8/18.
+ */
+public class OnoffBlindFragment extends BaseFragment {
+
+    @Bind(R.id.tv_title)
+    TextView tvTitle;
+    @Bind(R.id.ll_categary)
+    LinearLayout llCategary;
+    @Bind(R.id.se_barCode)
+    SearchEditText seBarCode;
+
+    public OnoffBlindFragment() {
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.on_offshelve_layout, null);
+
+//        return super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, view);
+
+        return view;
+    }
+
+    @Override
+    public void dispatchCode(String code) {
+            seBarCode.setText(code);
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+}
+
 //
 //
 //

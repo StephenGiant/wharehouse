@@ -27,8 +27,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
+    @Override
+    protected void handleCode(String str) {
+        //将code传给当前的fragment处理
+    }
 
     @Bind(R.id.toolbar)
     Toolbar toolbar;

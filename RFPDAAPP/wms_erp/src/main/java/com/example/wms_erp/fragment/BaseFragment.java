@@ -1,6 +1,7 @@
 package com.example.wms_erp.fragment;
 
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 //                            _ooOoo_
 //                           o8888888o
@@ -35,6 +36,12 @@ import android.support.v4.app.Fragment;
 /**基类fragment
  * Created by qianpeng on 2016/8/18.
  */
-public class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
+    /**
+     * 将扫描的条码与指定的view绑定
+     * @param view
+     * @param code
+     */
+    public abstract void dispatchCode( String code);
 }
