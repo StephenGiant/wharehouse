@@ -7,24 +7,35 @@
 
     />
 <com.example.wms_erp.view.ClearEditText
+    android:id="@+id/et_userName"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="18sp"
     android:hint="输入账号"
     android:textColorHint="#999999"
     android:textColor="#666666"
-    android:background="@null"
+
     />
     <com.example.wms_erp.view.ClearEditText
+        android:id="@+id/et_password"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
         android:hint="输入密码"
         android:textColorHint="#999999"
         android:textColor="#666666"
-        android:background="@null"
+
         />
 <Button
+    android:id="@+id/btn_login"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/MyButtonTheme"
@@ -32,6 +43,10 @@
 
     />
     <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_quit"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/MyButtonTheme"

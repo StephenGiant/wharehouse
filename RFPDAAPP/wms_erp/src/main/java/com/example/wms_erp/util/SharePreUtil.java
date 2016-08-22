@@ -52,4 +52,11 @@ public class SharePreUtil {
         SharedPreferences sp = context.getSharedPreferences(CONFIG, 0);
         return sp.getFloat(key, defValue);
     }
+
+    public static void clearSP(Context context){
+        SharedPreferences sp = context.getSharedPreferences(CONFIG, 0);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.clear();
+        edit.commit();
+    }
 }

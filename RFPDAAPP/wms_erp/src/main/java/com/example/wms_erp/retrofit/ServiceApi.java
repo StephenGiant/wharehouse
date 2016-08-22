@@ -3,6 +3,7 @@ package com.example.wms_erp.retrofit;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.post.OnShelvebean;
 import com.example.wms_erp.model.response.OnShelveInfo;
+import com.example.wms_erp.model.response.UserInfo;
 
 import retrofit.http.Body;
 import retrofit.http.GET;
@@ -32,4 +33,13 @@ public interface ServiceApi {
      */
     @POST("OnShelves/SetOnShelves")
     public Observable<String> postOnShelve (@Query("userID") int userID, @Query("objType") String objType, @Body OnShelvebean osb);
+
+    /**
+     * 登陆接口
+     * @param userID
+     * @param userPswd
+     * @return
+     */
+    @GET("http://116.228.118.218:9099/Login/LogonUser")
+    public Observable<BaseBean<UserInfo>> login(@Query("userID")String userID,@Query("userPswd")String userPswd);
 }

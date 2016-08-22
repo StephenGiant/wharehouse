@@ -45,6 +45,8 @@ import android.view.WindowManager;
 import com.example.wms_erp.R;
 import com.example.wms_erp.application.AppManager;
 import com.example.wms_erp.receiver.PDAReceiver;
+import com.example.wms_erp.retrofit.RetrofitSingle;
+import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.util.NetUtils;
 import com.example.wms_erp.util.ToastUtil;
 
@@ -68,6 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     private PDAReceiver receiver;
     private IntentFilter scanDataIntentFilter;
+    protected ServiceApi serviceApi;
 
 
     @Override
@@ -87,6 +90,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         //scanDataIntentFilter.addAction("com.android.scancontext");
         //后台输出
         scanDataIntentFilter.addAction("com.android.scanservice.scancontext");
+        serviceApi = RetrofitSingle.getInstance();
     }
 
     protected abstract void handleCode(String str);

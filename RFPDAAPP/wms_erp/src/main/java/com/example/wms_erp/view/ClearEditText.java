@@ -84,10 +84,10 @@ public class ClearEditText extends EditText implements View.OnFocusChangeListene
                 boolean isInnerWidth = x > (getWidth() - getTotalPaddingRight()) && x < (getWidth() - getPaddingRight());
                 boolean isInnerHeight = y > distance && y < (distance + height);
                 if (isInnerWidth && isInnerHeight) {
-//                    this.setText("");
-                    if(onConfirmListenner!=null){
-                        onConfirmListenner.onConfirm(getText().toString());
-                    }
+                    this.setText("");
+//                    if(onConfirmListenner!=null){
+//                        onConfirmListenner.onConfirm(getText().toString());
+//                    }
                 }
             }
         }
