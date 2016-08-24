@@ -69,19 +69,23 @@ package com.example.wms_erp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wms_erp.R;
 import com.example.wms_erp.adapter.OnshelveInfoAdapter;
 import com.example.wms_erp.decorator.MySpaceDecration;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
+import com.example.wms_erp.presenter.impl.OnOffShelvePresenterImpl;
 import com.example.wms_erp.ui.MainActivity;
 import com.example.wms_erp.view.SearchEditText;
 
@@ -93,7 +97,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Administrator on 2016/8/18.
  */
-public class OnoffBlindFragment extends BaseFragment {
+public class OnoffBlindFragment extends BaseFragment implements View.OnClickListener{
 
     @Bind(R.id.tv_title)
     TextView tvTitle;
@@ -104,10 +108,13 @@ public class OnoffBlindFragment extends BaseFragment {
     @Bind(R.id.sp_reson)
     Spinner spReson;
     @Bind(R.id.onshelve_data)
-    RecyclerView onshelveData;
+    public RecyclerView onshelveData;
     MainActivity mActivity;
+    private MainActivity activity;
+    private OnOffShelvePresenterImpl onOffShelvePresenter;
 
     public OnoffBlindFragment() {
+
     }
 
     public static OnoffBlindFragment newInstance(Bundle args) {
@@ -115,20 +122,37 @@ public class OnoffBlindFragment extends BaseFragment {
         f.setArguments(args);
         return f;
     }
-
+String curType;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        activity = (MainActivity) getActivity();
+        onOffShelvePresenter = new OnOffShelvePresenterImpl(activity,this);
         View view = inflater.inflate(R.layout.on_offshelve_layout, null);
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, view);
+        tvTitle.setOnClickListener(this);
+       final String[] stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
+        curType = stringArray[0];
+        spReson.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+               curType= stringArray[position];
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         ArrayList<BaseBean<OnShelveInfo>> data = new ArrayList<>();
         for(int x=0;x<3;x++) {
             data.add(null);
         }
         onshelveData.addItemDecoration(new MySpaceDecration(10));
-        onshelveData.setAdapter(new OnshelveInfoAdapter(getActivity(),data));
+
 
 
         return view;
@@ -137,6 +161,7 @@ public class OnoffBlindFragment extends BaseFragment {
     @Override
     public void dispatchCode(String code) {
         seBarCode.setText(code);
+        onOffShelvePresenter.getOnShelveInfo(code);
 
     }
 
@@ -144,6 +169,13 @@ public class OnoffBlindFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Toast.makeText(getContext(),"点击了",Toast.LENGTH_SHORT).show();
+        onOffShelvePresenter.postOnShelve();
+
     }
 }
 

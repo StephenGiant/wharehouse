@@ -107,10 +107,12 @@ public class MainActivity extends BaseActivity
     private TextView account_name;
     private TextView versionName;
     private MyApplication application;
+    private OnoffBlindFragment onoffBlindFragment;
 
     @Override
     protected void handleCode(String str) {
         //将code传给当前的fragment处理
+        onoffBlindFragment.dispatchCode(str);
     }
 
     @Bind(R.id.toolbar)
@@ -137,7 +139,7 @@ public class MainActivity extends BaseActivity
         application = (MyApplication) getApplication();
         toolbar.setTitle("盲扫上下架");
         setSupportActionBar(toolbar);
-
+        onoffBlindFragment = new OnoffBlindFragment();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -238,7 +240,7 @@ public class MainActivity extends BaseActivity
     private void initViewPager() {
         vpFunctions.setNoScroll(true);
         ArrayList<Fragment> fragments = new ArrayList<>();
-    fragments.add(new OnoffBlindFragment());
+    fragments.add(onoffBlindFragment);
         FunctionsAdapter functionsAdapter = new FunctionsAdapter(getSupportFragmentManager(), this, fragments);
         vpFunctions.setAdapter(functionsAdapter);
     }

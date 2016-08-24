@@ -17,6 +17,7 @@
             android:textSize="17sp"
             />
         <TextView
+            android:id="@+id/goods_name"
             android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
             android:textSize="17sp"
             />
         <TextView
+            android:id="@+id/goods_location"
             android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,6 +65,7 @@
             android:textSize="17sp"
             />
         <TextView
+            android:id="@+id/goodsCode"
             android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,6 +89,7 @@
             android:textSize="17sp"
             />
         <TextView
+            android:id="@+id/batchNum"
             android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +114,7 @@
             android:textSize="17sp"
             />
         <TextView
+            android:id="@+id/unit"
             android:layout_marginLeft="9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -126,6 +131,7 @@
             android:textSize="17sp"
             />
         <TextView
+            android:id="@+id/specifation"
             android:layout_marginLeft="9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,6 +148,7 @@
             android:textSize="17sp"
             />
         <TextView
+            android:id="@+id/count"
             android:layout_marginLeft="9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

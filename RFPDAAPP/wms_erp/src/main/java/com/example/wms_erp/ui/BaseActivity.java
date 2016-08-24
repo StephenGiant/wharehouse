@@ -68,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * PDA相关
      */
-    private PDAReceiver receiver;
+    protected PDAReceiver receiver;
     private IntentFilter scanDataIntentFilter;
     protected ServiceApi serviceApi;
 

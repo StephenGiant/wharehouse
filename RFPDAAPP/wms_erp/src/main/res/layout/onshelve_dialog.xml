@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/ll_reson"
+   android:layout_marginTop="150dp"
+    android:layout_marginLeft="50dp"
+    android:layout_marginRight="50dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+
+    >
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="上架原因:"
+        android:textColor="@color/text_black"
+
+        />
+    <Spinner
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/onshelve_type"
+        android:spinnerMode="dropdown"
+        ></Spinner>
+</LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/ll_reson"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="大单位"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"
+
+            />
+        <com.example.wms_erp.view.ClearEditText
+            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:hint="0"
+            android:background="@null"
+            />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小单位"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"
+            />
+        <com.example.wms_erp.view.ClearEditText
+            android:layout_marginLeft="10dp"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:hint="0"
+            android:background="@null"
+            />
+    </LinearLayout>
+</RelativeLayout>
