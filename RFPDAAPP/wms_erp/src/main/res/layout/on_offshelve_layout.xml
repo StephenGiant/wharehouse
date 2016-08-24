@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    >
 <LinearLayout
     android:id="@+id/ll_categary"
     android:layout_width="match_parent"
@@ -39,18 +42,74 @@
         android:textColor="#666666"
         android:textColorHint="#999999"
         android:background="@null"
+        android:maxLines="1"
         />
-
+<View
+    android:layout_width="match_parent"
+    android:layout_height="0.5dp"
+    android:background="#666666"
+    />
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        >
         <Spinner
-            android:layout_width="wrap_content"
+
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:entries="@array/onshelve_type"
             android:spinnerMode="dropdown"
             android:id="@+id/sp_reson"></Spinner>
+<TextView
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_width="wrap_content"
 
+    android:layout_height="wrap_content"
+    android:text="大单位"
+    android:textSize="16sp"
+
+    />
+        <EditText
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:background="@null"
+            android:maxLines="1"
+            />
+        <TextView
+
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+
+            android:layout_height="wrap_content"
+            android:text="小单位"
+            android:textSize="16sp"
+
+            />
+        <EditText
+            android:layout_marginRight="10dp"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:background="@null"
+            android:maxLines="1"
+            />
     </LinearLayout>
 
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/onshelve_data"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layoutManager="LinearLayoutManager"
+    app:reverseLayout="false"
+
+
+    >
+
+</android.support.v7.widget.RecyclerView>
 </LinearLayout>

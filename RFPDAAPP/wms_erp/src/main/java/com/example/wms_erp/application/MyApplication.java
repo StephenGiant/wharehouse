@@ -33,7 +33,7 @@ public class MyApplication extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }finally {
-            //fuck your selfe
+            //fuck your selve
         }
 return null;
     }

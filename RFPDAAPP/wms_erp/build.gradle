@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
-
+repositories {
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
 android {
     compileSdkVersion 23
     buildToolsVersion "24.0.1"
@@ -35,4 +39,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.7.5'
     compile 'com.balysv:material-ripple:1.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.github.lsjwzh.RecyclerViewPager:lib:v1.1.1'
 }

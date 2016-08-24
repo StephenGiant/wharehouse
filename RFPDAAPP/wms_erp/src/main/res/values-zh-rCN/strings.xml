@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">WMS_ERP管理</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
     <string name="base_act_network_no">亲，当前网络不给力!</string>
+    <string name="huowei">货位号</string>
+    <string name="goodsname">商品名</string>
+    <string name="goodscode">商品编码</string>
+    <string name="batchnumber">批次号</string>
+    <string name="unit">单位</string>
+    <string name="specification">规格</string>
+    <string name="count">数量</string>
 </resources>

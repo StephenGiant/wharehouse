@@ -69,14 +69,23 @@ package com.example.wms_erp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.wms_erp.R;
+import com.example.wms_erp.adapter.OnshelveInfoAdapter;
+import com.example.wms_erp.decorator.MySpaceDecration;
+import com.example.wms_erp.model.BaseBean;
+import com.example.wms_erp.model.response.OnShelveInfo;
+import com.example.wms_erp.ui.MainActivity;
 import com.example.wms_erp.view.SearchEditText;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -92,8 +101,19 @@ public class OnoffBlindFragment extends BaseFragment {
     LinearLayout llCategary;
     @Bind(R.id.se_barCode)
     SearchEditText seBarCode;
+    @Bind(R.id.sp_reson)
+    Spinner spReson;
+    @Bind(R.id.onshelve_data)
+    RecyclerView onshelveData;
+    MainActivity mActivity;
 
     public OnoffBlindFragment() {
+    }
+
+    public static OnoffBlindFragment newInstance(Bundle args) {
+        OnoffBlindFragment f = new OnoffBlindFragment();
+        f.setArguments(args);
+        return f;
     }
 
     @Nullable
@@ -103,13 +123,20 @@ public class OnoffBlindFragment extends BaseFragment {
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, view);
+        ArrayList<BaseBean<OnShelveInfo>> data = new ArrayList<>();
+        for(int x=0;x<3;x++) {
+            data.add(null);
+        }
+        onshelveData.addItemDecoration(new MySpaceDecration(10));
+        onshelveData.setAdapter(new OnshelveInfoAdapter(getActivity(),data));
+
 
         return view;
     }
 
     @Override
     public void dispatchCode(String code) {
-            seBarCode.setText(code);
+        seBarCode.setText(code);
 
     }
 
