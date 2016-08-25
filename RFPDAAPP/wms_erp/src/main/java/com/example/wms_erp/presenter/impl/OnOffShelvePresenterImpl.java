@@ -1,5 +1,8 @@
 package com.example.wms_erp.presenter.impl;
 
+import android.support.v4.app.FragmentManager;
+import android.view.View;
+
 import com.example.wms_erp.adapter.OnshelveInfoAdapter;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.model.BaseBean;
@@ -8,6 +11,8 @@ import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.ui.MainActivity;
 import com.example.wms_erp.util.SharePreUtil;
+import com.example.wms_erp.view.OnshelveDialog;
+import com.example.wms_erp.view.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -26,12 +31,21 @@ public class OnOffShelvePresenterImpl extends BasePresenterImpl {
     private final ArrayList<OnShelveInfo> onShelveInfos;
     private OnshelveInfoAdapter adapter;
 private OnoffBlindFragment fragment;
-    public OnOffShelvePresenterImpl(MainActivity activity, OnoffBlindFragment fragment) {
+    public OnOffShelvePresenterImpl(final MainActivity activity, OnoffBlindFragment fragment) {
         this.activity = activity;
         this.fragment = fragment;
         serviceApi = RetrofitSingle.getInstance();
         userID = SharePreUtil.getInteger(activity, "userID", 0);
         onShelveInfos = new ArrayList<>();
+
+        fragment.onshelveData.addOnItemTouchListener(new RecyclerItemClickListener(activity) {
+            @Override
+            protected void onItemClick(View view, int position) {
+
+
+            }
+        });
+
     }
 
     /**
@@ -80,6 +94,7 @@ private OnoffBlindFragment fragment;
 //                activity.ToastCheese(onShelveInfoBaseBean.getDATA().toString());
                 if(onShelveInfoBaseBean.getDATA()!=null) {
                     showOnShelveInfo(onShelveInfoBaseBean.getDATA());
+                    showOnshelveDialog(onShelveInfoBaseBean.getDATA());
                 }else{
                     activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
                 }
@@ -95,5 +110,16 @@ private OnoffBlindFragment fragment;
         }else{
             adapter.refreshData(onShelveInfos);
         }
+    }
+    public boolean isShowing(){
+        return adapter!=null&&adapter.getItemCount()>0;
+    }
+
+    private void showOnshelveDialog(OnShelveInfo info){
+        OnshelveDialog dialog = OnshelveDialog.instanceDialog(info);
+
+        FragmentManager manager = activity.getSupportFragmentManager();
+        android.app.FragmentManager activityFragmentManager = activity.getFragmentManager();
+        dialog.show(activity.getFragmentManager(),"onshelve");
     }
 }

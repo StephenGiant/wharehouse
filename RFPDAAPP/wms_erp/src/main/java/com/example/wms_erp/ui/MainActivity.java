@@ -92,6 +92,7 @@ import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.util.SharePreUtil;
 import com.example.wms_erp.view.NoScrollViewPager;
+import com.example.wms_erp.view.OnshelveDialog;
 
 import java.util.ArrayList;
 
@@ -113,6 +114,8 @@ public class MainActivity extends BaseActivity
     protected void handleCode(String str) {
         //将code传给当前的fragment处理
         onoffBlindFragment.dispatchCode(str);
+
+
     }
 
     @Bind(R.id.toolbar)

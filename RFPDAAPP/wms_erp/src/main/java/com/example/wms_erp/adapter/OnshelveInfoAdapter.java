@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.example.wms_erp.R;
 import com.example.wms_erp.model.response.OnShelveInfo;
+import com.example.wms_erp.view.MaterialDialog;
+import com.example.wms_erp.view.OnshelveDialog;
 import com.example.wms_erp.viewholder.MyBaseViewHolder;
 
 import java.util.List;
@@ -52,7 +54,7 @@ public class OnshelveInfoAdapter extends MyBaseAdapter<OnShelveInfo, OnshelveInf
         return viewHolder;
     }
 
-    static class OnshelveInfoViewHolder extends MyBaseViewHolder {
+     class OnshelveInfoViewHolder extends MyBaseViewHolder implements View.OnLongClickListener{
         @Bind(R.id.goods_name)
         TextView goodsName;
         @Bind(R.id.goods_location)
@@ -69,6 +71,19 @@ public class OnshelveInfoAdapter extends MyBaseAdapter<OnShelveInfo, OnshelveInf
         TextView specifation;
         public OnshelveInfoViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnLongClickListener(this);
         }
+
+        @Override
+        public boolean onLongClick(View v) {
+
+            return false;
+        }
+    }
+
+    @Override
+    public void addItem(OnShelveInfo item) {
+
+        super.addItem(item);
     }
 }

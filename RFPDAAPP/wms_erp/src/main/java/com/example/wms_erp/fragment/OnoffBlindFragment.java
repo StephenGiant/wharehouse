@@ -87,6 +87,8 @@ import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.presenter.impl.OnOffShelvePresenterImpl;
 import com.example.wms_erp.ui.MainActivity;
+import com.example.wms_erp.view.OnshelveDialog;
+import com.example.wms_erp.view.RecyclerItemClickListener;
 import com.example.wms_erp.view.SearchEditText;
 
 import java.util.ArrayList;
@@ -128,11 +130,12 @@ String curType;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         activity = (MainActivity) getActivity();
-        onOffShelvePresenter = new OnOffShelvePresenterImpl(activity,this);
+
         View view = inflater.inflate(R.layout.on_offshelve_layout, null);
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, view);
+
         tvTitle.setOnClickListener(this);
        final String[] stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
         curType = stringArray[0];
@@ -162,13 +165,24 @@ String curType;
     public void dispatchCode(String code) {
         seBarCode.setText(code);
         onOffShelvePresenter.getOnShelveInfo(code);
+        if(onOffShelvePresenter.isShowing()){
+
+        }
+
 
     }
 
     @Override
     public void onDestroyView() {
+
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onResume() {
+        onOffShelvePresenter = new OnOffShelvePresenterImpl(activity,this);
+        super.onResume();
     }
 
     @Override
@@ -177,6 +191,8 @@ String curType;
         onOffShelvePresenter.postOnShelve();
 
     }
+
+
 }
 
 //
