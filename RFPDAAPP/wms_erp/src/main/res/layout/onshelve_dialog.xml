@@ -125,7 +125,7 @@ android:paddingBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/MyButtonTheme"
-        android:text="提交上架"
+        android:text="确定参数"
 
         />
 </RelativeLayout>

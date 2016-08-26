@@ -43,7 +43,7 @@ public class OnShelveInfo {
     private int WAREHOUSEID;
     private String WAREHOUSECODE;
     private String CELLNO;
-    private int QTY;
+    private double QTY;
     private String CREATER;
     private String UNITNAME;
     private int INVQTY;
@@ -54,7 +54,7 @@ public class OnShelveInfo {
     private Object QUALITYSTATUS;
     private Object ISPURUNITNAME;
     private String GOODSSPEC;
-    private int MAXQTY;
+    private double MAXQTY;
     private int EntityState;
     private boolean Selected;
 
@@ -138,11 +138,11 @@ public class OnShelveInfo {
         this.CELLNO = CELLNO;
     }
 
-    public int getQTY() {
+    public double getQTY() {
         return QTY;
     }
 
-    public void setQTY(int QTY) {
+    public void setQTY(double QTY) {
         this.QTY = QTY;
     }
 
@@ -226,11 +226,11 @@ public class OnShelveInfo {
         this.GOODSSPEC = GOODSSPEC;
     }
 
-    public int getMAXQTY() {
+    public double getMAXQTY() {
         return MAXQTY;
     }
 
-    public void setMAXQTY(int MAXQTY) {
+    public void setMAXQTY(double MAXQTY) {
         this.MAXQTY = MAXQTY;
     }
 

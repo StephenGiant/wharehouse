@@ -5,6 +5,8 @@ import com.example.wms_erp.model.post.OnShelvebean;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.model.response.UserInfo;
 
+import java.util.List;
+
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -28,11 +30,11 @@ public interface ServiceApi {
      * 提交上架
      * @param userID
      * @param objType
-     * @param osb
+     * @param onShelveInfos
      * @return
      */
     @POST("OnShelves/SetOnShelves")
-    public Observable<String> postOnShelve (@Query("userID") int userID, @Query("objType") String objType, @Body OnShelvebean osb);
+    public Observable<BaseBean<String>> postOnShelve (@Query("userID") int userID, @Query("objType") String objType, @Body List<OnShelveInfo> onShelveInfos);
 
     /**
      * 登陆接口

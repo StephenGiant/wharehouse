@@ -1,6 +1,8 @@
 package com.example.wms_erp.adapter;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.renderscript.RenderScript;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +28,7 @@ public abstract class MyBaseAdapter<T,VH extends RecyclerView.ViewHolder> extend
         T item = getItem(position);
         bindItemData(holder,item,position);
         setupOnItemClick(holder, position);
+
     }
 
     @Override
@@ -55,10 +58,11 @@ protected abstract void bindItemData(VH holder,T data,int position);
     }
 
     public void refreshData(List<T> data){
-        mData.clear();
-        if(data!=null){
-            mData.addAll(data);
-        }
+//        mData.clear();
+//        if(data!=null){
+//            mData.addAll(data);
+//        }
+        mData=data;
         notifyDataSetChanged();
     }
 

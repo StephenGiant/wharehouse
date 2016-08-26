@@ -114,7 +114,8 @@ public class OnoffBlindFragment extends BaseFragment implements View.OnClickList
     MainActivity mActivity;
     private MainActivity activity;
     private OnOffShelvePresenterImpl onOffShelvePresenter;
-
+    //缓存的条码集合，去除重复扫描
+public ArrayList<String> codes = new ArrayList<>();
     public OnoffBlindFragment() {
 
     }
@@ -188,7 +189,7 @@ String curType;
     @Override
     public void onClick(View v) {
         Toast.makeText(getContext(),"点击了",Toast.LENGTH_SHORT).show();
-        onOffShelvePresenter.postOnShelve();
+        onOffShelvePresenter.postOnshelve(curType);
 
     }
 

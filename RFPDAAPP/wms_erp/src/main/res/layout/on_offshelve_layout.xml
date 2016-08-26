@@ -64,41 +64,8 @@
             android:entries="@array/onshelve_type"
             android:spinnerMode="dropdown"
             android:id="@+id/sp_reson"></Spinner>
-<TextView
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:layout_width="wrap_content"
 
-    android:layout_height="wrap_content"
-    android:text="大单位"
-    android:textSize="16sp"
 
-    />
-        <EditText
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:background="@null"
-            android:maxLines="1"
-            />
-        <TextView
-
-            android:layout_marginRight="10dp"
-            android:layout_width="wrap_content"
-
-            android:layout_height="wrap_content"
-            android:text="小单位"
-            android:textSize="16sp"
-
-            />
-        <EditText
-            android:layout_marginRight="10dp"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:background="@null"
-            android:maxLines="1"
-            />
     </LinearLayout>
 
 <android.support.v7.widget.RecyclerView

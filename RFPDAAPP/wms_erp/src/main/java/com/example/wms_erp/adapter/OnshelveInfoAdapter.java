@@ -1,6 +1,7 @@
 package com.example.wms_erp.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import com.example.wms_erp.view.MaterialDialog;
 import com.example.wms_erp.view.OnshelveDialog;
 import com.example.wms_erp.viewholder.MyBaseViewHolder;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.Bind;
 
@@ -22,11 +26,16 @@ import butterknife.Bind;
 public class OnshelveInfoAdapter extends MyBaseAdapter<OnShelveInfo, OnshelveInfoAdapter.OnshelveInfoViewHolder> {
 
 
-
+private HashMap<Integer,String> countsDetail;
+    private ArrayList<Integer> edits;//标记已修改的条目
 
     public OnshelveInfoAdapter(Activity activity, List<OnShelveInfo> data) {
         super(activity, data);
+        countsDetail = new HashMap<>();
+        edits = new ArrayList<>();
     }
+
+
 
     @Override
     protected void bindItemData(OnshelveInfoViewHolder holder, OnShelveInfo data, int position) {
@@ -34,14 +43,30 @@ public class OnshelveInfoAdapter extends MyBaseAdapter<OnShelveInfo, OnshelveInf
         holder.batchNum.setText(data.getGOODSBATCHCODE());
         holder.goodsLocation.setText(data.getLOCATIONCODE());
         holder.goodsCode.setText(data.getGOODSCODE());
-        holder.unit.setText(data.getUNITNAME());
-        holder.specifation.setText(data.getGOODSSPEC());
-        holder.count.setText(data.getMAXQTY()*data.getPURUNITQTY()+"");
 
+        holder.specifation.setText(data.getGOODSSPEC());
+            if(edits.contains(position)){
+                holder.count.setText(countsDetail.get(position));
+            }
+
+    }
+
+    public void setCountShow(OnShelveInfo info,String countDetail){
+   if(edits.contains(mData.indexOf(info))){
+       //如果是修改过的条目，编辑，不添加
+    countsDetail.put(mData.indexOf(info),countDetail);
+
+notifyDataSetChanged();
+   }else{
+       edits.add(mData.indexOf(info));
+       countsDetail.put(mData.indexOf(info),countDetail);
+       notifyDataSetChanged();
+   }
     }
 
     @Override
     public int getItemCount() {
+
 //        Toast.makeText(mActivity,super.getItemCount()+"",Toast.LENGTH_SHORT).show();
         return super.getItemCount();
     }
@@ -63,8 +88,7 @@ public class OnshelveInfoAdapter extends MyBaseAdapter<OnShelveInfo, OnshelveInf
         TextView goodsCode;
         @Bind(R.id.batchNum)
         TextView batchNum;
-        @Bind(R.id.unit)
-        TextView unit;
+
         @Bind(R.id.count)
         TextView count;
         @Bind(R.id.specifation)

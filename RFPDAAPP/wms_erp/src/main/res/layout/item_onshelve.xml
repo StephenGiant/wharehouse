@@ -105,23 +105,7 @@
         android:background="@color/white"
         android:orientation="horizontal"
         >
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/unit"
-            android:textColor="@color/text_black"
-            android:textSize="17sp"
-            />
-        <TextView
-            android:id="@+id/unit"
-            android:layout_marginLeft="9dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="箱"
-            android:textSize="15sp"
-            android:textColor="@color/text_gray"
-            />
+
         <TextView
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
@@ -152,7 +136,7 @@
             android:layout_marginLeft="9dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="500"
+            android:text="0.0"
             android:textSize="15sp"
             android:textColor="@color/text_gray"
             />

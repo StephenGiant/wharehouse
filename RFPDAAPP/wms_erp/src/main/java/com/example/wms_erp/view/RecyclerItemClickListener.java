@@ -31,6 +31,8 @@ public abstract class RecyclerItemClickListener implements RecyclerView.OnItemTo
             onItemClick(childView, view.getChildAdapterPosition(childView));
             return true;
         }
+        //获取item的viewholder
+//        view.getChildViewHolder(view.getChildAt(0));
         return false;
     }
 
