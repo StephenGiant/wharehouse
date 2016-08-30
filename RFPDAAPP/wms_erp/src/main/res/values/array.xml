@@ -8,4 +8,12 @@
         <item>青浦调拨</item>
         <item> 其他</item>
     </string-array>
+    <string-array name="offshelve_type" translatable="false">
+        <item>门店出货</item>
+        <item>领料耗用</item>
+        <item>青浦调拨</item>
+        <item>报损</item>
+        <item>退货</item>
+        <item>其他</item>
+    </string-array>
 </resources>

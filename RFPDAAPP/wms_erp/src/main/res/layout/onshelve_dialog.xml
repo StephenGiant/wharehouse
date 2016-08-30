@@ -40,19 +40,20 @@ android:paddingBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="上架原因:"
+        android:text="商品条码:"
         android:textColor="@color/text_black"
 
         />
-    <Spinner
-        android:id="@+id/sp_reason"
+    <TextView
+        android:id="@+id/goods_code_dialog"
         android:layout_marginLeft="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/onshelve_type"
-        android:spinnerMode="dropdown"
+        android:text="111111111"
+        android:textSize="15sp"
+        android:textColor="@color/text_gray"
 
-        ></Spinner>
+        ></TextView>
 </LinearLayout>
     <View
         android:layout_below="@id/ll_reson"
@@ -89,6 +90,7 @@ android:paddingBottom="5dp"
             android:hint="0"
             android:background="@null"
             android:maxLines="1"
+            android:inputType="number"
             />
         <TextView
 
@@ -107,6 +109,7 @@ android:paddingBottom="5dp"
             android:hint="0"
             android:background="@null"
             android:maxLines="1"
+            android:inputType="number"
             />
     </LinearLayout>
     <View

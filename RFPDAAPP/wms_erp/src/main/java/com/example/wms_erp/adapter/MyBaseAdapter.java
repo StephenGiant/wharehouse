@@ -33,7 +33,10 @@ public abstract class MyBaseAdapter<T,VH extends RecyclerView.ViewHolder> extend
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        if(mData!=null&&mData.size()>0){
+            return mData.size();
+        }
+        return 0;
     }
 
 protected abstract void bindItemData(VH holder,T data,int position);

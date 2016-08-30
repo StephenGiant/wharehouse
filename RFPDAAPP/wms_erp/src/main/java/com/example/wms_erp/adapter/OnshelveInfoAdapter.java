@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wms_erp.R;
+import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.view.MaterialDialog;
 import com.example.wms_erp.view.OnshelveDialog;
@@ -46,22 +47,27 @@ private HashMap<Integer,String> countsDetail;
 
         holder.specifation.setText(data.getGOODSSPEC());
             if(edits.contains(position)){
-                holder.count.setText(countsDetail.get(position));
+                if(countsDetail.size()>0) {
+                    holder.count.setText(countsDetail.get(position));
+
+                }
             }
 
     }
 
-    public void setCountShow(OnShelveInfo info,String countDetail){
-   if(edits.contains(mData.indexOf(info))){
-       //如果是修改过的条目，编辑，不添加
-    countsDetail.put(mData.indexOf(info),countDetail);
-
-notifyDataSetChanged();
-   }else{
-       edits.add(mData.indexOf(info));
-       countsDetail.put(mData.indexOf(info),countDetail);
-       notifyDataSetChanged();
-   }
+    public boolean setCountShow(OnShelveInfo info,String countDetail){
+        if(countDetail!=null) {
+            Log.i("索引", mData.indexOf(info) + "");
+            if (!edits.contains(mData.indexOf(info))) {
+                edits.add(mData.indexOf(info));
+            }
+            countsDetail.put(mData.indexOf(info), countDetail);
+            Log.i("改数据", countsDetail.get(mData.indexOf(info)));
+            notifyDataSetChanged();
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
@@ -100,7 +106,8 @@ notifyDataSetChanged();
 
         @Override
         public boolean onLongClick(View v) {
-
+            removeUItem(getLayoutPosition());
+            OnoffBlindFragment.removeCode(getLayoutPosition());
             return false;
         }
     }
@@ -109,5 +116,8 @@ notifyDataSetChanged();
     public void addItem(OnShelveInfo item) {
 
         super.addItem(item);
+    }
+    public void clearCountsDetail(){
+        countsDetail.clear();
     }
 }

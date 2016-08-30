@@ -87,6 +87,7 @@ import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.presenter.impl.OnOffShelvePresenterImpl;
 import com.example.wms_erp.ui.MainActivity;
+import com.example.wms_erp.util.HandleCodeUtil;
 import com.example.wms_erp.view.OnshelveDialog;
 import com.example.wms_erp.view.RecyclerItemClickListener;
 import com.example.wms_erp.view.SearchEditText;
@@ -111,18 +112,29 @@ public class OnoffBlindFragment extends BaseFragment implements View.OnClickList
     Spinner spReson;
     @Bind(R.id.onshelve_data)
     public RecyclerView onshelveData;
-    MainActivity mActivity;
+//    MainActivity mActivity;
     private MainActivity activity;
     private OnOffShelvePresenterImpl onOffShelvePresenter;
     //缓存的条码集合，去除重复扫描
-public ArrayList<String> codes = new ArrayList<>();
+public static ArrayList<String> codes;
+    public static void clearCodes(){
+        codes.clear();
+    }
+    public static void removeCode(int index){
+        if(codes.size()>1){
+            codes.remove(index);
+        }else {
+            codes.clear();
+        }
+    }
     public OnoffBlindFragment() {
-
+        codes = new ArrayList<>();
     }
 
     public static OnoffBlindFragment newInstance(Bundle args) {
         OnoffBlindFragment f = new OnoffBlindFragment();
         f.setArguments(args);
+        codes = new ArrayList<>();
         return f;
     }
 String curType;
@@ -137,7 +149,7 @@ String curType;
 //        return super.onCreateView(inflater, container, savedInstanceState);
         ButterKnife.bind(this, view);
 
-        tvTitle.setOnClickListener(this);
+        llCategary.setOnClickListener(this);
        final String[] stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
         curType = stringArray[0];
         spReson.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -164,12 +176,16 @@ String curType;
 
     @Override
     public void dispatchCode(String code) {
-        seBarCode.setText(code);
-        onOffShelvePresenter.getOnShelveInfo(code);
-        if(onOffShelvePresenter.isShowing()){
+        if( HandleCodeUtil.checkDate(code)) {
+            seBarCode.setText(code);
 
+            onOffShelvePresenter.getOnShelveInfo(code);
+            if (onOffShelvePresenter.isShowing()) {
+
+            }
+        }else{
+            activity.ToastCheese("请检查条码!");
         }
-
 
     }
 

@@ -33,18 +33,35 @@ public class OnOffShelvePresenterImpl extends BasePresenterImpl {
 private OnoffBlindFragment fragment;
 
     private OnshelveDialog dialog;
-
+    private  String unEdit = null;
+    private ArrayList<String> unEdits;
+int unEditSize = 1000;
     public OnOffShelvePresenterImpl(final MainActivity activity, OnoffBlindFragment fragment) {
         this.activity = activity;
         this.fragment = fragment;
         serviceApi = RetrofitSingle.getInstance();
         userID = SharePreUtil.getInteger(activity, "userID", 0);
         onShelveInfos = new ArrayList<>();
+        unEdits = new ArrayList<>();
+
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                int x=0;
+                while (x<1000){
+                    unEdits.add(x+"");
+                    x++;
+                }
+            }
+        }.start();
+
+
 
         fragment.onshelveData.addOnItemTouchListener(new RecyclerItemClickListener(activity) {
             @Override
             protected void onItemClick(View view, int position) {
-
+                    showOnshelveDialog(onShelveInfos.get(position));
 
             }
         });
@@ -76,12 +93,13 @@ private OnoffBlindFragment fragment;
 //                activity.ToastCheese(onShelveInfoBaseBean.getDATA().toString());
                 if(onShelveInfoBaseBean.getDATA()!=null) {
                     onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
-                    if(fragment.codes.contains(barCode)){
+                    if(OnoffBlindFragment.codes.contains(barCode)){
                         //如果已经扫过了 就什么都不做并提示
-                        showOnshelveDialog(onShelveInfoBaseBean.getDATA());
-//                        activity.ToastCheese("请勿重复扫描");
+                        showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
+                        activity.ToastCheese("请勿重复扫描");
                     }else {
-                        fragment.codes.add(barCode);
+                       unEdit=barCode;
+                        OnoffBlindFragment.codes.add(barCode);
                         showOnShelveInfo(onShelveInfoBaseBean.getDATA());
                         showOnshelveDialog(onShelveInfoBaseBean.getDATA());
                     }
@@ -121,7 +139,16 @@ private OnoffBlindFragment fragment;
             dialog.setOnConfirmListenner(new OnshelveDialog.OnConfirmLitsenner() {
                 @Override
                 public void onConfirmClick(OnShelveInfo info) {
-                   adapter.setCountShow(info,dialog.getCountDetail());
+                    boolean b = adapter.setCountShow(info, dialog.getCountDetail());
+                    if(b) {
+
+
+//                    unEdit = null;
+            unEdits.remove(unEdits.size()-1);
+                        dialog.dismiss();
+                    }else{
+                        activity.ToastCheese("请输入要上架的数量");
+                    }
                 }
             });
         FragmentManager manager = activity.getSupportFragmentManager();
@@ -130,26 +157,53 @@ private OnoffBlindFragment fragment;
     }
 
 
+    /**
+     * 提交上架信息
+     * @param reason
+     */
     public void postOnshelve(final String reason){
 //        for(OnShelveInfo info:onShelveInfos ){
 //            info.setCELLNO(reason);
 //        }
-        serviceApi.postOnShelve(userID,reason,onShelveInfos).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<String>>() {
-            @Override
-            public void onCompleted() {
+        if(!hasUnEdit()) {
+            serviceApi.postOnShelve(userID, reason, onShelveInfos).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<String>>() {
+                @Override
+                public void onCompleted() {
 
-            }
+                }
 
-            @Override
-            public void onError(Throwable e) {
-activity.ToastCheese(e.toString());
-            }
+                @Override
+                public void onError(Throwable e) {
+                    activity.ToastCheese(e.toString());
+                }
 
-            @Override
-            public void onNext(BaseBean<String> response) {
-            activity.ToastCheese(response.getMESSAGE());
-            }
-        });
+                @Override
+                public void onNext(BaseBean<String> response) {
+                    activity.ToastCheese(response.getMESSAGE());
+                    if("1".equals(response.getRESULT())) {
+                        onShelveInfos.clear();
+                        adapter.refreshData(onShelveInfos);
+                        adapter.clearCountsDetail();
+                        unEditSize = unEdits.size();
+//                fragment.codes.clear();
+                        OnoffBlindFragment.clearCodes();
+                    }
+                }
+            });
+        }else{
+            activity.ToastCheese("尚有未编辑的条目！");
+        }
     }
+
+    private boolean hasUnEdit(){
+        if(unEditSize-unEdits.size()<onShelveInfos.size()){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
 }
