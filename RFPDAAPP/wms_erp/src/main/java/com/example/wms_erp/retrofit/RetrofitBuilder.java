@@ -3,6 +3,8 @@ package com.example.wms_erp.retrofit;
 import com.example.wms_erp.apiconfig.ApiConfig;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.util.concurrent.TimeUnit;
+
 import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 import retrofit.RxJavaCallAdapterFactory;
@@ -25,6 +27,7 @@ public class RetrofitBuilder {
      * @return
      */
     public  <S> S createServiceClass(Class<S> serviceClass){
+client.setConnectTimeout(10000,TimeUnit.MILLISECONDS);
         Retrofit retrofit = builder.client(client).build();
         return retrofit.create(serviceClass);
     }

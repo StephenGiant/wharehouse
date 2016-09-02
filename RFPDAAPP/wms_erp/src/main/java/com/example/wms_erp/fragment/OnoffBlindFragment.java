@@ -69,38 +69,41 @@ package com.example.wms_erp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnticipateInterpolator;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.wms_erp.R;
-import com.example.wms_erp.adapter.OnshelveInfoAdapter;
 import com.example.wms_erp.decorator.MySpaceDecration;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.presenter.impl.OnOffShelvePresenterImpl;
+import com.example.wms_erp.ui.BaseActivity;
 import com.example.wms_erp.ui.MainActivity;
 import com.example.wms_erp.util.HandleCodeUtil;
-import com.example.wms_erp.view.OnshelveDialog;
-import com.example.wms_erp.view.RecyclerItemClickListener;
+import com.example.wms_erp.view.FlipCardAnimation;
 import com.example.wms_erp.view.SearchEditText;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2016/8/18.
  */
-public class OnoffBlindFragment extends BaseFragment implements View.OnClickListener{
+public class OnoffBlindFragment extends BaseFragment implements View.OnClickListener {
 
     @Bind(R.id.tv_title)
     TextView tvTitle;
@@ -112,36 +115,47 @@ public class OnoffBlindFragment extends BaseFragment implements View.OnClickList
     Spinner spReson;
     @Bind(R.id.onshelve_data)
     public RecyclerView onshelveData;
-//    MainActivity mActivity;
+    @Bind(R.id.submit)
+    Button submit;
+    //    MainActivity mActivity;
     private MainActivity activity;
     private OnOffShelvePresenterImpl onOffShelvePresenter;
     //缓存的条码集合，去除重复扫描
-public static ArrayList<String> codes;
-    public static void clearCodes(){
+    public static ArrayList<String> codes;
+    private ArrayAdapter<CharSequence> adapter;
+    private FlipCardAnimation animation;
+    private String[] stringArray;
+
+    public static void clearCodes() {
         codes.clear();
     }
-    public static void removeCode(int index){
-        if(codes.size()>1){
+
+    public static void removeCode(int index) {
+        if (codes.size() > 1) {
             codes.remove(index);
-        }else {
+        } else {
             codes.clear();
         }
     }
+
     public OnoffBlindFragment() {
         codes = new ArrayList<>();
     }
 
     public static OnoffBlindFragment newInstance(Bundle args) {
+
         OnoffBlindFragment f = new OnoffBlindFragment();
         f.setArguments(args);
         codes = new ArrayList<>();
         return f;
     }
-String curType;
+
+    String curType;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
         activity = (MainActivity) getActivity();
 
         View view = inflater.inflate(R.layout.on_offshelve_layout, null);
@@ -150,12 +164,27 @@ String curType;
         ButterKnife.bind(this, view);
 
         llCategary.setOnClickListener(this);
-       final String[] stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
+
         curType = stringArray[0];
         spReson.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-               curType= stringArray[position];
+                final String choose = stringArray[position];
+                if(num==1&&"报损".equals(curType)){
+                    activity.showMaterialDialog("当前为报损下架", "确定更换为" + stringArray[position] + "下架吗？", new BaseActivity.OncheckListenner() {
+                        @Override
+                        public void onPositiveClick() {
+                            onOffShelvePresenter.clearInfo();
+                            curType = choose;
+                        }
+
+                        @Override
+                        public void onNagativeClick() {
+                                spReson.setSelection(3);
+                        }
+                    });
+                }
+                curType = stringArray[position];
             }
 
             @Override
@@ -164,27 +193,56 @@ String curType;
             }
         });
         ArrayList<BaseBean<OnShelveInfo>> data = new ArrayList<>();
-        for(int x=0;x<3;x++) {
+        for (int x = 0; x < 3; x++) {
             data.add(null);
         }
         onshelveData.addItemDecoration(new MySpaceDecration(10));
 
+//changeToOffShelve();
 
 
         return view;
     }
 
     @Override
-    public void dispatchCode(String code) {
-        if( HandleCodeUtil.checkDate(code)) {
+    public void dispatchCode(final String code) {
+        if (HandleCodeUtil.checkDate(code)) {
             seBarCode.setText(code);
-
-            onOffShelvePresenter.getOnShelveInfo(code);
-            if (onOffShelvePresenter.isShowing()) {
-
+            switch (num){
+                case 0:
+                    onOffShelvePresenter.getOnShelveInfo(code);
+                    break;
+                case 1:
+                    onOffShelvePresenter.getOffShelveInfo(code,curType);
+                    break;
             }
-        }else{
-            activity.ToastCheese("请检查条码!");
+
+//            if (onOffShelvePresenter.isShowing()) {
+//
+//            }
+        } else {
+            if(num==0) {
+                activity.ToastCheese("请检查条码!");
+            }else if(!"报损".equals(curType)){
+                //报损下架
+           activity.showMaterialDialog("此商品已过期", "点确认将选报损下架", new BaseActivity.OncheckListenner() {
+               @Override
+               public void onPositiveClick() {
+                   seBarCode.setText(code);
+                    spReson.setSelection(3);
+                   curType = "报损";
+                   onOffShelvePresenter.getOffShelveInfo(code,curType);
+               }
+
+               @Override
+               public void onNagativeClick() {
+                        seBarCode.setText("");
+               }
+           });
+            }else{
+                seBarCode.setText(code);
+                onOffShelvePresenter.getOnShelveInfo(code);
+            }
         }
 
     }
@@ -198,18 +256,102 @@ String curType;
 
     @Override
     public void onResume() {
-        onOffShelvePresenter = new OnOffShelvePresenterImpl(activity,this);
+        onOffShelvePresenter = new OnOffShelvePresenterImpl(activity, this);
         super.onResume();
     }
 
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(getContext(),"点击了",Toast.LENGTH_SHORT).show();
-        onOffShelvePresenter.postOnshelve(curType);
+//    @Override
+//    public void onClick(View v) {
+////        Toast.makeText(getContext(),"点击了",Toast.LENGTH_SHORT).show();
+////        onOffShelvePresenter.postOnshelve(curType);
+//
+//
+//    }
+
+    private void changeToOffShelve() {
+        stringArray = getActivity().getResources().getStringArray(R.array.offshelve_type);
+        adapter = ArrayAdapter.createFromResource(getContext(), R.array.offshelve_type, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spReson.setAdapter(adapter);
+    }
+
+    private void changeToOnshelve() {
+        stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
+        adapter = ArrayAdapter.createFromResource(getContext(), R.array.onshelve_type, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spReson.setAdapter(adapter);
+    }
+
+    int num = 0;
+
+    private void startFlipAnimation() {
+        onOffShelvePresenter.clearInfo();
+        if (animation == null) {
+            int width = llCategary.getWidth() / 2;
+            int height = llCategary.getHeight() / 2;
+            animation = new FlipCardAnimation(0, 180, width, height);
+            animation.setInterpolator(new AnticipateInterpolator());
+            animation.setDuration(2000);
+            animation.setFillAfter(false);
+            animation.setRepeatCount(0);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            animation.setOnContentChangeListener(new FlipCardAnimation.OnContentChangeListener() {
+                @Override
+                public void contentChange() {
+                    Log.i("oncontentChange","getIn");
+                    if (num > 0) {
+                        num = 0;
+                        Log.i("进来","变上架");
+                        tvTitle.setText("盲扫上架");
+                        changeToOnshelve();
+                    } else {
+                        Log.i("进来","变下架num="+num);
+                        tvTitle.setText("盲扫下架");
+                        changeToOffShelve();
+                        num++;
+                    }
+
+                }
+            });
+        }
+        animation.setCanContentChange();
+        llCategary.startAnimation(animation);
 
     }
 
-
+    @OnClick({R.id.ll_categary, R.id.submit})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_categary:
+                startFlipAnimation();
+                break;
+            case R.id.submit:
+                switch (num){
+                    case 0:
+                        onOffShelvePresenter.postOnshelve(curType);
+                        break;
+                    case 1:
+                        onOffShelvePresenter.postOffshelve(curType);
+                        break;
+                }
+                break;
+        }
+    }
 }
 
 //

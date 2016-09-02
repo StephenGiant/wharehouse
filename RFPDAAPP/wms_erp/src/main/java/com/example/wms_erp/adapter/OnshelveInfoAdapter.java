@@ -40,12 +40,14 @@ private HashMap<Integer,String> countsDetail;
 
     @Override
     protected void bindItemData(OnshelveInfoViewHolder holder, OnShelveInfo data, int position) {
+
         holder.goodsName.setText(data.getGOODSNAME());
         holder.batchNum.setText(data.getGOODSBATCHCODE());
         holder.goodsLocation.setText(data.getLOCATIONCODE());
         holder.goodsCode.setText(data.getGOODSCODE());
 
         holder.specifation.setText(data.getGOODSSPEC());
+        holder.count.setText("0.0");
             if(edits.contains(position)){
                 if(countsDetail.size()>0) {
                     holder.count.setText(countsDetail.get(position));
@@ -102,12 +104,16 @@ private HashMap<Integer,String> countsDetail;
         public OnshelveInfoViewHolder(View itemView) {
             super(itemView);
             itemView.setOnLongClickListener(this);
+
         }
 
         @Override
         public boolean onLongClick(View v) {
             removeUItem(getLayoutPosition());
             OnoffBlindFragment.removeCode(getLayoutPosition());
+            countsDetail.clear();
+            edits.remove(getLayoutPosition());
+            Log.i("codes长度",OnoffBlindFragment.codes.size()+"");
             return false;
         }
     }

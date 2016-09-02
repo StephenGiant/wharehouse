@@ -78,6 +78,11 @@ int unEditSize = 1000;
         serviceApi.getOnShelveInfo(code.substring(0,code.length()-8)).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<OnShelveInfo>>() {
             @Override
+            public void onStart() {
+                activity.showLoadingDialog("");
+            }
+
+            @Override
             public void onCompleted() {
 
             }
@@ -85,18 +90,19 @@ int unEditSize = 1000;
             @Override
             public void onError(Throwable e) {
                 activity.ToastCheese(e.toString());
-
+                activity.hideLoadingDialog();
             }
 
             @Override
             public void onNext(BaseBean<OnShelveInfo> onShelveInfoBaseBean) {
+                activity.hideLoadingDialog();
 //                activity.ToastCheese(onShelveInfoBaseBean.getDATA().toString());
                 if(onShelveInfoBaseBean.getDATA()!=null) {
                     onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
                     if(OnoffBlindFragment.codes.contains(barCode)){
                         //如果已经扫过了 就什么都不做并提示
                         showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
-                        activity.ToastCheese("请勿重复扫描");
+//                        activity.ToastCheese("请勿重复扫描");
                     }else {
                        unEdit=barCode;
                         OnoffBlindFragment.codes.add(barCode);
@@ -111,7 +117,7 @@ int unEditSize = 1000;
         });
     }
     private void showOnShelveInfo(OnShelveInfo info){
-
+        Log.i("看数据",info.getMAXQTY()+"");
         onShelveInfos.add(info);
         Log.i("数据个数3",onShelveInfos.size()+"");
         if(adapter==null) {
@@ -121,8 +127,9 @@ int unEditSize = 1000;
         }else{
             Log.i("数据个数2",onShelveInfos.size()+"");
 
-                adapter.refreshData(onShelveInfos);
-
+//                adapter.refreshData(onShelveInfos);
+            Log.i("看bug",onShelveInfos.get(0).getMAXQTY()+"");
+adapter.notifyDataSetChanged();
 
         }
     }
@@ -203,7 +210,126 @@ int unEditSize = 1000;
         return false;
     }
 
+    /**
+     * 获取下架信息
+     * 实体类和上架信息一样
+     */
+    public void getOffShelveInfo(final String barCode, final String curType){
+        //不需要去掉后8位
+        serviceApi.getOffShelveInfo(barCode).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<OnShelveInfo>>() {
+            @Override
+            public void onStart() {
+                activity.showLoadingDialog("");
+            }
 
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                activity.hideLoadingDialog();
+            activity.ToastCheese(e.toString()+"下架");
+                Log.i("获取下架信息有误",e.toString());
+            }
+
+            @Override
+            public void onNext(BaseBean<OnShelveInfo> onShelveInfoBaseBean) {
+                activity.hideLoadingDialog();
+
+                handleInfo(barCode,onShelveInfoBaseBean,curType);
+            }
+        });
+}
+
+    /**
+     * 提交下架
+     * @param reason
+     */
+    public void postOffshelve(String reason){
+        if(!hasUnEdit()) {
+            serviceApi.postOffShelve(userID, reason, onShelveInfos).subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<String>>() {
+                @Override
+                public void onCompleted() {
+
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    activity.ToastCheese(e.toString());
+                }
+
+                @Override
+                public void onNext(BaseBean<String> response) {
+                    activity.ToastCheese(response.getMESSAGE());
+                    if("1".equals(response.getRESULT())) {
+              clearInfo();
+                    }
+                }
+            });
+        }else{
+            activity.ToastCheese("尚有未编辑的条目！");
+        }
+    }
+
+private void handleInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBean,String curType){
+    if(onShelveInfoBaseBean.getDATA()!=null) {
+//        activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
+        Log.i("下架","有数据");
+        if("报损".equals(curType)) {
+            onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
+            showCodeInfo(barCode,onShelveInfoBaseBean);
+        }else{
+            Log.i("非报损",curType);
+            //商品过期不能非报损下架
+            if(onShelveInfoBaseBean.getDATA().getQUALITYSTATUS()>0){
+//                if(adapter!=null){
+                    clearInfo();
+                activity.ToastCheese("此商品已临保或已过保!");
+//                }
+            }else{
+                //正常品且当前为正常品下架
+             showCodeInfo(barCode,onShelveInfoBaseBean);
+            }
+        }
+    }else{
+        activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
+    }
+}
+
+    private void showCodeInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBean){
+        if (OnoffBlindFragment.codes.contains(barCode)) {
+            //如果已经扫过了 就什么都不做并提示
+            Log.i("已扫描",barCode);
+            showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
+            Log.i("对象",onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)).toString());
+//            activity.ToastCheese("请勿重复扫描");
+        } else {
+//
+            Log.i("对象2",onShelveInfoBaseBean.getDATA().toString());
+//            Log.i("看数据",onShelveInfoBaseBean.getDATA().getMAXQTY()+"");
+            unEdit = barCode;
+            OnoffBlindFragment.codes.add(barCode);
+            showOnShelveInfo(onShelveInfoBaseBean.getDATA());
+            showOnshelveDialog(onShelveInfoBaseBean.getDATA());
+        }
+    }
+
+    /**
+     * 清除信息列表
+     */
+    public void clearInfo(){
+        if(adapter!=null){
+            onShelveInfos.clear();
+//            unEdits.clear();
+            adapter.refreshData(onShelveInfos);
+            OnoffBlindFragment.clearCodes();
+            adapter.clearCountsDetail();
+        }
+    }
 
 
 }

@@ -51,7 +51,7 @@ public class OnShelveInfo {
     private int TIPNUMBER;
     private int PURUNITQTY;
     private String PURUNITNAME;
-    private Object QUALITYSTATUS;
+    private int QUALITYSTATUS;
     private Object ISPURUNITNAME;
     private String GOODSSPEC;
     private double MAXQTY;
@@ -202,11 +202,11 @@ public class OnShelveInfo {
         this.PURUNITNAME = PURUNITNAME;
     }
 
-    public Object getQUALITYSTATUS() {
+    public int getQUALITYSTATUS() {
         return QUALITYSTATUS;
     }
 
-    public void setQUALITYSTATUS(Object QUALITYSTATUS) {
+    public void setQUALITYSTATUS(int QUALITYSTATUS) {
         this.QUALITYSTATUS = QUALITYSTATUS;
     }
 

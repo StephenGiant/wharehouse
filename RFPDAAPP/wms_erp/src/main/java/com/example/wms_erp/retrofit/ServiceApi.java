@@ -44,4 +44,22 @@ public interface ServiceApi {
      */
     @GET("http://116.228.118.218:9099/Login/LogonUser")
     public Observable<BaseBean<UserInfo>> login(@Query("userID")String userID,@Query("userPswd")String userPswd);
+
+    /**
+     * 获取下架信息
+     * @param barCode
+     * @return
+     */
+    @GET("OffShelves/GetLocationGoodsInfo")
+    public Observable<BaseBean<OnShelveInfo>> getOffShelveInfo(@Query("gbCode")String barCode);
+
+    /**
+     * 提交下架
+     * @param userID
+     * @param objType
+     * @param onShelveInfos
+     * @return
+     */
+    @POST("OffShelves/SetOffShelves")
+    public Observable<BaseBean<String>> postOffShelve(@Query("userID") int userID, @Query("objType") String objType, @Body List<OnShelveInfo> onShelveInfos);
 }

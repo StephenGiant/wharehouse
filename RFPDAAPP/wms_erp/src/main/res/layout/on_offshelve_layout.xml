@@ -27,6 +27,7 @@
         />
 
 </LinearLayout>
+
     <com.example.wms_erp.view.SearchEditText
         android:id="@+id/se_barCode"
         android:layout_marginTop="20dp"
@@ -71,7 +72,8 @@
 <android.support.v7.widget.RecyclerView
     android:id="@+id/onshelve_data"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
+    android:layout_weight="1"
     app:layoutManager="LinearLayoutManager"
     app:reverseLayout="false"
 
@@ -79,4 +81,15 @@
     >
 
 </android.support.v7.widget.RecyclerView>
+    <Button
+        android:layout_marginBottom="10dp"
+        android:id="@+id/submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyButtonTheme"
+        android:text="提  交"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+
+        />
 </LinearLayout>

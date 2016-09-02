@@ -49,6 +49,7 @@ import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.util.NetUtils;
 import com.example.wms_erp.util.ToastUtil;
+import com.example.wms_erp.view.MaterialDialog;
 
 
 /**
@@ -71,7 +72,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected PDAReceiver receiver;
     private IntentFilter scanDataIntentFilter;
     protected ServiceApi serviceApi;
-
+    private MaterialDialog materialDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -180,6 +181,120 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void ToastCheese(String msg) {
         ToastUtil.makeText(this, msg).show();
+    }
+
+    public OncheckListenner mListenner;
+    /**
+     * 自定义对话框
+     *
+     * @param title
+     * @param message
+     */
+    public void showMaterialDialog(String title, String message) {
+        if (materialDialog == null) {
+            materialDialog = new MaterialDialog(this);
+        }
+        materialDialog.setTitle(title).setMessage(message).setPositiveButton("确定", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                materialDialog.dismiss();
+                if (mListenner != null) {
+                    mListenner.onPositiveClick();
+                }
+
+            }
+        }).setNegativeButton("取消", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                materialDialog.dismiss();
+                if (mListenner != null) {
+                    mListenner.onNagativeClick();
+                }
+            }
+        }).setCanceledOnTouchOutside(false).show();
+
+    }
+
+    /**
+     * 带点击事件的普通对话框
+     *
+     * @param title
+     * @param message
+     * @param listenner
+     */
+    public void showMaterialDialog(String title, String message, OncheckListenner listenner) {
+        mListenner = listenner;
+        materialDialog = new MaterialDialog(this);
+
+        materialDialog.setTitle(title).setMessage(message).setPositiveButton("确定", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                materialDialog.dismiss();
+                if (mListenner != null) {
+                    mListenner.onPositiveClick();
+                }
+
+            }
+        }).setNegativeButton("取消", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                materialDialog.dismiss();
+                if (mListenner != null) {
+                    mListenner.onNagativeClick();
+                }
+            }
+        }).setCanceledOnTouchOutside(false).show();
+
+    }
+
+    /**
+     * 自定义布局的dialog
+     *
+     * @param title
+     * @param view
+     * @param listenner
+     */
+    public void showMaterialDialog(String title, View view, OncheckListenner listenner) {
+        mListenner = listenner;
+        materialDialog = new MaterialDialog(this);
+        materialDialog.setTitle(title).setContentView(view).setPositiveButton("确定", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (mListenner != null) {
+                    mListenner.onPositiveClick();
+                }
+                materialDialog.dismiss();
+                materialDialog = null;
+            }
+        }).setNegativeButton("取消", new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (mListenner != null) {
+                    mListenner.onNagativeClick();
+                }
+                materialDialog.dismiss();
+                materialDialog = null;
+
+            }
+        }).setCanceledOnTouchOutside(false).show();
+        ;
+    }
+    public void setOncheckListenner(OncheckListenner listenner) {
+        mListenner = listenner;
+    }
+
+    public interface OncheckListenner {
+        public void onPositiveClick();
+
+        public void onNagativeClick();
     }
 
     /**

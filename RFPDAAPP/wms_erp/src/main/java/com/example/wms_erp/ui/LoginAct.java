@@ -91,6 +91,7 @@ ToastCheese(e.toString());
                 SharePreUtil.clearSP(this);
                 AppManager appManager = AppManager.getAppManager();
                 appManager.AppExit(this);
+
                 break;
         }
     }
