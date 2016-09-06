@@ -62,4 +62,6 @@ public interface ServiceApi {
      */
     @POST("OffShelves/SetOffShelves")
     public Observable<BaseBean<String>> postOffShelve(@Query("userID") int userID, @Query("objType") String objType, @Body List<OnShelveInfo> onShelveInfos);
+    @GET("InventoryAdjustment/GetLocationInventory")
+    public Observable<BaseBean<String>> getLocationInventory(@Query("LocCode")String locCode,@Query("status") int status);
 }

@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  * Created by qianpeng on 2016/8/30.
@@ -66,8 +67,19 @@ public class HandleCodeUtil {
 
     }
 
-    public static boolean isGoodsCode(String code){
-        return false;
+//    public static boolean isGoodsCode(String code){
+//        return false;
+//    }
+
+    /**
+     * 判断是否为货位，此正则与发货箱近似
+     * @param code
+     * @return
+     */
+    public static boolean isLocCode(String code){
+        Pattern compile = Pattern.compile("\\w{6}");
+        return compile.matcher(code).matches();
+
     }
 
 }

@@ -17,7 +17,7 @@ public class Util {
 	public static Map<Integer, Integer> suondMap;
 	public static Context context;
 	
-	//��ʼ��������
+
 	public static void initSoundPool(Context context){
 		Util.context = context;
 		sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 1);
@@ -33,16 +33,16 @@ public class Util {
 	   }
 	    float audioMaxVolume = am.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 	        
-	        //���ص�ǰAudioManager���������ֵ
+
 	        float audioCurrentVolume = am.getStreamVolume(AudioManager.STREAM_MUSIC);
 	        float volumnRatio = audioCurrentVolume/audioMaxVolume;
 	        sp.play(
-	        		suondMap.get(sound), //���ŵ�����Id 
-	        		audioCurrentVolume, //����������
-	        		audioCurrentVolume, //����������
-	                1, //���ȼ���0Ϊ���
-	                number, //ѭ��������0�޲�ѭ����-1����Զѭ��
-	                1);//�ط��ٶȣ�ֵ��0.5-2.0֮�䣬1Ϊ�����ٶ�
+	        		suondMap.get(sound), //
+	        		audioCurrentVolume, //
+	        		audioCurrentVolume, //
+	                1, //
+	                number, //
+	                1);//
 	    }
 	
 }
