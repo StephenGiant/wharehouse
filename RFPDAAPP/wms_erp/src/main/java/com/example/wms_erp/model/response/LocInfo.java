@@ -287,6 +287,9 @@ public class LocInfo {
     public void setValues(LocInfoTable tableinfo){
       setGOODSCODE(tableinfo.getGOODSCODE());
         setGOODSNAME(tableinfo.getGOODSNAME());
+        setPURUNITQTY(tableinfo.getPURUNITQTY());
+        setBuyQty(tableinfo.getBuyQty());
+
     }
 
     public boolean isNeed(String locCode,String goodsCode){

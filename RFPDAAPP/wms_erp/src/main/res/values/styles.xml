@@ -51,4 +51,9 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowAnimationStyle">@style/AnimationPicker</item>
     </style>
+    <style name="MyEditTextTheme" parent="Base.Widget.AppCompat.EditText">
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@null</item>
+
+    </style>
 </resources>

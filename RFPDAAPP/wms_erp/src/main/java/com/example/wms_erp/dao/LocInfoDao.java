@@ -43,9 +43,11 @@ public class LocInfoDao {
 
         List<LocInfoTable> locInfoTables = new Select().from(LocInfoTable.class).where(LocInfoTable_Table.LOCATIONCODE.eq("")).and(LocInfoTable_Table.GOODSBATCHCODE.eq("")).queryList();
         for(LocInfoTable infoTable:locInfoTables){
+            long id = infoTable.getId();//获取索引
+
             LocInfo locInfo = new LocInfo();
             //设置参数值
-
+            locInfo.setValues(infoTable);
             results.add(locInfo);
         }
         return results;

@@ -87,7 +87,10 @@ import android.widget.TextView;
 import com.example.wms_erp.R;
 import com.example.wms_erp.adapter.FunctionsAdapter;
 import com.example.wms_erp.application.MyApplication;
+import com.example.wms_erp.event.CodeEvent;
+import com.example.wms_erp.event.RxBus;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
+import com.example.wms_erp.fragment.TiaoZhengFragment;
 import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.util.SharePreUtil;
@@ -109,13 +112,23 @@ public class MainActivity extends BaseActivity
     private TextView versionName;
     private MyApplication application;
     private OnoffBlindFragment onoffBlindFragment;
-
+    private int curTag = 0x1001;
     @Override
     protected void handleCode(String str) {
         //将code传给当前的fragment处理
-        onoffBlindFragment.dispatchCode(str);
+//    diapatchCode(str,curTag);
+        RxBus.getDefault().send(new CodeEvent(str,curTag));
 
+    }
+    private void diapatchCode(String code,int tag){
+        switch (tag){
+            case OnoffBlindFragment.TAG_ONOFFFRAGMENT:
+                onoffBlindFragment.dispatchCode(code);
+                break;
+            case TiaoZhengFragment.TAG_TIAOZHENG:
 
+                break;
+        }
     }
 
     @Bind(R.id.toolbar)

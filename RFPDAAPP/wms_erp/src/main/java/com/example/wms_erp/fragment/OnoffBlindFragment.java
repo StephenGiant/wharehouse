@@ -85,6 +85,8 @@ import android.widget.TextView;
 
 import com.example.wms_erp.R;
 import com.example.wms_erp.decorator.MySpaceDecration;
+import com.example.wms_erp.event.CodeEvent;
+import com.example.wms_erp.event.RxBus;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.presenter.impl.OnOffShelvePresenterImpl;
@@ -99,6 +101,7 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscriber;
 
 /**
  * Created by Administrator on 2016/8/18.
@@ -125,7 +128,7 @@ public class OnoffBlindFragment extends BaseFragment implements View.OnClickList
     private ArrayAdapter<CharSequence> adapter;
     private FlipCardAnimation animation;
     private String[] stringArray;
-
+public static final int TAG_ONOFFFRAGMENT = 0x1001;
     public static void clearCodes() {
         codes.clear();
     }
@@ -157,7 +160,25 @@ public class OnoffBlindFragment extends BaseFragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
         activity = (MainActivity) getActivity();
+        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
 
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                if(o instanceof CodeEvent){
+                    Log.i("RxBus",((CodeEvent) o).getCode());
+                    dispatchCode(((CodeEvent) o).getCode());
+                }
+            }
+        });
         View view = inflater.inflate(R.layout.on_offshelve_layout, null);
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
