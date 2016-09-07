@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class FunctionsAdapter extends FragmentPagerAdapter {
         }
         return 0;
     }
+
+
 
     @Override
     public long getItemId(int position) {

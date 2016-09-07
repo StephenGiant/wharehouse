@@ -4,12 +4,16 @@ import android.graphics.Camera;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wms_erp.R;
+import com.example.wms_erp.adapter.LocPagerAdapter;
 import com.example.wms_erp.view.NoScrollViewPager;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,6 +38,9 @@ public class LocCountFragment extends BaseFragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.loccount_layout, null);
 
         ButterKnife.bind(this, view);
+        ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments.add(new TiaoZhengFragment());
+        vpContent.setAdapter(new LocPagerAdapter(getFragmentManager(),fragments));
         return view;
     }
 
@@ -41,7 +48,7 @@ public class LocCountFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        Camera camera = new Camera();
-        camera.rotateZ(360);
+//        Camera camera = new Camera();
+//        camera.rotateZ(360);
     }
 }

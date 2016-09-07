@@ -3,10 +3,12 @@ package com.example.wms_erp.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.wms_erp.R;
 import com.example.wms_erp.event.RxBus;
@@ -24,13 +26,13 @@ import rx.functions.Action1;
  */
 public class TiaoZhengFragment extends BaseFragment {
     @Bind(R.id.ce_huowei)
-    ClearEditText ceHuowei;
+    EditText ceHuowei;
     @Bind(R.id.ce_bigunit)
-    ClearEditText ceBigunit;
+    EditText ceBigunit;
     @Bind(R.id.ce_smallunit)
-    ClearEditText ceSmallunit;
+    EditText ceSmallunit;
     @Bind(R.id.ce_code)
-    ClearEditText ceCode;
+   EditText ceCode;
     @Bind(R.id.btn_zuofei)
     Button btnZuofei;
     @Bind(R.id.rv_datas)
@@ -41,11 +43,16 @@ public static final int TAG_TIAOZHENG = 0x1005;
 
     }
 
+    public TiaoZhengFragment() {
+        Log.i("创建对象了","调整界面");
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.loctable_layout, null);
         ButterKnife.bind(this, view);
+        Log.i("加载布局了","调整界面");
         return view;
     }
 

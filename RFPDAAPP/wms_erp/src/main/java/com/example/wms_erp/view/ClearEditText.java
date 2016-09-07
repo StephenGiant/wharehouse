@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -17,7 +18,7 @@ import com.example.wms_erp.R;
 /**
  * @说明： 自定义带删除按钮的EditText
  */
-public class ClearEditText extends EditText implements View.OnFocusChangeListener,
+public class ClearEditText extends AppCompatEditText implements View.OnFocusChangeListener,
         TextWatcher {
     //EditText右侧的删除按钮
     private Drawable mClearDrawable;

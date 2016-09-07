@@ -67,6 +67,7 @@ package com.example.wms_erp.fragment;
 //
 //                                         美女镇楼！！！
 
+import android.app.Application;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -84,6 +85,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.wms_erp.R;
+import com.example.wms_erp.application.MyApplication;
 import com.example.wms_erp.decorator.MySpaceDecration;
 import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
@@ -102,6 +104,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Subscriber;
+import rx.Subscription;
 
 /**
  * Created by Administrator on 2016/8/18.
@@ -129,6 +132,8 @@ public class OnoffBlindFragment extends BaseFragment implements View.OnClickList
     private FlipCardAnimation animation;
     private String[] stringArray;
 public static final int TAG_ONOFFFRAGMENT = 0x1001;
+    private MyApplication application;
+
     public static void clearCodes() {
         codes.clear();
     }
@@ -160,7 +165,9 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         stringArray = getActivity().getResources().getStringArray(R.array.onshelve_type);
         activity = (MainActivity) getActivity();
-        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
+        application = (MyApplication) activity.getApplication();
+
+        Subscription subscription = RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
             @Override
             public void onCompleted() {
 
@@ -173,12 +180,13 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
 
             @Override
             public void onNext(Object o) {
-                if(o instanceof CodeEvent){
-                    Log.i("RxBus",((CodeEvent) o).getCode());
+                if (o instanceof CodeEvent) {
+                    Log.i("RxBus", ((CodeEvent) o).getCode());
                     dispatchCode(((CodeEvent) o).getCode());
                 }
             }
         });
+        application.rxManager.add(subscription);
         View view = inflater.inflate(R.layout.on_offshelve_layout, null);
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
@@ -270,7 +278,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
 
     @Override
     public void onDestroyView() {
-
+        application.rxManager.clear();//结束订阅的事件，防止ANR
         super.onDestroyView();
         ButterKnife.unbind(this);
     }

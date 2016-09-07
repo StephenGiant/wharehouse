@@ -66,6 +66,7 @@ package com.example.wms_erp.ui;
 //
 //                                         美女镇楼！！！
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -78,6 +79,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -89,6 +91,7 @@ import com.example.wms_erp.adapter.FunctionsAdapter;
 import com.example.wms_erp.application.MyApplication;
 import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
+import com.example.wms_erp.fragment.LocCountFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.fragment.TiaoZhengFragment;
 import com.example.wms_erp.retrofit.RetrofitSingle;
@@ -113,6 +116,8 @@ public class MainActivity extends BaseActivity
     private MyApplication application;
     private OnoffBlindFragment onoffBlindFragment;
     private int curTag = 0x1001;
+    private MyApplication application1;
+
     @Override
     protected void handleCode(String str) {
         //将code传给当前的fragment处理
@@ -151,8 +156,9 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+//        MyApplication application1 =  (MyApplication) getApplication();
         serviceApi = RetrofitSingle.getInstance();
-        application = (MyApplication) getApplication();
+        this.application = (MyApplication) getApplication();
         toolbar.setTitle("盲扫上下架");
         setSupportActionBar(toolbar);
         onoffBlindFragment = new OnoffBlindFragment();
@@ -175,7 +181,7 @@ public class MainActivity extends BaseActivity
         imageView = (ImageView) view.findViewById(R.id.imageView);
         account_name = (TextView) view.findViewById(R.id.account_name);
         versionName = (TextView) view.findViewById(R.id.version_name);
-        versionName.setText(application.getVersion());
+        versionName.setText(this.application.getVersion());
         imageView.setOnClickListener(this);
         initViewPager();
 
@@ -225,6 +231,14 @@ public class MainActivity extends BaseActivity
             toolbar.setTitle("盲扫上下架");
         } else if (id == R.id.nav_gallery) {
             toolbar.setTitle("指令上下架");
+            try {
+                vpFunctions.setCurrentItem(1);
+            }
+            catch (NullPointerException e){
+                e.printStackTrace();
+                Log.i("切换失败","库存盘点");
+            }
+
         } else if (id == R.id.nav_slideshow) {
             toolbar.setTitle("库存盘点");
         } else if (id == R.id.nav_manage) {
@@ -257,6 +271,7 @@ public class MainActivity extends BaseActivity
         vpFunctions.setNoScroll(true);
         ArrayList<Fragment> fragments = new ArrayList<>();
     fragments.add(onoffBlindFragment);
+        fragments.add(new LocCountFragment());
         FunctionsAdapter functionsAdapter = new FunctionsAdapter(getSupportFragmentManager(), this, fragments);
         vpFunctions.setAdapter(functionsAdapter);
     }
@@ -269,5 +284,11 @@ public class MainActivity extends BaseActivity
         if (userID != -1) {
             account_name.setText(SharePreUtil.getString(this, "userName", ""));
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+//        application.rxManager.clear();
+        super.onDestroy();
     }
 }
