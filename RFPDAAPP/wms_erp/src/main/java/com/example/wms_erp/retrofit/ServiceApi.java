@@ -2,6 +2,7 @@ package com.example.wms_erp.retrofit;
 
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.post.OnShelvebean;
+import com.example.wms_erp.model.response.LocInfo;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.model.response.UserInfo;
 
@@ -63,5 +64,5 @@ public interface ServiceApi {
     @POST("OffShelves/SetOffShelves")
     public Observable<BaseBean<String>> postOffShelve(@Query("userID") int userID, @Query("objType") String objType, @Body List<OnShelveInfo> onShelveInfos);
     @GET("InventoryAdjustment/GetLocationInventory")
-    public Observable<BaseBean<String>> getLocationInventory(@Query("LocCode")String locCode,@Query("status") int status);
+    public Observable<BaseBean<List<LocInfo>>> getLocationInventory(@Query("LocCode")String locCode);
 }

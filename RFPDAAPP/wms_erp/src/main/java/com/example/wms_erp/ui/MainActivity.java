@@ -117,6 +117,7 @@ public class MainActivity extends BaseActivity
     private OnoffBlindFragment onoffBlindFragment;
     private int curTag = 0x1001;
     private MyApplication application1;
+    private LocCountFragment countFragment;
 
     @Override
     protected void handleCode(String str) {
@@ -229,10 +230,12 @@ public class MainActivity extends BaseActivity
 
             // Handle the camera action
             toolbar.setTitle("盲扫上下架");
+            vpFunctions.setCurrentItem(0);
         } else if (id == R.id.nav_gallery) {
             toolbar.setTitle("指令上下架");
             try {
                 vpFunctions.setCurrentItem(1);
+                countFragment.initData();
             }
             catch (NullPointerException e){
                 e.printStackTrace();
@@ -271,7 +274,8 @@ public class MainActivity extends BaseActivity
         vpFunctions.setNoScroll(true);
         ArrayList<Fragment> fragments = new ArrayList<>();
     fragments.add(onoffBlindFragment);
-        fragments.add(new LocCountFragment());
+        countFragment = new LocCountFragment();
+        fragments.add(countFragment);
         FunctionsAdapter functionsAdapter = new FunctionsAdapter(getSupportFragmentManager(), this, fragments);
         vpFunctions.setAdapter(functionsAdapter);
     }

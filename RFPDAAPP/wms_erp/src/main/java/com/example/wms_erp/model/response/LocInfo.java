@@ -53,12 +53,12 @@ public class LocInfo {
     private String PRODUCTIONDATE;
     private String STORAGEDATE;
     private int EXPIRYDAYS;
-    private int QTY;
+    private double QTY;
     private int QTYchange;
     private double INVQTY;
     private int PURUNITQTY;
-    private int BuyQty;
-    private int StoreQty;
+    private double BuyQty;
+    private double StoreQty;
     private String PURUNITNAME;
     private String CREATER;
     private int STATUS;
@@ -66,7 +66,7 @@ public class LocInfo {
     private String MINBATCH;
     private String QUALITYSTATUS;
     private String GOODS_SN;
-    private int CHQTY;
+    private double CHQTY;
 
     public String getGOODSCODE() {
         return GOODSCODE;
@@ -172,11 +172,11 @@ public class LocInfo {
         this.EXPIRYDAYS = EXPIRYDAYS;
     }
 
-    public int getQTY() {
+    public double getQTY() {
         return QTY;
     }
 
-    public void setQTY(int QTY) {
+    public void setQTY(double QTY) {
         this.QTY = QTY;
     }
 
@@ -204,19 +204,19 @@ public class LocInfo {
         this.PURUNITQTY = PURUNITQTY;
     }
 
-    public int getBuyQty() {
+    public double getBuyQty() {
         return BuyQty;
     }
 
-    public void setBuyQty(int BuyQty) {
+    public void setBuyQty(double BuyQty) {
         this.BuyQty = BuyQty;
     }
 
-    public int getStoreQty() {
+    public double getStoreQty() {
         return StoreQty;
     }
 
-    public void setStoreQty(int StoreQty) {
+    public void setStoreQty(double StoreQty) {
         this.StoreQty = StoreQty;
     }
 
@@ -276,11 +276,11 @@ public class LocInfo {
         this.GOODS_SN = GOODS_SN;
     }
 
-    public int getCHQTY() {
+    public double getCHQTY() {
         return CHQTY;
     }
 
-    public void setCHQTY(int CHQTY) {
+    public void setCHQTY(double CHQTY) {
         this.CHQTY = CHQTY;
     }
 

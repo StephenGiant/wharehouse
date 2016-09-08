@@ -11,15 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.wms_erp.R;
+import com.example.wms_erp.dao.LocInfoDao;
 import com.example.wms_erp.event.RxBus;
+import com.example.wms_erp.event.RxManager;
+import com.example.wms_erp.model.response.LocInfo;
 import com.example.wms_erp.view.ClearEditText;
+
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2016/9/6.
@@ -38,13 +46,47 @@ public class TiaoZhengFragment extends BaseFragment {
     @Bind(R.id.rv_datas)
     RecyclerView rvDatas;
 public static final int TAG_TIAOZHENG = 0x1005;
+    private LocInfoDao locInfoDao;
     @Override
-    public void dispatchCode(String code) {
+    public void dispatchCode(final String code) {
+        //要异步操作
+        Observable.create(new Observable.OnSubscribe<List<LocInfo>>() {
+            @Override
+            public void call(Subscriber<? super List<LocInfo>> subscriber) {
+                List<LocInfo> locInfos = LocInfoDao.getLocInfos("", code);
+                if(locInfos!=null){
+                    subscriber.onNext(locInfos);
+                }
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<List<LocInfo>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(List<LocInfo> locInfos) {
+                    //显示信息
+
+            }
+        });
+
 
     }
 
     public TiaoZhengFragment() {
         Log.i("创建对象了","调整界面");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Nullable

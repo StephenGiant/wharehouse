@@ -39,7 +39,7 @@ public class LocInfoTable extends BaseModel{
     @Column
     private int EXPIRYDAYS;
     @Column
-    private int QTY;
+    private double QTY;
     @Column
     private int QTYchange;
     @Column
@@ -47,9 +47,9 @@ public class LocInfoTable extends BaseModel{
     @Column
     private int PURUNITQTY;
     @Column
-    private int BuyQty;
+    private double BuyQty;
     @Column
-    private int StoreQty;
+    private double StoreQty;
     @Column
     private String PURUNITNAME;
     @Column
@@ -65,7 +65,7 @@ public class LocInfoTable extends BaseModel{
     @Column
     private String GOODS_SN;
     @Column
-    private int CHQTY;
+    private double CHQTY;
 
     public int getLOCATIONINVENTORYID() {
         return LOCATIONINVENTORYID;
@@ -123,11 +123,11 @@ public class LocInfoTable extends BaseModel{
         this.EXPIRYDAYS = EXPIRYDAYS;
     }
 
-    public int getQTY() {
+    public double getQTY() {
         return QTY;
     }
 
-    public void setQTY(int QTY) {
+    public void setQTY(double QTY) {
         this.QTY = QTY;
     }
 
@@ -139,19 +139,19 @@ public class LocInfoTable extends BaseModel{
         this.QTYchange = QTYchange;
     }
 
-    public int getStoreQty() {
+    public double getStoreQty() {
         return StoreQty;
     }
 
-    public void setStoreQty(int storeQty) {
+    public void setStoreQty(double storeQty) {
         StoreQty = storeQty;
     }
 
-    public int getBuyQty() {
+    public double getBuyQty() {
         return BuyQty;
     }
 
-    public void setBuyQty(int buyQty) {
+    public void setBuyQty(double buyQty) {
         BuyQty = buyQty;
     }
 
@@ -203,11 +203,11 @@ public class LocInfoTable extends BaseModel{
         this.GOODS_SN = GOODS_SN;
     }
 
-    public int getCHQTY() {
+    public double getCHQTY() {
         return CHQTY;
     }
 
-    public void setCHQTY(int CHQTY) {
+    public void setCHQTY(double CHQTY) {
         this.CHQTY = CHQTY;
     }
 
