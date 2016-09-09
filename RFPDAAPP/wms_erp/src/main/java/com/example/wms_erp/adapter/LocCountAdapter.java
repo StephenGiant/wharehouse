@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 
 import com.example.wms_erp.R;
 import com.example.wms_erp.model.response.LocInfo;
@@ -12,18 +12,26 @@ import com.example.wms_erp.viewholder.MyBaseViewHolder;
 
 import java.util.List;
 
+import butterknife.Bind;
+
 /**
  * 库存盘点信息显示adapter
  * Created by qianpeng on 2016/9/8.
  */
-public class LocCountAdapter extends MyBaseAdapter<List<LocInfo>,LocCountAdapter.LocCountViewHolder> {
-    public LocCountAdapter(Activity activity, List<List<LocInfo>> data) {
+public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocCountViewHolder> {
+
+
+
+
+    public LocCountAdapter(Activity activity, List<LocInfo> data) {
         super(activity, data);
     }
 
     @Override
-    protected void bindItemData(LocCountViewHolder holder, List<LocInfo> data, int position) {
-
+    protected void bindItemData(LocCountViewHolder holder, LocInfo data, int position) {
+        holder.goodsCode.setText(data.getGOODSBATCHCODE());
+        holder.goodsName.setText(data.getGOODSNAME());
+        holder.tvQTY.setText(data.getINVQTY()+"");
     }
 
     @Override
@@ -33,7 +41,13 @@ public class LocCountAdapter extends MyBaseAdapter<List<LocInfo>,LocCountAdapter
         return new LocCountViewHolder(view);
     }
 
-    static class LocCountViewHolder extends MyBaseViewHolder{
+    static class LocCountViewHolder extends MyBaseViewHolder {
+        @Bind(R.id.goodsCode)
+        TextView goodsCode;
+        @Bind(R.id.goodsName)
+        TextView goodsName;
+        @Bind(R.id.tv_QTY)
+        TextView tvQTY;
         public LocCountViewHolder(View itemView) {
             super(itemView);
         }

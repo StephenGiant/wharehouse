@@ -89,6 +89,7 @@ import com.example.wms_erp.application.MyApplication;
 import com.example.wms_erp.decorator.MySpaceDecration;
 import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
+import com.example.wms_erp.event.RxManager;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.presenter.impl.OnOffShelvePresenterImpl;
@@ -182,7 +183,9 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
             public void onNext(Object o) {
                 if (o instanceof CodeEvent) {
                     Log.i("RxBus", ((CodeEvent) o).getCode());
-                    dispatchCode(((CodeEvent) o).getCode());
+                    if((((CodeEvent) o).getTag())==TAG_ONOFFFRAGMENT) {
+                        dispatchCode(((CodeEvent) o).getCode());
+                    }
                 }
             }
         });
@@ -380,6 +383,14 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
                 }
                 break;
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        activity.unRegist();
+//        application.rxManager.clear();
+        Log.i("pause","盲扫");
     }
 }
 

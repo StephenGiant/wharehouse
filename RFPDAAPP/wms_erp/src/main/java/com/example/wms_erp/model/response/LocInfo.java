@@ -56,7 +56,7 @@ public class LocInfo {
     private double QTY;
     private int QTYchange;
     private double INVQTY;
-    private int PURUNITQTY;
+    private double PURUNITQTY;
     private double BuyQty;
     private double StoreQty;
     private String PURUNITNAME;
@@ -196,11 +196,11 @@ public class LocInfo {
         this.INVQTY = INVQTY;
     }
 
-    public int getPURUNITQTY() {
+    public double getPURUNITQTY() {
         return PURUNITQTY;
     }
 
-    public void setPURUNITQTY(int PURUNITQTY) {
+    public void setPURUNITQTY(double PURUNITQTY) {
         this.PURUNITQTY = PURUNITQTY;
     }
 
@@ -286,9 +286,11 @@ public class LocInfo {
 
     public void setValues(LocInfoTable tableinfo){
       setGOODSCODE(tableinfo.getGOODSCODE());
+        setGOODSBATCHCODE(tableinfo.getGOODSBATCHCODE());
         setGOODSNAME(tableinfo.getGOODSNAME());
         setPURUNITQTY(tableinfo.getPURUNITQTY());
         setBuyQty(tableinfo.getBuyQty());
+        setINVQTY(tableinfo.getINVQTY());
 
     }
 

@@ -45,7 +45,7 @@ public class LocInfoTable extends BaseModel{
     @Column
     private double INVQTY;
     @Column
-    private int PURUNITQTY;
+    private double PURUNITQTY;
     @Column
     private double BuyQty;
     @Column
@@ -227,11 +227,11 @@ public class LocInfoTable extends BaseModel{
         this.PURUNITNAME = PURUNITNAME;
     }
 
-    public int getPURUNITQTY() {
+    public double getPURUNITQTY() {
         return PURUNITQTY;
     }
 
-    public void setPURUNITQTY(int PURUNITQTY) {
+    public void setPURUNITQTY(double PURUNITQTY) {
         this.PURUNITQTY = PURUNITQTY;
     }
 
