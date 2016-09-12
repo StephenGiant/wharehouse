@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.wms_erp.R;
 import com.example.wms_erp.model.response.LocInfo;
 import com.example.wms_erp.model.response.OnShelveInfo;
+import com.example.wms_erp.util.UnitUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,7 +27,7 @@ import butterknife.OnClick;
  * 模仿datepickerdialog
  * Created by qianpeng on 2016/8/25.
  */
-public class OnshelveDialog extends DialogFragment {
+public class LocCountDialog extends DialogFragment {
 
 
     @Bind(R.id.et_bigunit)
@@ -40,20 +41,20 @@ public class OnshelveDialog extends DialogFragment {
     @Bind(R.id.goods_code_dialog)
     TextView goodsCodeDialog;
     private Activity activity;
-    private OnShelveInfo info;
-    private LocInfo locInfo;
-    public static OnshelveDialog instanceDialog(Object info) {
-        OnshelveDialog dialog = new OnshelveDialog();
-        if(info instanceof OnShelveInfo) {
-            dialog.info = (OnShelveInfo) info;
-        }else{
-
-        }
+    private LocInfo info;
+//    private LocInfo locInfo;
+    public static LocCountDialog instanceDialog(LocInfo info) {
+        LocCountDialog dialog = new LocCountDialog();
+//        if(info instanceof OnShelveInfo) {
+            dialog.info =  info;
+//        }else{
+//
+//        }
 
         return dialog;
     }
 
-    public void setInfo(OnShelveInfo info) {
+    public void setInfo(LocInfo info) {
         this.info = info;
     }
 
@@ -115,32 +116,47 @@ public class OnshelveDialog extends DialogFragment {
     String test;
 
 
+    /**
+     * 没有大小单位字段
+     */
     @OnClick(R.id.btn_comit)
     public void onClick() {
         double bigUnit = 0;
         double smallunit=0;
-
-            test = etBigunit.getText().toString();
-            Log.i("大单位", etBigunit.getText().toString());
-
-            if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
-                bigUnit = Double.parseDouble(etBigunit.getText().toString());
-            } else {
-                bigUnit = 0;
-            }
-            info.setMAXQTY(bigUnit);
-            Log.i("大单位", info.getMAXQTY() + "");
-
-            if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
-                smallunit = Double.parseDouble(etSmalluint.getText().toString());
-            } else {
-                smallunit = 0;
-            }
-        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
-            info.setQTY(bigUnit * info.getPURUNITQTY() + smallunit);
+        if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
+            bigUnit = Double.parseDouble(etBigunit.getText().toString());
         }else{
-            info.setQTY(bigUnit+smallunit);
+            bigUnit=0;
         }
+        if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
+            smallunit = Double.parseDouble(etSmalluint.getText().toString());
+        }else{
+            smallunit=0;
+        }
+        double total = UnitUtils.getTotalCount(smallunit,bigUnit,info.getPURUNITQTY());
+        info.setINVQTY(total);
+//
+//            test = etBigunit.getText().toString();
+//            Log.i("大单位", etBigunit.getText().toString());
+//
+//            if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
+//                bigUnit = Double.parseDouble(etBigunit.getText().toString());
+//            } else {
+//                bigUnit = 0;
+//            }
+//            info.setMAXQTY(bigUnit);
+//            Log.i("大单位", info.getMAXQTY() + "");
+//
+//            if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
+//                smallunit = Double.parseDouble(etSmalluint.getText().toString());
+//            } else {
+//                smallunit = 0;
+//            }
+//        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+//            info.setQTY(bigUnit * info.getPURUNITQTY() + smallunit);
+//        }else{
+//            info.setQTY(bigUnit+smallunit);
+//        }
         if (listenner != null) {
             listenner.onConfirmClick(info);
         }
@@ -156,12 +172,14 @@ public class OnshelveDialog extends DialogFragment {
 
 
     public static interface OnConfirmLitsenner {
-        public void onConfirmClick(OnShelveInfo info);
+        public void onConfirmClick(LocInfo info);
     }
-
+public double getINVQTY(){
+    return info.getINVQTY();
+}
     public static class Builder {
 
-        OnshelveDialog dialog;
+        LocCountDialog dialog;
         View contentView;
 
         public Builder setContentView(View view) {
@@ -169,7 +187,7 @@ public class OnshelveDialog extends DialogFragment {
             return this;
         }
 
-        public OnshelveDialog build() {
+        public LocCountDialog build() {
                 dialog.setCancelable(false);
             return dialog;
         }

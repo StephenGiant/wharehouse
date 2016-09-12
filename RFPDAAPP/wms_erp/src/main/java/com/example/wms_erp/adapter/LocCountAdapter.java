@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.wms_erp.R;
 import com.example.wms_erp.model.response.LocInfo;
+import com.example.wms_erp.util.UnitUtils;
 import com.example.wms_erp.viewholder.MyBaseViewHolder;
 
 import java.util.List;
@@ -31,7 +32,9 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
     protected void bindItemData(LocCountViewHolder holder, LocInfo data, int position) {
         holder.goodsCode.setText(data.getGOODSBATCHCODE());
         holder.goodsName.setText(data.getGOODSNAME());
-        holder.tvQTY.setText(data.getINVQTY()+"");
+        holder.tvQTY.setText(data.getINVQTY() + "");
+        holder.countBigunit.setText(UnitUtils.getBigUnitNum(data.getINVQTY(),data.getPURUNITQTY())+"");//获取大单位数量
+        holder.countSmallunit.setText(UnitUtils.getSmallUinitNum(data.getINVQTY(),data.getPURUNITQTY())+"");//获取小单位数量
     }
 
     @Override
@@ -48,6 +51,10 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
         TextView goodsName;
         @Bind(R.id.tv_QTY)
         TextView tvQTY;
+        @Bind(R.id.count_bigunit)
+        TextView countBigunit;
+        @Bind(R.id.count_smallunit)
+        TextView countSmallunit;
         public LocCountViewHolder(View itemView) {
             super(itemView);
         }

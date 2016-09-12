@@ -47,7 +47,7 @@ public class LocCountFragment extends BaseFragment {
     private ServiceApi serviceApi;
     private MainActivity activity;
     private LocInfoDao locInfoDao;
-
+    public ArrayList<LocInfo> doneList = new ArrayList<>();
     @Override
     public void dispatchCode(String code) {
 
@@ -143,6 +143,32 @@ public class LocCountFragment extends BaseFragment {
                         }
                     }
                 });
+        tabTitle.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                }
+            }
+        });
     }
 
     @Override

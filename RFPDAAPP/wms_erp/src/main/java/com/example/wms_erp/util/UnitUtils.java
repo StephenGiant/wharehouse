@@ -11,4 +11,7 @@ public static double getSmallUinitNum(double num,double xishu){
     public static double getBigUnitNum(double num,double xishu){
         return num/xishu;
     }
+    public static double getTotalCount(double small,double big,double xishu){
+        return small+(big*xishu);
+    }
 }
