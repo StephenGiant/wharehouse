@@ -6,14 +6,15 @@
             android:id="@+id/nav_camera"
             android:icon="@drawable/cloud_upload"
             android:title="盲扫上下架" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/order"
-            android:title="指令上下架" />
+
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/file_text"
             android:title="库存盘点" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/order"
+            android:title="指令上下架" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/trash_can"

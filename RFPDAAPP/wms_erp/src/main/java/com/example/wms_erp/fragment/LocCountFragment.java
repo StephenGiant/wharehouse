@@ -19,6 +19,8 @@ import com.example.wms_erp.dao.LocInfoDao;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.db.LocInfoTable;
 import com.example.wms_erp.model.response.LocInfo;
+import com.example.wms_erp.model.response.LocInfoResponse;
+//import com.example.wms_erp.model.response.LocInfo_Table;
 import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.ui.MainActivity;
@@ -62,7 +64,7 @@ public class LocCountFragment extends BaseFragment {
 
     public void initData(){
         serviceApi.getLocationInventory("").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<BaseBean<List<LocInfo>>>() {
+                .subscribe(new Subscriber<BaseBean<List<LocInfoResponse>>>() {
                     @Override
                     public void onStart() {
                         activity.showLoadingDialog("正在加载数据");
@@ -81,43 +83,17 @@ public class LocCountFragment extends BaseFragment {
                     }
 
                     @Override
-                    public void onNext(final BaseBean<List<LocInfo>> data) {
+                    public void onNext(final BaseBean<List<LocInfoResponse>> data) {
                         //存入数据库
                         if(data.getDATA()!=null){
-                            Delete.table(LocInfoTable.class);
+                            Delete.table(LocInfo.class);
                             Observable.create(new Observable.OnSubscribe<String>() {
                                 @Override
                                 public void call(Subscriber<? super String> subscriber) {
-                                    for(LocInfo info:data.getDATA()){
-                                        LocInfoTable infoTable = new LocInfoTable();
-                                        infoTable.setBuyQty(info.getBuyQty());
-                                        infoTable.setGOODSCODE(info.getGOODSCODE());
-                                        infoTable.setGOODSNAME(info.getGOODSNAME());
-                                        infoTable.setPURUNITQTY(info.getPURUNITQTY());
-                                        infoTable.setCELLNO(info.getCELLNO());
-                                        infoTable.setCHQTY(info.getCHQTY());
-                                        infoTable.setCREATER(info.getCREATER());
-                                        infoTable.setEXPIRYDAYS(info.getEXPIRYDAYS());
-                                        infoTable.setGOODS_SN(info.getGOODS_SN());
-                                        infoTable.setGOODSBATCHCODE(info.getGOODSBATCHCODE());
-                                        infoTable.setGOODSID(info.getGOODSID());
-                                        infoTable.setINVQTY(info.getINVQTY());
-                                        infoTable.setLOCATIONCODE(info.getLOCATIONCODE());
-                                        infoTable.setLOCATIONINVENTORYID(info.getLOCATIONINVENTORYID());
-                                        infoTable.setLOCATIONID(info.getLOCATIONID());
-                                        infoTable.setPRODUCTIONDATE(info.getPRODUCTIONDATE());
-                                        infoTable.setMAXBATCH(info.getMAXBATCH());
-                                        infoTable.setMINBATCH(info.getMINBATCH());
-                                        infoTable.setQTY(info.getQTY());
-                                        infoTable.setQTYchange(info.getQTYchange());
-                                        infoTable.setSTATUS(info.getSTATUS());
-                                        infoTable.setWAREHOUSEID(info.getWAREHOUSEID());
-                                        infoTable.setStoreQty(info.getStoreQty());
-                                        infoTable.setSTORAGEDATE(info.getSTORAGEDATE());
-                                        infoTable.setUNITNAME(info.getUNITNAME());
-                                        infoTable.setPURUNITNAME(info.getPURUNITNAME());
+                                    for(LocInfoResponse info:data.getDATA()){
+                                        LocInfo infoTable = new LocInfo();
+                                       infoTable.setValues(info);
                                         infoTable.save();
-
 
                                     }
                                     subscriber.onNext("读取数据完成");
@@ -148,10 +124,14 @@ public class LocCountFragment extends BaseFragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 switch (tab.getPosition()){
                     case 0:
+                        tab.setText("调整");
+
                         break;
                     case 1:
+                        tab.setText("清单");
                         break;
                 }
+                vpContent.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -189,7 +169,16 @@ public class LocCountFragment extends BaseFragment {
         application = (MyApplication) getActivity().getApplication();
         ArrayList<Fragment> fragments = new ArrayList<>();
         fragments.add(new TiaoZhengFragment());
+        fragments.add(new LocBillFragment());
         vpContent.setAdapter(new LocPagerAdapter(getFragmentManager(),fragments));
+//        tabTitle.setupWithViewPager(vpContent);
+//        tabTitle.setTabMode(TabLayout.MODE_FIXED);
+        tabTitle.setupWithViewPager(vpContent);
+
+                    tabTitle.getTabAt(0).setText("调整");
+           tabTitle.getTabAt(1).setText("清单");
+
+
         return view;
     }
 

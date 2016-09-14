@@ -77,4 +77,5 @@ protected abstract void bindItemData(VH holder,T data,int position);
         mData.add(item);
         notifyItemInserted(mData.size()-1);
     }
+
 }

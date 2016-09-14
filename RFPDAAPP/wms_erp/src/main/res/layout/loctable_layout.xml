@@ -12,11 +12,12 @@
         android:layout_marginLeft="10dp"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:text="货位号"
+        android:text="条码"
+        android:gravity="end"
             android:textSize="16sp"
         />
     <EditText
-        android:id="@+id/ce_huowei"
+        android:id="@+id/ce_code"
         android:layout_marginRight="10dp"
         android:maxLines="1"
         android:layout_marginLeft="9dp"
@@ -33,13 +34,14 @@
             android:layout_marginLeft="10dp"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="条码"
+            android:text="货位号"
             android:textSize="16sp"
             android:gravity="end"
             />
         <EditText
             android:maxLines="1"
-            android:id="@+id/ce_code"
+            android:id="@+id/ce_huowei"
+
             android:layout_marginLeft="9dp"
             android:layout_width="180dp"
             android:layout_height="wrap_content" />
@@ -49,7 +51,7 @@
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             style="@style/MyButtonTheme"
-            android:text="作废"
+            android:text="查询"
             />
     </LinearLayout>
     <View

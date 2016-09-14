@@ -82,4 +82,15 @@ public class HandleCodeUtil {
 
     }
 
+    /**
+     * 商品条码，包括批次号
+     * @param code
+     * @return
+     */
+    public static boolean isGoodsCode(String code){
+        //前三位为字母或者数字
+        Pattern compile = Pattern.compile("\\w{3}\\d{6,20}");
+        return compile.matcher(code).matches();
+    }
+
 }

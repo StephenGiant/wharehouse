@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.example.wms_erp.R;
 import com.example.wms_erp.model.response.LocInfo;
-import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.util.UnitUtils;
 
 import butterknife.Bind;
@@ -24,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * 库存盘点dialog
  * 模仿datepickerdialog
  * Created by qianpeng on 2016/8/25.
  */
@@ -40,13 +40,16 @@ public class LocCountDialog extends DialogFragment {
     TextView tvTitle;
     @Bind(R.id.goods_code_dialog)
     TextView goodsCodeDialog;
+    @Bind(R.id.subtitle)
+    TextView subtitle;
     private Activity activity;
     private LocInfo info;
-//    private LocInfo locInfo;
+
+    //    private LocInfo locInfo;
     public static LocCountDialog instanceDialog(LocInfo info) {
         LocCountDialog dialog = new LocCountDialog();
 //        if(info instanceof OnShelveInfo) {
-            dialog.info =  info;
+        dialog.info = info;
 //        }else{
 //
 //        }
@@ -85,12 +88,12 @@ public class LocCountDialog extends DialogFragment {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, height + 90);//Here!
         window.setGravity(Gravity.BOTTOM);
         super.onResume();
-        tvTitle.setText(info.getGOODSNAME());
-        etSmalluint.setFocusable(true);
-        if(info.getPURUNITNAME().equals(info.getUNITNAME())){
-            etSmalluint.setFocusable(false);
-        }
-        goodsCodeDialog.setText(info.getGOODSCODE());
+//        tvTitle.setText(info.getGOODSNAME());
+//        etSmalluint.setFocusable(true);
+//        if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
+//            etSmalluint.setFocusable(false);
+//        }
+//        goodsCodeDialog.setText(info.getGOODSCODE());
     }
 
     private View initView() {
@@ -98,11 +101,12 @@ public class LocCountDialog extends DialogFragment {
         ButterKnife.bind(this, view);
 //        setInfo(info);
         tvTitle.setText(info.getGOODSNAME());
+        subtitle.setText("商品批次号:");
         etSmalluint.setFocusable(true);
-        if(info.getPURUNITNAME().equals(info.getUNITNAME())){
+        if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
             etSmalluint.setFocusable(false);
         }
-        goodsCodeDialog.setText(info.getGOODSCODE());
+        goodsCodeDialog.setText(info.getGOODSBATCHCODE());
         return view;
     }
 
@@ -122,19 +126,22 @@ public class LocCountDialog extends DialogFragment {
     @OnClick(R.id.btn_comit)
     public void onClick() {
         double bigUnit = 0;
-        double smallunit=0;
+        double smallunit = 0;
         if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
             bigUnit = Double.parseDouble(etBigunit.getText().toString());
-        }else{
-            bigUnit=0;
+
+        } else {
+            bigUnit = 0;
         }
+        info.setBuyQty(bigUnit);
         if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
             smallunit = Double.parseDouble(etSmalluint.getText().toString());
-        }else{
-            smallunit=0;
+        } else {
+            smallunit = 0;
         }
-        double total = UnitUtils.getTotalCount(smallunit,bigUnit,info.getPURUNITQTY());
-        info.setINVQTY(total);
+        info.setStoreQty(smallunit);
+        double total = UnitUtils.getTotalCount(smallunit, bigUnit, info.getPURUNITQTY());
+//        info.setINVQTY(total);
 //
 //            test = etBigunit.getText().toString();
 //            Log.i("大单位", etBigunit.getText().toString());
@@ -157,6 +164,7 @@ public class LocCountDialog extends DialogFragment {
 //        }else{
 //            info.setQTY(bigUnit+smallunit);
 //        }
+        info.update();
         if (listenner != null) {
             listenner.onConfirmClick(info);
         }
@@ -169,14 +177,23 @@ public class LocCountDialog extends DialogFragment {
         this.listenner = listenner;
     }
 
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        // TODO: inflate a fragment view
+//        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+//        ButterKnife.bind(this, rootView);
+//        return rootView;
+//    }
 
 
     public static interface OnConfirmLitsenner {
         public void onConfirmClick(LocInfo info);
     }
-public double getINVQTY(){
-    return info.getINVQTY();
-}
+
+    public double getINVQTY() {
+        return info.getINVQTY();
+    }
+
     public static class Builder {
 
         LocCountDialog dialog;
@@ -188,7 +205,7 @@ public double getINVQTY(){
         }
 
         public LocCountDialog build() {
-                dialog.setCancelable(false);
+            dialog.setCancelable(false);
             return dialog;
         }
     }
@@ -196,17 +213,17 @@ public double getINVQTY(){
     public String getCountDetail() {
         String small = etSmalluint.getText().toString();
         String big = etBigunit.getText().toString();
-        if(TextUtils.isEmpty(small)&&TextUtils.isEmpty(big)){
+        if (TextUtils.isEmpty(small) && TextUtils.isEmpty(big)) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+        if (!info.getUNITNAME().equals(info.getPURUNITNAME())) {
             sb.append(etBigunit.getText().toString());
             sb.append(info.getPURUNITNAME());
             sb.append(etSmalluint.getText().toString());
             sb.append(info.getUNITNAME());
-        }else{
-            sb.append((Double.parseDouble(TextUtils.isEmpty(big)?"0":big)+Double.parseDouble(TextUtils.isEmpty(small)?"0":small))+info.getPURUNITNAME());
+        } else {
+            sb.append((Double.parseDouble(TextUtils.isEmpty(big) ? "0" : big) + Double.parseDouble(TextUtils.isEmpty(small) ? "0" : small)) + info.getPURUNITNAME());
         }
         Log.i("看返回", sb.toString());
         return sb.toString();

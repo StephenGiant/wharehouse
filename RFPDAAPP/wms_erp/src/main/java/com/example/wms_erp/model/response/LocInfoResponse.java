@@ -1,76 +1,85 @@
 package com.example.wms_erp.model.response;
 
-import com.example.wms_erp.model.db.LocInfoDB;
 import com.example.wms_erp.model.db.LocInfoTable;
-import com.raizlabs.android.dbflow.annotation.Column;
-import com.raizlabs.android.dbflow.annotation.PrimaryKey;
-import com.raizlabs.android.dbflow.annotation.Table;
-import com.raizlabs.android.dbflow.structure.BaseModel;
-
-import java.util.List;
 
 /**
- * Created by Administrator on 2016/9/5.
+ * Created by Administrator on 2016/9/14.
  */
-@Table(database = LocInfoDB.class)
-public class LocInfo extends BaseModel{
+public class LocInfoResponse {
 
-    @PrimaryKey(autoincrement = true)
-    long id;
-    @Column
+    /**
+     * GOODSCODE : 0101010022
+     * GOODSNAME : 友加白胡椒粉
+     * LOCATIONINVENTORYID : 130657
+     * LOCATIONID : 8141
+     * LOCATIONCODE : CK1B39
+     * GOODSBATCHCODE : 010101002260304120
+     * GOODSID : 0
+     * UNITNAME : 瓶
+     * WAREHOUSEID : 0
+     * CELLNO : 常温原料
+     * PRODUCTIONDATE : 60304
+     * STORAGEDATE : 160326
+     * EXPIRYDAYS : 120
+     * QTY : 0
+     * QTYchange : 0
+     * INVQTY : 2058
+     * PURUNITQTY : 20
+     * BuyQty : 102
+     * StoreQty : 18
+     * PURUNITNAME : 箱
+     * CREATER : null
+     * STATUS : 1
+     * MAXBATCH : null
+     * MINBATCH : null
+     * QUALITYSTATUS : null
+     * GOODS_SN : null
+     * CHQTY : 0
+     */
+
     private String GOODSCODE;
-    @Column
     private String GOODSNAME;
-    @Column
     private int LOCATIONINVENTORYID;
-    @Column
     private int LOCATIONID;
-    @Column
     private String LOCATIONCODE;
-    @Column
     private String GOODSBATCHCODE;
-    @Column
     private int GOODSID;
-    @Column
     private String UNITNAME;
-    @Column
     private int WAREHOUSEID;
-    @Column
     private String CELLNO;
-    @Column
     private String PRODUCTIONDATE;
-    @Column
     private String STORAGEDATE;
-    @Column
     private int EXPIRYDAYS;
-    @Column
     private double QTY;
-    @Column
-    private int QTYchange;
-    @Column
+    private double QTYchange;
     private double INVQTY;
-    @Column
     private double PURUNITQTY;
-    @Column
     private double BuyQty;
-    @Column
     private double StoreQty;
-    @Column
     private String PURUNITNAME;
-    @Column
     private String CREATER;
-    @Column
     private int STATUS;
-    @Column
     private String MAXBATCH;
-    @Column
     private String MINBATCH;
-    @Column
     private String QUALITYSTATUS;
-    @Column
     private String GOODS_SN;
-    @Column
     private double CHQTY;
+
+    public String getGOODSCODE() {
+        return GOODSCODE;
+    }
+
+    public void setGOODSCODE(String GOODSCODE) {
+        this.GOODSCODE = GOODSCODE;
+    }
+
+    public String getGOODSNAME() {
+        return GOODSNAME;
+    }
+
+    public void setGOODSNAME(String GOODSNAME) {
+        this.GOODSNAME = GOODSNAME;
+    }
 
     public int getLOCATIONINVENTORYID() {
         return LOCATIONINVENTORYID;
@@ -88,12 +97,44 @@ public class LocInfo extends BaseModel{
         this.LOCATIONID = LOCATIONID;
     }
 
+    public String getLOCATIONCODE() {
+        return LOCATIONCODE;
+    }
+
+    public void setLOCATIONCODE(String LOCATIONCODE) {
+        this.LOCATIONCODE = LOCATIONCODE;
+    }
+
+    public String getGOODSBATCHCODE() {
+        return GOODSBATCHCODE;
+    }
+
+    public void setGOODSBATCHCODE(String GOODSBATCHCODE) {
+        this.GOODSBATCHCODE = GOODSBATCHCODE;
+    }
+
     public int getGOODSID() {
         return GOODSID;
     }
 
     public void setGOODSID(int GOODSID) {
         this.GOODSID = GOODSID;
+    }
+
+    public String getUNITNAME() {
+        return UNITNAME;
+    }
+
+    public void setUNITNAME(String UNITNAME) {
+        this.UNITNAME = UNITNAME;
+    }
+
+    public int getWAREHOUSEID() {
+        return WAREHOUSEID;
+    }
+
+    public void setWAREHOUSEID(int WAREHOUSEID) {
+        this.WAREHOUSEID = WAREHOUSEID;
     }
 
     public String getCELLNO() {
@@ -136,7 +177,7 @@ public class LocInfo extends BaseModel{
         this.QTY = QTY;
     }
 
-    public int getQTYchange() {
+    public double getQTYchange() {
         return QTYchange;
     }
 
@@ -144,20 +185,44 @@ public class LocInfo extends BaseModel{
         this.QTYchange = QTYchange;
     }
 
-    public double getStoreQty() {
-        return StoreQty;
+    public double getINVQTY() {
+        return INVQTY;
     }
 
-    public void setStoreQty(double storeQty) {
-        StoreQty = storeQty;
+    public void setINVQTY(double INVQTY) {
+        this.INVQTY = INVQTY;
+    }
+
+    public double getPURUNITQTY() {
+        return PURUNITQTY;
+    }
+
+    public void setPURUNITQTY(double PURUNITQTY) {
+        this.PURUNITQTY = PURUNITQTY;
     }
 
     public double getBuyQty() {
         return BuyQty;
     }
 
-    public void setBuyQty(double buyQty) {
-        BuyQty = buyQty;
+    public void setBuyQty(double BuyQty) {
+        this.BuyQty = BuyQty;
+    }
+
+    public double getStoreQty() {
+        return StoreQty;
+    }
+
+    public void setStoreQty(double StoreQty) {
+        this.StoreQty = StoreQty;
+    }
+
+    public String getPURUNITNAME() {
+        return PURUNITNAME;
+    }
+
+    public void setPURUNITNAME(String PURUNITNAME) {
+        this.PURUNITNAME = PURUNITNAME;
     }
 
     public String getCREATER() {
@@ -216,90 +281,8 @@ public class LocInfo extends BaseModel{
         this.CHQTY = CHQTY;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getPURUNITNAME() {
-        return PURUNITNAME;
-    }
-
-    public void setPURUNITNAME(String PURUNITNAME) {
-        this.PURUNITNAME = PURUNITNAME;
-    }
-
-    public double getPURUNITQTY() {
-        return PURUNITQTY;
-    }
-
-    public void setPURUNITQTY(double PURUNITQTY) {
-        this.PURUNITQTY = PURUNITQTY;
-    }
-
-    public double getINVQTY() {
-        return INVQTY;
-    }
-
-    public void setINVQTY(double INVQTY) {
-        this.INVQTY = INVQTY;
-    }
-
-    public int getWAREHOUSEID() {
-        return WAREHOUSEID;
-    }
-
-    public void setWAREHOUSEID(int WAREHOUSEID) {
-        this.WAREHOUSEID = WAREHOUSEID;
-    }
-
-    public String getUNITNAME() {
-        return UNITNAME;
-    }
-
-    public void setUNITNAME(String UNITNAME) {
-        this.UNITNAME = UNITNAME;
-    }
-
-    public String getGOODSBATCHCODE() {
-        return GOODSBATCHCODE;
-    }
-
-    public void setGOODSBATCHCODE(String GOODSBATCHCODE) {
-        this.GOODSBATCHCODE = GOODSBATCHCODE;
-    }
-
-    public String getLOCATIONCODE() {
-        return LOCATIONCODE;
-    }
-
-    public void setLOCATIONCODE(String LOCATIONCODE) {
-        this.LOCATIONCODE = LOCATIONCODE;
-    }
-
-
-
-    public String getGOODSNAME() {
-        return GOODSNAME;
-    }
-
-    public void setGOODSNAME(String GOODSNAME) {
-        this.GOODSNAME = GOODSNAME;
-    }
-
-    public String getGOODSCODE() {
-        return GOODSCODE;
-    }
-
-    public void setGOODSCODE(String GOODSCODE) {
-        this.GOODSCODE = GOODSCODE;
-    }
-
-    public void setValues(LocInfoResponse tableinfo){
-      setGOODSCODE(tableinfo.getGOODSCODE());
+    public void setValues(LocInfo tableinfo){
+        setGOODSCODE(tableinfo.getGOODSCODE());
         setGOODSBATCHCODE(tableinfo.getGOODSBATCHCODE());
         setGOODSNAME(tableinfo.getGOODSNAME());
         setPURUNITQTY(tableinfo.getPURUNITQTY());
@@ -326,6 +309,4 @@ public class LocInfo extends BaseModel{
         setSTATUS(tableinfo.getSTATUS());
 
     }
-
-
 }

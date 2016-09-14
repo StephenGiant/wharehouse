@@ -6,7 +6,11 @@ package com.example.wms_erp.util;
 public class UnitUtils {
 
 public static double getSmallUinitNum(double num,double xishu){
-    return num%xishu;
+    if(xishu!=1) {
+        return num % xishu;
+    }else{
+        return 0;
+    }
 }
     public static double getBigUnitNum(double num,double xishu){
         return num/xishu;

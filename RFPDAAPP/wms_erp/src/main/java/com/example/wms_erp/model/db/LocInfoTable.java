@@ -8,7 +8,7 @@ import com.raizlabs.android.dbflow.structure.BaseModel;
 /**
  * Created by Administrator on 2016/9/5.
  */
-@Table(database = LocInfoDB.class)
+//@Table(database = LocInfoDB.class)
 public class LocInfoTable extends BaseModel{
     @PrimaryKey(autoincrement = true)
     long id;

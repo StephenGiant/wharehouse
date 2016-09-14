@@ -83,6 +83,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -91,6 +92,7 @@ import com.example.wms_erp.adapter.FunctionsAdapter;
 import com.example.wms_erp.application.MyApplication;
 import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
+import com.example.wms_erp.event.UpdateEvent;
 import com.example.wms_erp.fragment.LocCountFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.fragment.TiaoZhengFragment;
@@ -104,6 +106,7 @@ import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import rx.Subscriber;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -162,6 +165,25 @@ public class MainActivity extends BaseActivity
         this.application = (MyApplication) getApplication();
         toolbar.setTitle("盲扫上下架");
         setSupportActionBar(toolbar);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                if(o instanceof UpdateEvent){
+//                    countFragment.initData();
+                }
+            }
+        });
         onoffBlindFragment = new OnoffBlindFragment();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,6 +257,9 @@ public class MainActivity extends BaseActivity
             curTag=OnoffBlindFragment.TAG_ONOFFFRAGMENT;
         } else if (id == R.id.nav_gallery) {
             toolbar.setTitle("指令上下架");
+
+        } else if (id == R.id.nav_slideshow) {
+            toolbar.setTitle("库存盘点");
             try {
                 curTag = TiaoZhengFragment.TAG_TIAOZHENG;
                 vpFunctions.setCurrentItem(1);
@@ -245,8 +270,7 @@ public class MainActivity extends BaseActivity
                 Log.i("切换失败","库存盘点");
             }
 
-        } else if (id == R.id.nav_slideshow) {
-            toolbar.setTitle("库存盘点");
+
         } else if (id == R.id.nav_manage) {
             toolbar.setTitle("报损");
         } else if (id == R.id.nav_setting) {

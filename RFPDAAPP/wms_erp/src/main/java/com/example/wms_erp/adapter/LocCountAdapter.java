@@ -23,7 +23,6 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
 
 
 
-
     public LocCountAdapter(Activity activity, List<LocInfo> data) {
         super(activity, data);
     }
@@ -32,9 +31,10 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
     protected void bindItemData(LocCountViewHolder holder, LocInfo data, int position) {
         holder.goodsCode.setText(data.getGOODSBATCHCODE());
         holder.goodsName.setText(data.getGOODSNAME());
-        holder.tvQTY.setText(data.getINVQTY() + "");
-        holder.countBigunit.setText(UnitUtils.getBigUnitNum(data.getINVQTY(),data.getPURUNITQTY())+"");//获取大单位数量
-        holder.countSmallunit.setText(UnitUtils.getSmallUinitNum(data.getINVQTY(),data.getPURUNITQTY())+"");//获取小单位数量
+        holder.tvQTY.setText((data.getStoreQty()+data.getBuyQty()*data.getPURUNITQTY())+"");
+        holder.countBigunit.setText("大单位:" + data.getBuyQty());//获取大单位数量
+        holder.countSmallunit.setText("小单位:" + data.getStoreQty());//获取小单位数量
+        holder.huoweiCode.setText(data.getLOCATIONCODE());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
         return new LocCountViewHolder(view);
     }
 
-    static class LocCountViewHolder extends MyBaseViewHolder {
+     class LocCountViewHolder extends MyBaseViewHolder {
         @Bind(R.id.goodsCode)
         TextView goodsCode;
         @Bind(R.id.goodsName)
@@ -55,8 +55,19 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
         TextView countBigunit;
         @Bind(R.id.count_smallunit)
         TextView countSmallunit;
-        public LocCountViewHolder(View itemView) {
+        @Bind(R.id.huowei_code)
+        TextView huoweiCode;
+
+        public LocCountViewHolder(final View itemView) {
             super(itemView);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    LocCountAdapter.this.mData.remove(getLayoutPosition());
+                    LocCountAdapter.this.notifyItemRemoved(getLayoutPosition());
+                    return false;
+                }
+            });
         }
     }
 }
