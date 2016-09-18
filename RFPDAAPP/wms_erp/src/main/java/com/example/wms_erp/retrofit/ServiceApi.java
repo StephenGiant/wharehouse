@@ -44,7 +44,7 @@ public interface ServiceApi {
      * @param userPswd
      * @return
      */
-    @GET("http://116.228.118.218:9099/Login/LogonUser")
+    @GET("Login/LogonUser")
     public Observable<BaseBean<UserInfo>> login(@Query("userID")String userID,@Query("userPswd")String userPswd);
 
     /**

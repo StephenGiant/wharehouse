@@ -6,6 +6,15 @@
     layout="@layout/toolbar_layout"
 
     />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/ll_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
 <com.example.wms_erp.view.ClearEditText
     android:id="@+id/et_userName"
     android:layout_marginLeft="16dp"
@@ -31,6 +40,7 @@
         android:textColor="#666666"
 
         />
+
 <Button
     android:id="@+id/btn_login"
     android:layout_marginTop="30dp"
@@ -42,6 +52,27 @@
     android:text="登陆"
 
     />
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_userInfo"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:background="@color/white"
+            >
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="用户名:"
+                android:textSize="18sp"
+                android:textColor="@color/text_black"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
     <Button
         android:layout_marginTop="20dp"
         android:id="@+id/btn_quit"

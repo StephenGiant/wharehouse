@@ -166,24 +166,24 @@ public class MainActivity extends BaseActivity
         toolbar.setTitle("盲扫上下架");
         setSupportActionBar(toolbar);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
-            @Override
-            public void onCompleted() {
-
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Object o) {
-                if(o instanceof UpdateEvent){
-//                    countFragment.initData();
-                }
-            }
-        });
+//        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//
+//            }
+//
+//            @Override
+//            public void onNext(Object o) {
+//                if(o instanceof UpdateEvent){
+////                    countFragment.initData();
+//                }
+//            }
+//        });
         onoffBlindFragment = new OnoffBlindFragment();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,6 +207,19 @@ public class MainActivity extends BaseActivity
         versionName.setText(this.application.getVersion());
         imageView.setOnClickListener(this);
         initViewPager();
+//        if(application.userInfo==null) {
+//            showMaterialDialog("当前未登陆", "请先登录!", new OncheckListenner() {
+//                @Override
+//                public void onPositiveClick() {
+//                    drawerLayout.openDrawer(GravityCompat.START);
+//                }
+//
+//                @Override
+//                public void onNagativeClick() {
+//                    drawerLayout.openDrawer(GravityCompat.START);
+//                }
+//            });
+//        }
 
     }
 
@@ -285,11 +298,12 @@ public class MainActivity extends BaseActivity
     @Override
     public void onClick(View v) {
 //        Toast.makeText(this,"请登陆",Toast.LENGTH_SHORT).show();
-        if (userID == -1) {
+//        if (userID == -1) {
             Intent intent = new Intent(this, LoginAct.class);
+            intent.putExtra("userID",userID);
             startActivity(intent);
-            ToastCheese(userID + "");
-        }
+//            ToastCheese(userID + "");
+//        }
 
 
     }
