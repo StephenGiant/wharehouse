@@ -33,6 +33,24 @@ public class LocDetail {
     private String INVUNITNAME;
     private String LOCATIONCODE;
     private String GOODSID;
+    private String FIRSTDATE;
+    private String LASTDATE;
+
+    public String getFIRSTDATE() {
+        return FIRSTDATE;
+    }
+
+    public void setFIRSTDATE(String FIRSTDATE) {
+        this.FIRSTDATE = FIRSTDATE;
+    }
+
+    public String getLASTDATE() {
+        return LASTDATE;
+    }
+
+    public void setLASTDATE(String LASTDATE) {
+        this.LASTDATE = LASTDATE;
+    }
 
     public int getLOCATIONINVENTORYID() {
         return LOCATIONINVENTORYID;

@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<LinearLayout
+
+   <com.example.wms_erp.view.ClearEditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textSize="16sp"
+       android:textColor="@color/text_black"
+       android:hint="扫描条码"
+       />
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/rv_locdetails"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    >
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/goodscode"
-        />
+    app:layoutManager="LinearLayoutManager"
+    app:reverseLayout="false"
+    ></android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
 
 </LinearLayout>

@@ -305,6 +305,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
         adapter = ArrayAdapter.createFromResource(getContext(), R.array.offshelve_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spReson.setAdapter(adapter);
+        onOffShelvePresenter.clearInfo();
     }
 
     private void changeToOnshelve() {
@@ -312,6 +313,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
         adapter = ArrayAdapter.createFromResource(getContext(), R.array.onshelve_type, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spReson.setAdapter(adapter);
+        onOffShelvePresenter.clearInfo();
     }
 
     int num = 0;
