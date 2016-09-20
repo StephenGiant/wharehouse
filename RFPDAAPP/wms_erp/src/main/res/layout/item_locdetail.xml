@@ -90,9 +90,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="2dp"
-        >
+        android:padding="2dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -113,8 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/ContentTextStyle"
-            android:text="@string/lastonshelvedate"
-            />
+            android:text="@string/lastonshelvedate" />
         <TextView
             android:id="@+id/lastDate"
             android:layout_marginLeft="5dp"

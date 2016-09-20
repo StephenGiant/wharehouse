@@ -49,7 +49,7 @@ public class FunctionsAdapter extends FragmentPagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeViewAt(position);
+//        container.removeViewAt(position);
         super.destroyItem(container, position, object);
     }
 }

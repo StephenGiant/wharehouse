@@ -94,6 +94,7 @@ import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
 import com.example.wms_erp.event.UpdateEvent;
 import com.example.wms_erp.fragment.LocCountFragment;
+import com.example.wms_erp.fragment.LocQueryFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.fragment.TiaoZhengFragment;
 import com.example.wms_erp.retrofit.RetrofitSingle;
@@ -121,6 +122,7 @@ public class MainActivity extends BaseActivity
     private int curTag = 0x1001;
     private MyApplication application1;
     private LocCountFragment countFragment;
+    private LocQueryFragment locQueryFragment;
 
     @Override
     protected void handleCode(String str) {
@@ -285,7 +287,9 @@ public class MainActivity extends BaseActivity
 
 
         } else if (id == R.id.nav_manage) {
-            toolbar.setTitle("报损");
+            toolbar.setTitle("货位查询");
+            curTag = LocQueryFragment.TAG_LOCQUERY;
+            vpFunctions.setCurrentItem(2);
         } else if (id == R.id.nav_setting) {
             toolbar.setTitle("设置选项");
         }
@@ -315,8 +319,11 @@ public class MainActivity extends BaseActivity
         vpFunctions.setNoScroll(true);
         ArrayList<Fragment> fragments = new ArrayList<>();
     fragments.add(onoffBlindFragment);
+
         countFragment = new LocCountFragment();
         fragments.add(countFragment);
+        locQueryFragment = new LocQueryFragment();
+        fragments.add(locQueryFragment);
         FunctionsAdapter functionsAdapter = new FunctionsAdapter(getSupportFragmentManager(), this, fragments);
         vpFunctions.setAdapter(functionsAdapter);
     }

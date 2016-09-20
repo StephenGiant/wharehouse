@@ -18,7 +18,7 @@
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/trash_can"
-            android:title="报损" />
+            android:title="货位查询" />
     </group>
 
     <item android:title="设置">
