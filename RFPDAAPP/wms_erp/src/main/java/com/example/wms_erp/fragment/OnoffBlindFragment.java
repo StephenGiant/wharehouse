@@ -168,28 +168,8 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
         activity = (MainActivity) getActivity();
         application = (MyApplication) activity.getApplication();
 
-        Subscription subscription = RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
-            @Override
-            public void onCompleted() {
 
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(Object o) {
-                if (o instanceof CodeEvent) {
-                    Log.i("RxBus", ((CodeEvent) o).getCode());
-                    if((((CodeEvent) o).getTag())==TAG_ONOFFFRAGMENT) {
-                        dispatchCode(((CodeEvent) o).getCode());
-                    }
-                }
-            }
-        });
-        application.rxManager.add(subscription);
+//        application.rxManager.add(subscription);
         View view = inflater.inflate(R.layout.on_offshelve_layout, null);
 
 //        return super.onCreateView(inflater, container, savedInstanceState);
@@ -281,7 +261,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
 
     @Override
     public void onDestroyView() {
-        application.rxManager.clear();//结束订阅的事件，防止ANR
+//        application.rxManager.clear();//结束订阅的事件，防止ANR
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
@@ -289,6 +269,27 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
     @Override
     public void onResume() {
         onOffShelvePresenter = new OnOffShelvePresenterImpl(activity, this);
+        Subscription subscription = RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                if (o instanceof CodeEvent) {
+                    Log.i("RxBus", ((CodeEvent) o).getCode());
+                    if(((CodeEvent) o).getTag()==TAG_ONOFFFRAGMENT) {
+                        dispatchCode(((CodeEvent) o).getCode());
+                    }
+                }
+            }
+        });
         super.onResume();
     }
 
@@ -392,7 +393,9 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
         super.onPause();
 //        activity.unRegist();
 //        application.rxManager.clear();
+        onOffShelvePresenter.clearInfo();
         Log.i("pause","盲扫");
+
     }
 }
 

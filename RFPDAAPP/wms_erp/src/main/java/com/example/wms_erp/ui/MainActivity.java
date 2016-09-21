@@ -87,6 +87,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.wms_erp.BuildConfig;
 import com.example.wms_erp.R;
 import com.example.wms_erp.adapter.FunctionsAdapter;
 import com.example.wms_erp.application.MyApplication;
@@ -168,6 +169,8 @@ public class MainActivity extends BaseActivity
         toolbar.setTitle("盲扫上下架");
         setSupportActionBar(toolbar);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
+//        Log.i("testConfig",BuildConfig.URL);
 //        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
 //            @Override
 //            public void onCompleted() {
@@ -268,8 +271,10 @@ public class MainActivity extends BaseActivity
             // Handle the camera action
 
             toolbar.setTitle("盲扫上下架");
-            vpFunctions.setCurrentItem(0);
             curTag=OnoffBlindFragment.TAG_ONOFFFRAGMENT;
+            Log.i("当前页面",curTag+"");
+            vpFunctions.setCurrentItem(0);
+
         } else if (id == R.id.nav_gallery) {
             toolbar.setTitle("指令上下架");
 

@@ -84,24 +84,38 @@ public class OnshelveDialog extends DialogFragment {
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, height + 90);//Here!
         window.setGravity(Gravity.BOTTOM);
         super.onResume();
-        tvTitle.setText(info.getGOODSNAME());
-        etSmalluint.setFocusable(true);
-        if(info.getPURUNITNAME().equals(info.getUNITNAME())){
-            etSmalluint.setFocusable(false);
+        try {
+            tvTitle.setText(info.getGOODSNAME());
+            etSmalluint.setFocusable(true);
+            if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
+                etSmalluint.setFocusable(false);
+            }
+            goodsCodeDialog.setText(info.getGOODSCODE());
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            tvTitle.setText("异常");
+            goodsCodeDialog.setText("异常，请检查批次");
         }
-        goodsCodeDialog.setText(info.getGOODSCODE());
+
     }
 
     private View initView() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.onshelve_dialog, null);
         ButterKnife.bind(this, view);
 //        setInfo(info);
-        tvTitle.setText(info.getGOODSNAME());
-        etSmalluint.setFocusable(true);
-        if(info.getPURUNITNAME().equals(info.getUNITNAME())){
-            etSmalluint.setFocusable(false);
+        try {
+            tvTitle.setText(info.getGOODSNAME());
+            etSmalluint.setFocusable(true);
+            if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
+                etSmalluint.setFocusable(false);
+            }
+            goodsCodeDialog.setText(info.getGOODSCODE());
+        }catch (NullPointerException e){
+            e.printStackTrace();
+            tvTitle.setText("异常");
+            goodsCodeDialog.setText("异常，请检查批次");
         }
-        goodsCodeDialog.setText(info.getGOODSCODE());
+
         return view;
     }
 

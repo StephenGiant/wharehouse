@@ -64,6 +64,9 @@ activity.hideLoadingDialog();
                                     }
                                 }else{
                                     activity.ToastCheese(listBaseBean.getMESSAGE());
+                                    if(locDetailAdapter!=null){
+                                        locDetailAdapter.refreshData(null);
+                                    }
                                 }
                        }
                    });
