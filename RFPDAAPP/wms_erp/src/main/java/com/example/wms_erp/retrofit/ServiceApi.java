@@ -2,6 +2,7 @@ package com.example.wms_erp.retrofit;
 
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.post.OnShelvebean;
+import com.example.wms_erp.model.response.GoodsLocInfo;
 import com.example.wms_erp.model.response.LocDetail;
 import com.example.wms_erp.model.response.LocInfo;
 import com.example.wms_erp.model.response.LocInfoResponse;
@@ -73,4 +74,22 @@ public interface ServiceApi {
     public Observable<BaseBean<List<LocDetail>>> getLocDetailByGoodsCode(@Query("code")String code);
     @GET("LocationGoods/GetLocationGoods")
     public Observable<BaseBean<List<LocDetail>>> getLocDetailByLocCode(@Query("code")String code);
+
+    /**
+     * 获取商品货位信息
+     * @param goodsCode
+     * @param loacationCode
+     * @return
+     */
+    @GET("LocationGoodsMove/GetLocationALLGoods")
+    public Observable<BaseBean<List<GoodsLocInfo>>> getGoodsLocInfo(@Query("goodsCode")String goodsCode,@Query("locationCode")String loacationCode);
+
+    /**
+     *  提交转移货位
+     * @param userID
+     * @param destinLocationCode
+     * @return
+     */
+    @POST("LocationGoodsMove/LocationGoodsMove")
+    public Observable<BaseBean<String>> postGoodsLocChange(@Query("UserID") int userID,@Query("DestinLocationCode")String destinLocationCode);
 }
