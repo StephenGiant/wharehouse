@@ -25,7 +25,7 @@ public class LocDetail {
     private String GOODSBATCHCODE;
     private String INVGOODSBATCHCODE;
     private String INVSTATUS;
-    private int QTY;
+    private double QTY;
     private String GOODSCODE;
     private String GOODSNAME;
     private String INVGOODSCODE;
@@ -84,11 +84,11 @@ public class LocDetail {
         this.INVSTATUS = INVSTATUS;
     }
 
-    public int getQTY() {
+    public double getQTY() {
         return QTY;
     }
 
-    public void setQTY(int QTY) {
+    public void setQTY(double QTY) {
         this.QTY = QTY;
     }
 

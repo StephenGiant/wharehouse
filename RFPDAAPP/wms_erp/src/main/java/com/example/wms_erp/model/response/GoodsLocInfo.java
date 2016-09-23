@@ -43,18 +43,18 @@ public class GoodsLocInfo {
     private int WAREHOUSEID;
     private String WAREHOUSECODE;
     private String CELLNO;
-    private int QTY;
+    private double QTY;
     private String CREATER;
     private String UNITNAME;
-    private int INVQTY;
+    private double INVQTY;
     private int INVSTATUS;
-    private int TIPNUMBER;
-    private int PURUNITQTY;
+    private double TIPNUMBER;
+    private double PURUNITQTY;
     private String PURUNITNAME;
     private String QUALITYSTATUS;
     private String ISPURUNITNAME;
     private String GOODSSPEC;
-    private int MAXQTY;
+    private double MAXQTY;
     private int EntityState;
     private boolean Selected;
 
@@ -138,11 +138,11 @@ public class GoodsLocInfo {
         this.CELLNO = CELLNO;
     }
 
-    public int getQTY() {
+    public double getQTY() {
         return QTY;
     }
 
-    public void setQTY(int QTY) {
+    public void setQTY(double QTY) {
         this.QTY = QTY;
     }
 
@@ -162,11 +162,11 @@ public class GoodsLocInfo {
         this.UNITNAME = UNITNAME;
     }
 
-    public int getINVQTY() {
+    public double getINVQTY() {
         return INVQTY;
     }
 
-    public void setINVQTY(int INVQTY) {
+    public void setINVQTY(double INVQTY) {
         this.INVQTY = INVQTY;
     }
 
@@ -178,19 +178,19 @@ public class GoodsLocInfo {
         this.INVSTATUS = INVSTATUS;
     }
 
-    public int getTIPNUMBER() {
+    public double getTIPNUMBER() {
         return TIPNUMBER;
     }
 
-    public void setTIPNUMBER(int TIPNUMBER) {
+    public void setTIPNUMBER(double TIPNUMBER) {
         this.TIPNUMBER = TIPNUMBER;
     }
 
-    public int getPURUNITQTY() {
+    public double getPURUNITQTY() {
         return PURUNITQTY;
     }
 
-    public void setPURUNITQTY(int PURUNITQTY) {
+    public void setPURUNITQTY(double PURUNITQTY) {
         this.PURUNITQTY = PURUNITQTY;
     }
 
@@ -226,11 +226,11 @@ public class GoodsLocInfo {
         this.GOODSSPEC = GOODSSPEC;
     }
 
-    public int getMAXQTY() {
+    public double getMAXQTY() {
         return MAXQTY;
     }
 
-    public void setMAXQTY(int MAXQTY) {
+    public void setMAXQTY(double MAXQTY) {
         this.MAXQTY = MAXQTY;
     }
 

@@ -11,6 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="@string/goodscode"
+    style="@style/TitleTextStyle"
     />
     <EditText
         android:layout_marginTop="10dp"
@@ -18,7 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/huowei"
+        style="@style/TitleTextStyle"
         />
+
+    <Button
+        android:id="@+id/btn_query"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyButtonTheme"
+        android:text="查询数据"
+        />
+
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="15dp"
         android:id="@+id/rv_goodslocs"

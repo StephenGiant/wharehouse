@@ -25,7 +25,7 @@ android {
             buildConfigField "String","BaseURL","\"http://211.136.156.114:9091/\""
         }
         debug {
-            buildConfigField "String", "BaseURL", "\"http://211.136.156.114:8081/\""
+            buildConfigField "String", "BaseURL", "\"http://211.136.156.114:9091/\""
 
         }
     }

@@ -91,7 +91,7 @@ android:paddingBottom="5dp"
             android:hint="0"
             android:background="@null"
             android:maxLines="1"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             />
         <TextView
 
@@ -110,7 +110,7 @@ android:paddingBottom="5dp"
             android:hint="0"
             android:background="@null"
             android:maxLines="1"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             />
     </LinearLayout>
     <View

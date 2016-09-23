@@ -46,13 +46,13 @@ public class OnShelveInfo {
     private double QTY;
     private String CREATER;
     private String UNITNAME;
-    private int INVQTY;
+    private double INVQTY;
     private int INVSTATUS;
-    private int TIPNUMBER;
-    private int PURUNITQTY;
+    private double TIPNUMBER;
+    private double PURUNITQTY;
     private String PURUNITNAME;
     private int QUALITYSTATUS;
-    private Object ISPURUNITNAME;
+    private String ISPURUNITNAME;
     private String GOODSSPEC;
     private double MAXQTY;
     private int EntityState;
@@ -162,11 +162,11 @@ public class OnShelveInfo {
         this.UNITNAME = UNITNAME;
     }
 
-    public int getINVQTY() {
+    public double getINVQTY() {
         return INVQTY;
     }
 
-    public void setINVQTY(int INVQTY) {
+    public void setINVQTY(double INVQTY) {
         this.INVQTY = INVQTY;
     }
 
@@ -178,19 +178,19 @@ public class OnShelveInfo {
         this.INVSTATUS = INVSTATUS;
     }
 
-    public int getTIPNUMBER() {
+    public double getTIPNUMBER() {
         return TIPNUMBER;
     }
 
-    public void setTIPNUMBER(int TIPNUMBER) {
+    public void setTIPNUMBER(double TIPNUMBER) {
         this.TIPNUMBER = TIPNUMBER;
     }
 
-    public int getPURUNITQTY() {
+    public double getPURUNITQTY() {
         return PURUNITQTY;
     }
 
-    public void setPURUNITQTY(int PURUNITQTY) {
+    public void setPURUNITQTY(double PURUNITQTY) {
         this.PURUNITQTY = PURUNITQTY;
     }
 
@@ -210,11 +210,11 @@ public class OnShelveInfo {
         this.QUALITYSTATUS = QUALITYSTATUS;
     }
 
-    public Object getISPURUNITNAME() {
+    public String getISPURUNITNAME() {
         return ISPURUNITNAME;
     }
 
-    public void setISPURUNITNAME(Object ISPURUNITNAME) {
+    public void setISPURUNITNAME(String ISPURUNITNAME) {
         this.ISPURUNITNAME = ISPURUNITNAME;
     }
 

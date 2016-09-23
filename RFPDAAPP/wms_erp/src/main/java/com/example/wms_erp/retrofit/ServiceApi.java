@@ -82,7 +82,7 @@ public interface ServiceApi {
      * @return
      */
     @GET("LocationGoodsMove/GetLocationALLGoods")
-    public Observable<BaseBean<List<GoodsLocInfo>>> getGoodsLocInfo(@Query("goodsCode")String goodsCode,@Query("locationCode")String loacationCode);
+    public Observable<BaseBean<List<OnShelveInfo>>> getGoodsLocInfo(@Query("goodsCode")String goodsCode,@Query("locationCode")String loacationCode);
 
     /**
      *  提交转移货位
@@ -91,5 +91,5 @@ public interface ServiceApi {
      * @return
      */
     @POST("LocationGoodsMove/LocationGoodsMove")
-    public Observable<BaseBean<String>> postGoodsLocChange(@Query("UserID") int userID,@Query("DestinLocationCode")String destinLocationCode);
+    public Observable<BaseBean<String>> postGoodsLocChange(@Query("UserID") int userID,@Query("DestinLocationCode")String destinLocationCode,@Body List<OnShelveInfo> requestbody);
 }

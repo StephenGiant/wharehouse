@@ -42,8 +42,8 @@ public class ChangeLocDialog extends DialogFragment {
     @Bind(R.id.btn_comit)
     Button btnComit;
     private static ChangeLocDialog dialog;
-    private  GoodsLocInfo info;
-    public static ChangeLocDialog getInstance(GoodsLocInfo info){
+    private  OnShelveInfo info;
+    public static ChangeLocDialog getInstance(OnShelveInfo info){
         //单例的创建，防止弹多个对话框
         synchronized (ChangeLocDialog.class){
             if(dialog==null){
@@ -80,13 +80,15 @@ public class ChangeLocDialog extends DialogFragment {
     private View initView() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.goodsmove_dialog, null);
         ButterKnife.bind(this,view);
-        tvTitle.setText(info.getGOODSNAME());
-        goodsCodeDialog.setText(info.getGOODSCODE());
+        if(tvTitle!=null) {
+            tvTitle.setText(info.getGOODSNAME());
+            goodsCodeDialog.setText(info.getGOODSCODE());
+        }
 
         return view;
     }
-    public void setData(GoodsLocInfo info){
-        info = info;
+    public void setData(OnShelveInfo info){
+        this.info = info;
     }
     @Override
     public void onDestroyView() {

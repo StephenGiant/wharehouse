@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -47,7 +48,7 @@ public class OnshelveDialog extends DialogFragment {
         if(info instanceof OnShelveInfo) {
             dialog.info = (OnShelveInfo) info;
         }else{
-
+//            LinearLayoutManager
         }
 
         return dialog;
