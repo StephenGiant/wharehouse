@@ -21,13 +21,21 @@
         android:hint="@string/huowei"
         style="@style/TitleTextStyle"
         />
-
+<EditText
+    android:id="@+id/target_loc"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="目标货位号"
+    style="@style/TitleTextStyle"
+    android:enabled="false"
+    />
     <Button
         android:id="@+id/btn_query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/MyButtonTheme"
-        android:text="查询数据"
+        android:text="搬移货位"
         />
 
     <android.support.v7.widget.RecyclerView

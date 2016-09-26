@@ -15,11 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wms_erp.R;
-import com.example.wms_erp.model.response.GoodsLocInfo;
+import com.example.wms_erp.event.RxBus;
 import com.example.wms_erp.model.response.OnShelveInfo;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import rx.Subscriber;
 
 /**
  * 转移货位弹出框
@@ -42,20 +44,20 @@ public class ChangeLocDialog extends DialogFragment {
     @Bind(R.id.btn_comit)
     Button btnComit;
     private static ChangeLocDialog dialog;
-    private  OnShelveInfo info;
-    public static ChangeLocDialog getInstance(OnShelveInfo info){
+    private OnShelveInfo info;
+
+    public static ChangeLocDialog getInstance(OnShelveInfo info) {
         //单例的创建，防止弹多个对话框
-        synchronized (ChangeLocDialog.class){
-            if(dialog==null){
+        synchronized (ChangeLocDialog.class) {
+            if (dialog == null) {
                 dialog = new ChangeLocDialog();
 
             }
-                dialog.setData(info);
+            dialog.setData(info);
 
         }
         return dialog;
     }
-
 
 
     @Override
@@ -73,44 +75,69 @@ public class ChangeLocDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-//        ButterKnife.bind(this, super.onCreateView(inflater, container, savedInstanceState));
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     private View initView() {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.goodsmove_dialog, null);
-        ButterKnife.bind(this,view);
-        if(tvTitle!=null) {
+        ButterKnife.bind(this, view);
+        if (tvTitle != null) {
             tvTitle.setText(info.getGOODSNAME());
             goodsCodeDialog.setText(info.getGOODSCODE());
         }
+        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
+            @Override
+            public void onCompleted() {
 
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
         return view;
     }
-    public void setData(OnShelveInfo info){
+
+    public void setData(OnShelveInfo info) {
         this.info = info;
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
-    public String getNewHuowei(){
+
+    public String getNewHuowei() {
         return etUpdateLoc.getText().toString();
     }
+
     @Override
     public void show(FragmentManager manager, String tag) {
         super.show(manager, tag);
     }
-    private ChangeLocDialog.OnConfirmLitsenner listenner;
 
-    public void setOnConfirmListenner(ChangeLocDialog.OnConfirmLitsenner listenner) {
+    private OnConfirmLitsenner listenner;
+
+    public void setOnConfirmListenner(OnConfirmLitsenner listenner) {
         this.listenner = listenner;
     }
 
+    @OnClick(R.id.btn_comit)
+    public void onClick() {
+        if(listenner!=null){
+            listenner.onConfirmClick(info,etUpdateLoc.getText().toString());
+        }
+    }
 
 
     public static interface OnConfirmLitsenner {
-        public void onConfirmClick(OnShelveInfo info);
+        public void onConfirmClick(OnShelveInfo info,String locCode);
     }
 }

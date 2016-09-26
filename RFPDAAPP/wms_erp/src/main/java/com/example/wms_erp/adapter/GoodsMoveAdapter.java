@@ -12,7 +12,6 @@ import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.viewholder.MyBaseViewHolder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,7 +23,8 @@ import butterknife.Bind;
 public class GoodsMoveAdapter extends MyBaseAdapter<OnShelveInfo, GoodsMoveAdapter.OnshelveInfoViewHolder> {
 
 
-private HashMap<Integer,String> countsDetail;
+
+    private HashMap<Integer, String> countsDetail;
 //    private ArrayList<Integer> edits;//标记已修改的条目
 
     public GoodsMoveAdapter(Activity activity, List<OnShelveInfo> data) {
@@ -34,7 +34,6 @@ private HashMap<Integer,String> countsDetail;
     }
 
 
-
     @Override
     protected void bindItemData(OnshelveInfoViewHolder holder, OnShelveInfo data, int position) {
 
@@ -42,9 +41,9 @@ private HashMap<Integer,String> countsDetail;
         holder.batchNum.setText(data.getGOODSBATCHCODE());
         holder.goodsLocation.setText(data.getLOCATIONCODE());
         holder.goodsCode.setText(data.getGOODSCODE());
-
-        holder.specifation.setText(data.getGOODSSPEC());
-        holder.count.setText(data.getINVQTY()+"");
+        holder.titleSpec.setVisibility(View.GONE);
+        holder.specifation.setText("");
+        holder.count.setText(data.getQTY() + "");
 //        holder.count.setText("0.0");
 //            if(edits.contains(position)){
 //                if(countsDetail.size()>0) {
@@ -85,7 +84,7 @@ private HashMap<Integer,String> countsDetail;
         return viewHolder;
     }
 
-     class OnshelveInfoViewHolder extends MyBaseViewHolder implements View.OnLongClickListener{
+    class OnshelveInfoViewHolder extends MyBaseViewHolder implements View.OnLongClickListener {
         @Bind(R.id.goods_name)
         TextView goodsName;
         @Bind(R.id.goods_location)
@@ -94,11 +93,13 @@ private HashMap<Integer,String> countsDetail;
         TextView goodsCode;
         @Bind(R.id.batchNum)
         TextView batchNum;
-
+        @Bind(R.id.title_spec)
+        TextView titleSpec;
         @Bind(R.id.count)
         TextView count;
         @Bind(R.id.specifation)
         TextView specifation;
+
         public OnshelveInfoViewHolder(View itemView) {
             super(itemView);
             itemView.setOnLongClickListener(this);
@@ -111,7 +112,7 @@ private HashMap<Integer,String> countsDetail;
             OnoffBlindFragment.removeCode(getLayoutPosition());
             countsDetail.clear();
 //            edits.remove(getLayoutPosition());
-            Log.i("codes长度",OnoffBlindFragment.codes.size()+"");
+            Log.i("codes长度", OnoffBlindFragment.codes.size() + "");
             return false;
         }
     }
@@ -121,7 +122,8 @@ private HashMap<Integer,String> countsDetail;
 
         super.addItem(item);
     }
-    public void clearCountsDetail(){
+
+    public void clearCountsDetail() {
         countsDetail.clear();
     }
 }
