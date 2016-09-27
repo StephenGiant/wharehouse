@@ -92,4 +92,16 @@ public interface ServiceApi {
      */
     @POST("LocationGoodsMove/LocationGoodsMove")
     public Observable<BaseBean<String>> postGoodsLocChange(@Query("UserID") int userID,@Query("DestinLocationCode")String destinLocationCode,@Body List<OnShelveInfo> requestbody);
+
+    /**
+     * 绑定商品货位
+     * @param userID
+     * @param locCode
+     * @param goodsCode
+     * @param status
+     * @return
+     */
+    @POST("LocationGoods/SetLocationGoods")
+    public Observable<BaseBean<String>> postBindLocGoods(
+            @Query("userID") int userID,@Query("LocationCode")String locCode,@Query("GoodsCode")String goodsCode,@Query("status") int status);
 }
