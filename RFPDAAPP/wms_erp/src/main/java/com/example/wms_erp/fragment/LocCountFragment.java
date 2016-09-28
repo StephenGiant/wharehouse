@@ -50,6 +50,9 @@ public class LocCountFragment extends BaseFragment {
     private MainActivity activity;
     private LocInfoDao locInfoDao;
     public ArrayList<LocInfo> doneList = new ArrayList<>();
+    private LocPagerAdapter locPagerAdapter;
+    private ArrayList<Fragment> fragments;
+
     @Override
     public void dispatchCode(String code) {
 
@@ -60,6 +63,18 @@ public class LocCountFragment extends BaseFragment {
         super.onResume();
         Log.i("LocCountFragment","可见了");
 
+//            if(locPagerAdapter==null) {
+                locPagerAdapter = new LocPagerAdapter(getChildFragmentManager(), fragments);
+                vpContent.setAdapter(locPagerAdapter);
+//            }else{
+//                locPagerAdapter.notifyDataSetChanged();
+//            }
+        tabTitle.setupWithViewPager(vpContent);
+
+        tabTitle.getTabAt(0).setText("调整");
+        tabTitle.getTabAt(1).setText("清单");
+        Log.i("库存盘点","onResume");
+//        initData();
     }
 
     public void initData(){
@@ -154,9 +169,7 @@ public class LocCountFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        serviceApi = RetrofitSingle.getInstance();
-        activity = (MainActivity) getActivity();
-        locInfoDao = new LocInfoDao();
+
 
     }
 
@@ -167,17 +180,17 @@ public class LocCountFragment extends BaseFragment {
 
         ButterKnife.bind(this, view);
         application = (MyApplication) getActivity().getApplication();
-        ArrayList<Fragment> fragments = new ArrayList<>();
+        serviceApi = RetrofitSingle.getInstance();
+        activity = (MainActivity) getActivity();
+        locInfoDao = new LocInfoDao();
+        Log.i("库存盘点","onCreate");
+        fragments = new ArrayList<>();
         fragments.add(new TiaoZhengFragment());
         fragments.add(new LocBillFragment());
-        vpContent.setAdapter(new LocPagerAdapter(getFragmentManager(),fragments));
 //        tabTitle.setupWithViewPager(vpContent);
 //        tabTitle.setTabMode(TabLayout.MODE_FIXED);
-        tabTitle.setupWithViewPager(vpContent);
 
-                    tabTitle.getTabAt(0).setText("调整");
-           tabTitle.getTabAt(1).setText("清单");
-
+Log.i("库存盘点","oncreateView");
 
         return view;
     }
@@ -187,6 +200,9 @@ public class LocCountFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
         application.rxManager.clear();//取消掉所有事件
+//        vpContent.removeAllViews();
+//        vpContent = null;
+        Log.i("库存盘点","onDestroyView");
 //        Camera camera = new Camera();
 //        camera.rotateZ(360);
     }

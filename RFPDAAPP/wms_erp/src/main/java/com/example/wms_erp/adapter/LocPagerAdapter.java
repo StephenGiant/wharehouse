@@ -3,6 +3,7 @@ package com.example.wms_erp.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,15 @@ import java.util.List;
  */
 public class LocPagerAdapter extends FragmentPagerAdapter {
     List<Fragment> data;
+//    private final FragmentTransaction transaction;
+FragmentManager fm;
+    private FragmentTransaction transaction;
+
     public LocPagerAdapter(FragmentManager fm,List<Fragment> data) {
         super(fm);
+        this.fm = fm;
         this.data = data;
+//        transaction = fm.beginTransaction();
     }
 
     @Override
@@ -29,7 +36,18 @@ public class LocPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         Log.i("LocPager","adapter加载数据");
-        return super.instantiateItem(container, position);
+        int childCount = container.getChildCount();
+        Log.i("pagerAdapter","item数量"+childCount);
+//        if(transaction==null) {
+//            transaction = fm.beginTransaction();
+//            transaction.add(container.getId(), data.get(position));
+//        }
+////        }else{
+////            transaction.attach(data.get(position));
+////        }
+//
+//        return data.get(position);
+        return super.instantiateItem(container,position);
     }
 
     @Override
@@ -43,7 +61,7 @@ public class LocPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeViewAt(position);
+//        container.removeViewAt(position);
         super.destroyItem(container, position, object);
     }
 }
