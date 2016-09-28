@@ -23,6 +23,11 @@
             android:id="@+id/move_location"
             android:icon="@drawable/ic_move"
             android:title="货位搬移" />
+        <item
+            android:id="@+id/nav_bindloc"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="货位关联"
+            />
     </group>
 
     <item android:title="设置">

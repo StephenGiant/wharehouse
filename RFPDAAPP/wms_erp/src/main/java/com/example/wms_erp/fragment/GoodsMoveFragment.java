@@ -95,12 +95,14 @@ if(goodsMovePresenter.checkLoc(code)){
             public void onNext(Object o) {
                 String code = null;
                 if (o instanceof CodeEvent) {
-                    if (HandleCodeUtil.isLocCode(((CodeEvent) o).getCode())) {
-                        code = ((CodeEvent) o).getCode();
-                    } else {
-                        code = ((CodeEvent) o).getCode().substring(0, ((CodeEvent) o).getCode().length() - 8);
+                    if(((CodeEvent) o).getTag()==TAG_MOVELACATION) {
+                        if (HandleCodeUtil.isLocCode(((CodeEvent) o).getCode())) {
+                            code = ((CodeEvent) o).getCode();
+                        } else {
+                            code = ((CodeEvent) o).getCode().substring(0, ((CodeEvent) o).getCode().length() - 8);
+                        }
+                        dispatchCode(code);
                     }
-                    dispatchCode(code);
                 }
             }
         });

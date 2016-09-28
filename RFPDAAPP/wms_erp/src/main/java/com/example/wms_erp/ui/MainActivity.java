@@ -94,6 +94,7 @@ import com.example.wms_erp.application.MyApplication;
 import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
 import com.example.wms_erp.event.UpdateEvent;
+import com.example.wms_erp.fragment.BindLocGoodsFragment;
 import com.example.wms_erp.fragment.GoodsMoveFragment;
 import com.example.wms_erp.fragment.LocCountFragment;
 import com.example.wms_erp.fragment.LocQueryFragment;
@@ -126,6 +127,7 @@ public class MainActivity extends BaseActivity
     private LocCountFragment countFragment;
     private LocQueryFragment locQueryFragment;
     private GoodsMoveFragment goodsMoveFragment;
+    private BindLocGoodsFragment bindLocGoodsFragment;
 
     @Override
     protected void handleCode(String str) {
@@ -303,6 +305,10 @@ public class MainActivity extends BaseActivity
             toolbar.setTitle("货位搬移");
             curTag = GoodsMoveFragment.TAG_MOVELACATION;
             vpFunctions.setCurrentItem(3);
+        }else if(id == R.id.nav_bindloc){
+            toolbar.setTitle("货位关联");
+            curTag = BindLocGoodsFragment.TAG_BINDLOCGOODS;
+            vpFunctions.setCurrentItem(4);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -337,6 +343,8 @@ public class MainActivity extends BaseActivity
         fragments.add(locQueryFragment);
         goodsMoveFragment = new GoodsMoveFragment();
         fragments.add(goodsMoveFragment);
+        bindLocGoodsFragment = new BindLocGoodsFragment();
+        fragments.add(bindLocGoodsFragment);
         FunctionsAdapter functionsAdapter = new FunctionsAdapter(getSupportFragmentManager(), this, fragments);
         vpFunctions.setAdapter(functionsAdapter);
     }

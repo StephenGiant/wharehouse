@@ -1,7 +1,14 @@
 package com.example.wms_erp.fragment;
 
+import android.app.Application;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.wms_erp.application.MyApplication;
 
 //                            _ooOoo_
 //                           o8888888o
@@ -38,10 +45,24 @@ import android.view.View;
  */
 public abstract class BaseFragment extends Fragment {
 
+    private MyApplication application;
+
     /**
-     * 将扫描的条码与指定的view绑定
-     * @param view
+     *
      * @param code
      */
     public abstract void dispatchCode( String code);
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        application = (MyApplication) getActivity().getApplication();
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        application.rxManager.clear();
+    }
 }

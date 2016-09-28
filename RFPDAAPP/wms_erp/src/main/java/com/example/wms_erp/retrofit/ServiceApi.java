@@ -3,9 +3,11 @@ package com.example.wms_erp.retrofit;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.post.OnShelvebean;
 import com.example.wms_erp.model.response.GoodsLocInfo;
+import com.example.wms_erp.model.response.Kuwei;
 import com.example.wms_erp.model.response.LocDetail;
 import com.example.wms_erp.model.response.LocInfo;
 import com.example.wms_erp.model.response.LocInfoResponse;
+import com.example.wms_erp.model.response.OffshelveInfo;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.model.response.UserInfo;
 
@@ -104,4 +106,20 @@ public interface ServiceApi {
     @POST("LocationGoods/SetLocationGoods")
     public Observable<BaseBean<String>> postBindLocGoods(
             @Query("userID") int userID,@Query("LocationCode")String locCode,@Query("GoodsCode")String goodsCode,@Query("status") int status);
+    @POST("OffShelvesOrder/SetOffShelves")
+    public Observable<BaseBean<String>> offshelveOrder();
+    @GET("OffShelvesOrder/GetOffCellNo")
+    public Observable<BaseBean<List<Kuwei>>> getKuwei(@Query("userID")int userID);
+
+    /**
+     * 获取下架指令信息
+     * @param cellNO
+     * @param batchNo
+     * @param userID
+     * @param date
+     * @return
+     */
+    @GET("OffShelvesOrder/GetOffShelvesInfo")
+    public Observable<BaseBean<List<OffshelveInfo>>> getOffshelveInfo(@Query("cellNo") String cellNO,@Query("batchNo")String batchNo,@Query("userID") int userID
+    ,@Query("offShelvesDate")String date);
 }
