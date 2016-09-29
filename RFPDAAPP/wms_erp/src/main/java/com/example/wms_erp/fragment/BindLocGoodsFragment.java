@@ -66,7 +66,7 @@ public class BindLocGoodsFragment extends BaseFragment {
 
     @Override
     public void onResume() {
-        Subscription subscribe = RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
+         RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
             @Override
             public void onCompleted() {
 
@@ -86,7 +86,7 @@ public class BindLocGoodsFragment extends BaseFragment {
                 }
             }
         });
-        application.rxManager.add(subscribe);
+//        application.rxManager.add(subscribe);
 
         super.onResume();
     }

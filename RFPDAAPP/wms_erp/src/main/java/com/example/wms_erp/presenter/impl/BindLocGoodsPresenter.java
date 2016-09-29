@@ -38,12 +38,14 @@ this.activity = activity;
 
                     @Override
                     public void onError(Throwable e) {
+                        activity.ToastCheese(e.toString());
 
                     }
 
                     @Override
                     public void onNext(BaseBean<String> stringBaseBean) {
                         //提交数据
+                        activity.ToastCheese(stringBaseBean.getMESSAGE());
 
                     }
                 }

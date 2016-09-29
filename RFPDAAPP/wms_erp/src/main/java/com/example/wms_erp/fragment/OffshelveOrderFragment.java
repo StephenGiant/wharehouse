@@ -1,0 +1,53 @@
+package com.example.wms_erp.fragment;
+
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Spinner;
+
+import com.example.wms_erp.R;
+import com.example.wms_erp.view.DatePickWiget;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+/**
+ * Created by Administrator on 2016/9/29.
+ */
+
+public class OffshelveOrderFragment extends BaseFragment {
+    @Bind(R.id.sp_kuwei)
+    Spinner spKuwei;
+    @Bind(R.id.datePicker)
+    DatePickWiget datePicker;
+    @Bind(R.id.et_batch)
+    EditText etBatch;
+    @Bind(R.id.iv_query)
+    ImageView ivQuery;
+    @Bind(R.id.rv_offshelveInfo)
+    RecyclerView rvOffshelveInfo;
+
+    @Override
+    public void dispatchCode(String code) {
+
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.offshelve_order_layout, null);
+        ButterKnife.bind(this, view);
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
+    }
+}

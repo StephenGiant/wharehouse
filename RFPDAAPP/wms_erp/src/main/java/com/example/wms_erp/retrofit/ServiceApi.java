@@ -108,6 +108,12 @@ public interface ServiceApi {
             @Query("userID") int userID,@Query("LocationCode")String locCode,@Query("GoodsCode")String goodsCode,@Query("status") int status);
     @POST("OffShelvesOrder/SetOffShelves")
     public Observable<BaseBean<String>> offshelveOrder();
+
+    /**
+     * 获取库位，填充sp
+     * @param userID
+     * @return
+     */
     @GET("OffShelvesOrder/GetOffCellNo")
     public Observable<BaseBean<List<Kuwei>>> getKuwei(@Query("userID")int userID);
 

@@ -2,5 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center_vertical"
+        >
 
+        <Spinner
+
+            android:id="@+id/sp_kuwei"
+            android:layout_width="100dp"
+            android:layout_height="36dp"
+            android:background="#FFA800"
+            android:spinnerMode="dropdown"
+            ></Spinner>
+
+        <com.example.wms_erp.view.DatePickWiget
+            android:id="@+id/datePicker"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="2dp"
+            android:gravity="bottom"
+            android:layout_width="85dp"
+            android:layout_height="40dp">
+
+
+        </com.example.wms_erp.view.DatePickWiget>
+        <EditText
+
+            android:gravity="center_horizontal"
+            android:id="@+id/et_batch"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:hint="波次"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:inputType="number"
+            />
+        <ImageView
+            android:id="@+id/iv_query"
+            android:padding="7dp"
+            android:layout_width="50dp"
+            android:layout_height="38dp"
+            android:src="@mipmap/search"
+            />
+    </LinearLayout>
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#44000000"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_offshelveInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 </LinearLayout>
