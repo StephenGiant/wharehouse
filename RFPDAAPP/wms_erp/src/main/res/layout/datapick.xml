@@ -60,7 +60,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/dialog_btn_left_selector"
                 android:text="确定"
-                android:textColor="#1298FF" />
+            android:textColor="#1298FF" />
 
             <TextView
                 android:layout_width="0dip"

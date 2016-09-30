@@ -98,6 +98,7 @@ import com.example.wms_erp.fragment.BindLocGoodsFragment;
 import com.example.wms_erp.fragment.GoodsMoveFragment;
 import com.example.wms_erp.fragment.LocCountFragment;
 import com.example.wms_erp.fragment.LocQueryFragment;
+import com.example.wms_erp.fragment.OffshelveOrderFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.fragment.TiaoZhengFragment;
 import com.example.wms_erp.retrofit.RetrofitSingle;
@@ -128,6 +129,7 @@ public class MainActivity extends BaseActivity
     private LocQueryFragment locQueryFragment;
     private GoodsMoveFragment goodsMoveFragment;
     private BindLocGoodsFragment bindLocGoodsFragment;
+    private OffshelveOrderFragment orderFragment;
 
     @Override
     protected void handleCode(String str) {
@@ -281,7 +283,8 @@ public class MainActivity extends BaseActivity
 
         } else if (id == R.id.nav_gallery) {
             toolbar.setTitle("指令上下架");
-
+                curTag = OffshelveOrderFragment.TAG_OFFSHELVEORDER;
+            vpFunctions.setCurrentItem(5);
         } else if (id == R.id.nav_slideshow) {
             toolbar.setTitle("库存盘点");
             try {
@@ -345,6 +348,8 @@ public class MainActivity extends BaseActivity
         fragments.add(goodsMoveFragment);
         bindLocGoodsFragment = new BindLocGoodsFragment();
         fragments.add(bindLocGoodsFragment);
+        orderFragment = new OffshelveOrderFragment();
+        fragments.add(orderFragment);
         FunctionsAdapter functionsAdapter = new FunctionsAdapter(getSupportFragmentManager(), this, fragments);
         vpFunctions.setAdapter(functionsAdapter);
     }

@@ -28,6 +28,7 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="货位关联"
             />
+
     </group>
 
     <item android:title="设置">

@@ -1,5 +1,7 @@
 package com.example.wms_erp.presenter.impl;
 
+import android.widget.ArrayAdapter;
+
 import com.example.wms_erp.fragment.OffshelveOrderFragment;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.Kuwei;
@@ -42,8 +44,15 @@ public class OffshelveOrderPresenterImpl extends BasePresenterImpl {
 
             @Override
             public void onNext(BaseBean<List<Kuwei>> listBaseBean) {
+                activity.ToastCheese(listBaseBean.getMESSAGE());
                 if(listBaseBean.getDATA()!=null){
-
+                    //填充spinner
+                    String[] kuweis= new String[listBaseBean.getDATA().size()];
+                    for(int x=0;x<listBaseBean.getDATA().size();x++){
+                        kuweis[x] = listBaseBean.getDATA().get(x).getCELLNO();
+                    }
+                    ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, kuweis);
+                    fragment.spKuwei.setAdapter(stringArrayAdapter);
                 }
             }
         });

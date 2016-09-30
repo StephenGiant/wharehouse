@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.wms_erp.R;
+import com.example.wms_erp.presenter.impl.OffshelveOrderPresenterImpl;
+import com.example.wms_erp.ui.MainActivity;
 import com.example.wms_erp.view.DatePickWiget;
 
 import butterknife.Bind;
@@ -22,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class OffshelveOrderFragment extends BaseFragment {
     @Bind(R.id.sp_kuwei)
-    Spinner spKuwei;
+    public Spinner spKuwei;
     @Bind(R.id.datePicker)
     DatePickWiget datePicker;
     @Bind(R.id.et_batch)
@@ -31,6 +33,8 @@ public class OffshelveOrderFragment extends BaseFragment {
     ImageView ivQuery;
     @Bind(R.id.rv_offshelveInfo)
     RecyclerView rvOffshelveInfo;
+    private OffshelveOrderPresenterImpl offshelveOrderPresenter;
+    public static final int TAG_OFFSHELVEORDER = 0x1012;
 
     @Override
     public void dispatchCode(String code) {
@@ -42,6 +46,7 @@ public class OffshelveOrderFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.offshelve_order_layout, null);
         ButterKnife.bind(this, view);
+        offshelveOrderPresenter = new OffshelveOrderPresenterImpl((MainActivity) getActivity(), this);
         return view;
     }
 

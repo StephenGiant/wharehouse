@@ -32,7 +32,7 @@
 
             android:gravity="center_horizontal"
             android:id="@+id/et_batch"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="40dp"
             android:hint="波次"
             android:textSize="16sp"
@@ -42,9 +42,11 @@
         <ImageView
             android:id="@+id/iv_query"
             android:padding="7dp"
-            android:layout_width="50dp"
-            android:layout_height="38dp"
-            android:src="@mipmap/search"
+            android:layout_width="45dp"
+            android:layout_height="33dp"
+            android:src="@drawable/ic_search"
+
+            android:scaleType="centerCrop"
             />
     </LinearLayout>
     <View

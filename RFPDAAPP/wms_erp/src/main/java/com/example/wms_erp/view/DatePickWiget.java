@@ -83,8 +83,8 @@ public class DatePickWiget extends LinearLayout implements OnClickListener {
         }
         curTime = curYear + "-" + month_str + "-" + date_str;
 
-        final View view = View.inflate(getContext(), R.layout.datapick, null);
-
+//        final View view = View.inflate(getContext(), R.layout.datapick, null);
+        final View view = LayoutInflater.from(getContext()).inflate(R.layout.datapick, null);
         year = (WheelView) view.findViewById(R.id.year);
         year.setAdapter(new NumericWheelAdapter(1950, curYear));
         year.setLabel("年");
