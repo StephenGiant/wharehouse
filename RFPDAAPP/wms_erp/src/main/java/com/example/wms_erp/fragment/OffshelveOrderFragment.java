@@ -17,6 +17,7 @@ import com.example.wms_erp.view.DatePickWiget;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2016/9/29.
@@ -32,7 +33,9 @@ public class OffshelveOrderFragment extends BaseFragment {
     @Bind(R.id.iv_query)
     ImageView ivQuery;
     @Bind(R.id.rv_offshelveInfo)
-    RecyclerView rvOffshelveInfo;
+    public RecyclerView rvOffshelveInfo;
+    @Bind(R.id.iv_putdown)
+    ImageView ivPutdown;
     private OffshelveOrderPresenterImpl offshelveOrderPresenter;
     public static final int TAG_OFFSHELVEORDER = 0x1012;
 
@@ -54,5 +57,18 @@ public class OffshelveOrderFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+
+    @OnClick({R.id.iv_query, R.id.iv_putdown})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_query:
+                offshelveOrderPresenter.getOffshelveOrderInfo();
+                break;
+            case R.id.iv_putdown:
+                offshelveOrderPresenter.postOffshelveOrder(3);
+                break;
+        }
     }
 }

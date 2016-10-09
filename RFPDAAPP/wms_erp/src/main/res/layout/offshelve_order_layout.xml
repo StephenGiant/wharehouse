@@ -55,6 +55,66 @@
         android:layout_height="0.5dp"
         android:background="#44000000"
         />
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="货位"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="库存数"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="计划数"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="实际数"
+            android:textSize="16sp"
+            android:gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+
+            android:paddingLeft="10dp"
+            android:layout_height="wrap_content"
+            android:text="单位"
+            android:textSize="16sp"
+            android:gravity="start"
+            />
+        <ImageView
+            android:id="@+id/iv_putdown"
+            android:layout_marginLeft="2dp"
+            android:layout_width="30dp"
+            android:layout_height="18dp"
+            android:src="@drawable/offshelve"
+            android:background="@drawable/button_background_selector"
+            />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_offshelveInfo"

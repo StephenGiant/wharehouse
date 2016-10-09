@@ -2,9 +2,11 @@ package com.example.wms_erp.presenter.impl;
 
 import android.widget.ArrayAdapter;
 
+import com.example.wms_erp.adapter.OffshelveOrderAdapter;
 import com.example.wms_erp.fragment.OffshelveOrderFragment;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.Kuwei;
+import com.example.wms_erp.model.response.OffshelveInfo;
 import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.ui.MainActivity;
@@ -23,6 +25,7 @@ import rx.schedulers.Schedulers;
 public class OffshelveOrderPresenterImpl extends BasePresenterImpl {
     MainActivity activity; OffshelveOrderFragment fragment;
     private ServiceApi serviceApi;
+    private OffshelveOrderAdapter adapter;
 
     public OffshelveOrderPresenterImpl(MainActivity activity, OffshelveOrderFragment fragment) {
         this.activity = activity;this.fragment = fragment;
@@ -39,7 +42,7 @@ public class OffshelveOrderPresenterImpl extends BasePresenterImpl {
 
             @Override
             public void onError(Throwable e) {
-
+                activity.ToastCheese(e.toString());
             }
 
             @Override
@@ -53,8 +56,65 @@ public class OffshelveOrderPresenterImpl extends BasePresenterImpl {
                     }
                     ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, kuweis);
                     fragment.spKuwei.setAdapter(stringArrayAdapter);
+
+//                    byte[] bytes = "".getBytes();
                 }
             }
         });
+    }
+
+    /**
+     * 获取下架
+     */
+    public void getOffshelveOrderInfo(){
+                serviceApi.getOffshelveOrderInfo("","",0,"").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<BaseBean<List<OffshelveInfo>>>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(BaseBean<List<OffshelveInfo>> listBaseBean) {
+                                if(listBaseBean.getDATA()!=null) {
+                                    if(adapter==null) {
+                                        adapter = new OffshelveOrderAdapter(activity, listBaseBean.getDATA());
+                                        fragment.rvOffshelveInfo.setAdapter(adapter);
+                                    }else{
+                                        adapter.refreshData(listBaseBean.getDATA());
+                                    }
+
+                                }
+                            }
+                        });
+    }
+
+    /**
+     * 提交下架
+     */
+    public void postOffshelveOrder(int userID){
+            if(adapter!=null){
+                serviceApi.postOffshelveOrder(userID,adapter.getPudowninfo()).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<String>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseBean<String> stringBaseBean) {
+                            activity.ToastCheese(stringBaseBean.getMESSAGE());
+                    }
+                });
+            }
     }
 }

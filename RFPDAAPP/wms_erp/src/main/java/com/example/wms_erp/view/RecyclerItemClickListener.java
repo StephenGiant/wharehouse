@@ -13,14 +13,23 @@ import android.view.View;
 public abstract class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
 
     protected abstract void onItemClick(View view, int position);
+    public void onLongClick(View view,int position){}
 
     private GestureDetector mGestureDetector;
+    boolean isLongClick = false;
 
     public RecyclerItemClickListener(Context context) {
+
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
                 return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+                isLongClick = true;
+                super.onLongPress(e);
             }
         });
     }
@@ -28,8 +37,12 @@ public abstract class RecyclerItemClickListener implements RecyclerView.OnItemTo
     @Override
     public boolean onInterceptTouchEvent(RecyclerView view, MotionEvent e) {
         View childView = view.findChildViewUnder(e.getX(), e.getY());
-        if (childView != null && mGestureDetector.onTouchEvent(e)) {
+        if (childView != null && mGestureDetector.onTouchEvent(e)&&!isLongClick) {
             onItemClick(childView, view.getChildAdapterPosition(childView));
+            return true;
+        }else if(childView != null && mGestureDetector.onTouchEvent(e)&&isLongClick){
+            onLongClick(childView,view.getChildAdapterPosition(childView));
+                isLongClick = false;
             return true;
         }
         //获取item的viewholder
@@ -39,6 +52,7 @@ public abstract class RecyclerItemClickListener implements RecyclerView.OnItemTo
 
     @Override
     public void onTouchEvent(RecyclerView view, MotionEvent motionEvent) {
+
     }
 
     @Override

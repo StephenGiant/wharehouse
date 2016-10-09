@@ -126,6 +126,8 @@ public interface ServiceApi {
      * @return
      */
     @GET("OffShelvesOrder/GetOffShelvesInfo")
-    public Observable<BaseBean<List<OffshelveInfo>>> getOffshelveInfo(@Query("cellNo") String cellNO,@Query("batchNo")String batchNo,@Query("userID") int userID
+    public Observable<BaseBean<List<OffshelveInfo>>> getOffshelveOrderInfo(@Query("cellNo") String cellNO,@Query("batchNo")String batchNo,@Query("userID") int userID
     ,@Query("offShelvesDate")String date);
+    @POST("OffShelvesOrder/SetOffShelves")
+    public Observable<BaseBean<String>> postOffshelveOrder(@Query("userID") int userID,@Body List<OffshelveInfo> body);
 }
