@@ -375,7 +375,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_categary:
-//                startFlipAnimation();
+                startFlipAnimation();
                 break;
             case R.id.submit:
                 switch (num){

@@ -2,6 +2,7 @@ package com.example.wms_erp.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.util.SharePreUtil;
 import com.example.wms_erp.util.ToastUtil;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -58,6 +60,7 @@ public class LocBillFragment extends BaseFragment {
         Log.i("locBill", "create");
         ButterKnife.bind(this, view);
         rvBills.addItemDecoration(new MySpaceDecration(10));
+
         doneLocinfos = new ArrayList<>();
         serviceApi = RetrofitSingle.getInstance();
         RxBus.getDefault().toObserverable()

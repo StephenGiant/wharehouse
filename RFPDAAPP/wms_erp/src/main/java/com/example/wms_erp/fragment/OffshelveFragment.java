@@ -25,7 +25,7 @@ public class OffshelveFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        onOffShelvePresenter = new OnOffShelvePresenterImpl((MainActivity) getActivity(), null);
+//        onOffShelvePresenter = new OnOffShelvePresenterImpl((MainActivity) getActivity(), null);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 }
