@@ -134,7 +134,7 @@ public class OnoffBlindFragment extends BaseFragment implements View.OnClickList
     private String[] stringArray;
 public static final int TAG_ONOFFFRAGMENT = 0x1001;
     private MyApplication application;
-
+    public boolean isOffshelve = false;
     public static void clearCodes() {
         codes.clear();
     }
@@ -350,12 +350,14 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
                 public void contentChange() {
                     Log.i("oncontentChange","getIn");
                     if (num > 0) {
+                        isOffshelve = false;
                         num = 0;
                         Log.i("进来","变上架");
                         tvTitle.setText("盲扫上架");
                         changeToOnshelve();
                     } else {
                         Log.i("进来","变下架num="+num);
+                        isOffshelve = true;
                         tvTitle.setText("盲扫下架");
                         changeToOffShelve();
                         num++;
@@ -373,7 +375,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_categary:
-                startFlipAnimation();
+//                startFlipAnimation();
                 break;
             case R.id.submit:
                 switch (num){

@@ -62,12 +62,12 @@ public class OffshelveOrderPresenterImpl extends BasePresenterImpl {
             }
         });
     }
-
+private List<OffshelveInfo> infoList ;
     /**
      * 获取下架
      */
-    public void getOffshelveOrderInfo(){
-                serviceApi.getOffshelveOrderInfo("","",0,"").subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    public void getOffshelveOrderInfo(String cellNo,int userID,String batchNo,String date){
+                serviceApi.getOffshelveOrderInfo(cellNo,batchNo,userID,date).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Subscriber<BaseBean<List<OffshelveInfo>>>() {
                             @Override
                             public void onCompleted() {
@@ -84,6 +84,7 @@ public class OffshelveOrderPresenterImpl extends BasePresenterImpl {
                                 if(listBaseBean.getDATA()!=null) {
                                     if(adapter==null) {
                                         adapter = new OffshelveOrderAdapter(activity, listBaseBean.getDATA());
+                                        infoList = listBaseBean.getDATA();
                                         fragment.rvOffshelveInfo.setAdapter(adapter);
                                     }else{
                                         adapter.refreshData(listBaseBean.getDATA());
@@ -116,5 +117,20 @@ public class OffshelveOrderPresenterImpl extends BasePresenterImpl {
                     }
                 });
             }
+    }
+
+    public void scrollto(String code){
+        int position = -1;
+        if(infoList!=null){
+            for(int x=0;x<infoList.size();x++){
+                if(code.equals(infoList.get(x).getGOODSBATCHCODE())){
+                    position = x;
+                    break;
+                }
+            }
+            if(adapter!=null&&adapter.getItemCount()>0){
+                fragment.rvOffshelveInfo.scrollToPosition(position);
+            }
+        }
     }
 }

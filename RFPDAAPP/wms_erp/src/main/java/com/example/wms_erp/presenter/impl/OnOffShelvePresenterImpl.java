@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.wms_erp.adapter.OnshelveInfoAdapter;
+import com.example.wms_erp.fragment.OffshelveFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
@@ -12,6 +13,7 @@ import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.ui.MainActivity;
 import com.example.wms_erp.util.SharePreUtil;
+import com.example.wms_erp.view.OffshelveDialog;
 import com.example.wms_erp.view.OnshelveDialog;
 import com.example.wms_erp.view.RecyclerItemClickListener;
 
@@ -31,8 +33,9 @@ public class OnOffShelvePresenterImpl extends BasePresenterImpl {
     private final ArrayList<OnShelveInfo> onShelveInfos;
     private OnshelveInfoAdapter adapter;
 private OnoffBlindFragment fragment;
-
+private OffshelveFragment offshelveFragment;
     private OnshelveDialog dialog;
+    private OffshelveDialog offDialog;
     private  String unEdit = null;
     private ArrayList<String> unEdits;
 int unEditSize = 1000;
@@ -66,6 +69,13 @@ int unEditSize = 1000;
             }
         });
 
+    }
+
+    public OnOffShelvePresenterImpl(MainActivity activity, OffshelveFragment fragment){
+        serviceApi = RetrofitSingle.getInstance();
+        userID = SharePreUtil.getInteger(activity, "userID", 0);
+        onShelveInfos = new ArrayList<>();
+        offshelveFragment = fragment;
     }
 
 
@@ -154,7 +164,7 @@ adapter.notifyDataSetChanged();
             unEdits.remove(unEdits.size()-1);
                         dialog.dismiss();
                     }else{
-                        activity.ToastCheese("请输入要上架的数量");
+                        activity.ToastCheese("请输入数量");
                     }
                 }
             });
@@ -313,7 +323,7 @@ private void handleInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBe
 //            Log.i("看数据",onShelveInfoBaseBean.getDATA().getMAXQTY()+"");
             unEdit = barCode;
             OnoffBlindFragment.codes.add(barCode);
-            showOnShelveInfo(onShelveInfoBaseBean.getDATA());
+            showOffshelveDialog(onShelveInfoBaseBean.getDATA());
             showOnshelveDialog(onShelveInfoBaseBean.getDATA());
         }
     }
@@ -330,6 +340,33 @@ private void handleInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBe
             adapter.clearCountsDetail();
         }
     }
+private void showOffshelveDialog(OnShelveInfo info){
+    if(offDialog==null) {
+        offDialog = OffshelveDialog.instanceDialog(info);
+    }else{
+        offDialog.setInfo(info);
+    }
+    offDialog.setOnConfirmListenner(new OffshelveDialog.OnConfirmLitsenner() {
+        @Override
+        public void onConfirmClick(OnShelveInfo info) {
+            boolean b = adapter.setCountShow(info, offDialog.getCountDetail());
 
+
+               if (b && offDialog.compair(offDialog.getOpratorNum()) ) {
+                   offDialog.setQty(offDialog.getOpratorNum());
+
+//                    unEdit = null;
+                   unEdits.remove(unEdits.size() - 1);
+                   dialog.dismiss();
+               } else {
+                   activity.ToastCheese("请输入正确数量");
+               }
+
+        }
+    });
+    FragmentManager manager = activity.getSupportFragmentManager();
+    android.app.FragmentManager activityFragmentManager = activity.getFragmentManager();
+    dialog.show(activity.getFragmentManager(),"onshelve");
+}
 
 }
