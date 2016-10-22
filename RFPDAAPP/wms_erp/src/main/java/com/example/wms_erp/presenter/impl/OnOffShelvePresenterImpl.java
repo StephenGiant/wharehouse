@@ -99,7 +99,7 @@ int unEditSize = 1000;
 
             @Override
             public void onError(Throwable e) {
-                activity.ToastCheese(e.toString());
+                activity.ToastCheese(e.toString()+"上架");
                 activity.hideLoadingDialog();
             }
 
@@ -109,7 +109,7 @@ int unEditSize = 1000;
 //                activity.ToastCheese(onShelveInfoBaseBean.getDATA().toString());
                 if(onShelveInfoBaseBean.getDATA()!=null) {
                     onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
-                    if(OnoffBlindFragment.codes.contains(barCode)){
+                    if(OnoffBlindFragment.codes.size()>0&&OnoffBlindFragment.codes.contains(barCode)){
                         //如果已经扫过了 就什么都不做并提示
                         showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
 //                        activity.ToastCheese("请勿重复扫描");
@@ -311,7 +311,7 @@ private void handleInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBe
 }
 
     private void showCodeInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBean){
-        if (OnoffBlindFragment.codes.contains(barCode)) {
+        if (OnoffBlindFragment.codes.size()>0&&OnoffBlindFragment.codes.contains(barCode)) {
             //如果已经扫过了 就什么都不做并提示
             Log.i("已扫描",barCode);
             showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));

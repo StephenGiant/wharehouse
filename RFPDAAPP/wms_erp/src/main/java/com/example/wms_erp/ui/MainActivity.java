@@ -98,6 +98,7 @@ import com.example.wms_erp.fragment.BindLocGoodsFragment;
 import com.example.wms_erp.fragment.GoodsMoveFragment;
 import com.example.wms_erp.fragment.LocCountFragment;
 import com.example.wms_erp.fragment.LocQueryFragment;
+import com.example.wms_erp.fragment.OffshelveFragment;
 import com.example.wms_erp.fragment.OffshelveOrderFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.fragment.TiaoZhengFragment;
@@ -130,6 +131,7 @@ public class MainActivity extends BaseActivity
     private GoodsMoveFragment goodsMoveFragment;
     private BindLocGoodsFragment bindLocGoodsFragment;
     private OffshelveOrderFragment orderFragment;
+    private OffshelveFragment offshelveFragment;
 
     @Override
     protected void handleCode(String str) {
@@ -276,20 +278,20 @@ public class MainActivity extends BaseActivity
 
             // Handle the camera action
 
-            toolbar.setTitle("盲扫上下架");
+            toolbar.setTitle("盲扫上架");
             curTag=OnoffBlindFragment.TAG_ONOFFFRAGMENT;
             Log.i("当前页面",curTag+"");
             vpFunctions.setCurrentItem(0);
 
         } else if (id == R.id.nav_gallery) {
-            toolbar.setTitle("指令上下架");
+            toolbar.setTitle("指令下架");
                 curTag = OffshelveOrderFragment.TAG_OFFSHELVEORDER;
-            vpFunctions.setCurrentItem(5);
+            vpFunctions.setCurrentItem(6);
         } else if (id == R.id.nav_slideshow) {
             toolbar.setTitle("库存盘点");
             try {
                 curTag = TiaoZhengFragment.TAG_TIAOZHENG;
-                vpFunctions.setCurrentItem(1);
+                vpFunctions.setCurrentItem(2);
                 countFragment.initData();
             }
             catch (NullPointerException e){
@@ -301,17 +303,21 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_manage) {
             toolbar.setTitle("货位查询");
             curTag = LocQueryFragment.TAG_LOCQUERY;
-            vpFunctions.setCurrentItem(2);
+            vpFunctions.setCurrentItem(3);
         } else if (id == R.id.nav_setting) {
             toolbar.setTitle("设置选项");
         }else if(id==R.id.move_location){
             toolbar.setTitle("货位搬移");
             curTag = GoodsMoveFragment.TAG_MOVELACATION;
-            vpFunctions.setCurrentItem(3);
+            vpFunctions.setCurrentItem(4);
         }else if(id == R.id.nav_bindloc){
             toolbar.setTitle("货位关联");
             curTag = BindLocGoodsFragment.TAG_BINDLOCGOODS;
-            vpFunctions.setCurrentItem(4);
+            vpFunctions.setCurrentItem(5);
+        }else if(id ==R.id.nav_offshelve){
+            toolbar.setTitle("盲扫下架");
+            curTag = OffshelveFragment.TAG_OFFSHELVE;
+            vpFunctions.setCurrentItem(1);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -339,7 +345,8 @@ public class MainActivity extends BaseActivity
         vpFunctions.setNoScroll(true);
         ArrayList<Fragment> fragments = new ArrayList<>();
     fragments.add(onoffBlindFragment);
-
+        offshelveFragment = new OffshelveFragment();
+        fragments.add(offshelveFragment);
         countFragment = new LocCountFragment();
         fragments.add(countFragment);
         locQueryFragment = new LocQueryFragment();
