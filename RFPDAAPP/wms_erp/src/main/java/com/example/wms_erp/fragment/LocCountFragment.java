@@ -23,6 +23,7 @@ import com.example.wms_erp.model.response.LocInfoResponse;
 //import com.example.wms_erp.model.response.LocInfo_Table;
 import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
+import com.example.wms_erp.ui.BaseActivity;
 import com.example.wms_erp.ui.MainActivity;
 import com.example.wms_erp.view.NoScrollViewPager;
 import com.raizlabs.android.dbflow.sql.language.Delete;
@@ -131,6 +132,18 @@ public class LocCountFragment extends BaseFragment {
                                 }
                             });
 
+                        }else{
+                            activity.showMaterialDialog("加载数据失败", "请重新加载数据", new BaseActivity.OncheckListenner() {
+                                @Override
+                                public void onPositiveClick() {
+                                    initData();
+                                }
+
+                                @Override
+                                public void onNagativeClick() {
+                                //do nothing
+                                }
+                            });
                         }
                     }
                 });

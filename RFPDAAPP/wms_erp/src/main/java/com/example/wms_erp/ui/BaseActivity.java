@@ -38,10 +38,12 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.bugtags.library.Bugtags;
 import com.example.wms_erp.R;
 import com.example.wms_erp.application.AppManager;
 import com.example.wms_erp.receiver.PDAReceiver;
@@ -110,12 +112,21 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(receiver, scanDataIntentFilter);
+        Bugtags.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(receiver);
+        Bugtags.onPause(this);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        Bugtags.onDispatchTouchEvent(this, ev);
+
+        return super.dispatchTouchEvent(ev);
     }
 
     @Override

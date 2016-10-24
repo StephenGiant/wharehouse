@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.wms_erp.R;
+import com.example.wms_erp.fragment.OffshelveFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.view.MaterialDialog;
@@ -29,11 +30,12 @@ public class OnshelveInfoAdapter extends MyBaseAdapter<OnShelveInfo, OnshelveInf
 
 private HashMap<Integer,String> countsDetail;
     private ArrayList<Integer> edits;//标记已修改的条目
-
-    public OnshelveInfoAdapter(Activity activity, List<OnShelveInfo> data) {
+private int type=0;
+    public OnshelveInfoAdapter(Activity activity, List<OnShelveInfo> data,int type) {
         super(activity, data);
         countsDetail = new HashMap<>();
         edits = new ArrayList<>();
+        this.type = type;
     }
 
 
@@ -110,13 +112,24 @@ private HashMap<Integer,String> countsDetail;
         @Override
         public boolean onLongClick(View v) {
             removeUItem(getLayoutPosition());
-            OnoffBlindFragment.removeCode(getLayoutPosition());
+//            OnoffBlindFragment.removeCode(getLayoutPosition());
+            switch (type){
+                case 0:
+                    OnoffBlindFragment.removeCode(getLayoutPosition());
+                    break;
+                case 1:
+                    OffshelveFragment.removeCode(getLayoutPosition());
+                    break;
+            }
             countsDetail.clear();
-            edits.remove(getLayoutPosition());
+            if(edits.size()>0&&edits.size()>(getLayoutPosition()-1)) {
+                edits.remove(getLayoutPosition());
+            }
             Log.i("codes长度",OnoffBlindFragment.codes.size()+"");
             return false;
         }
     }
+
 
     @Override
     public void addItem(OnShelveInfo item) {

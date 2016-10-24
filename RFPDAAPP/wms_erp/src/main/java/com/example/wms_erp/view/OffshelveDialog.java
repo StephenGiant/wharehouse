@@ -171,6 +171,7 @@ public double getOpratorNum(){
 }
     public void setQty(double qty){
         info.setQTY(qty);
+        Log.i("下架数",qty+"");
     }
 
 
@@ -214,6 +215,7 @@ public double getOpratorNum(){
 
     }
 public boolean compair(double num){
-    return num<info.getINVQTY();
+    Log.i("看库存",info.getINVQTY()+"");
+    return num<=info.getINVQTY()&&num>0;
 }
 }

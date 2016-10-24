@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 
+import com.bugtags.library.Bugtags;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.okhttp.OkHttpUrlLoader;
 import com.bumptech.glide.load.model.GlideUrl;
@@ -34,11 +35,14 @@ public class MyApplication extends Application {
     public UserInfo userInfo;
     @Override
     public void onCreate() {
+
+        super.onCreate();
+//        Bugtags.start("0fed9c24794039ea2325087e1f4ab1da", this, Bugtags.BTGInvocationEventBubble);
+        Bugtags.start("61ece70d72dbf3a8252692c2fcc1602e", this, Bugtags.BTGInvocationEventShake);
         Glide.get(this)
                 .register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(new OkHttpClient()));
-       FlowManager.init(this);
+        FlowManager.init(this);
         rxManager = new RxManager();
-        super.onCreate();
     }
 
     public String getVersion(){

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
-
+apply plugin: 'com.bugtags.library.plugin'
 def dbflow_version = "3.0.0-beta3"
 repositories {
     maven { url "https://jitpack.io" }
@@ -17,6 +17,10 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        ndk {
+            // 设置支持的 SO 库构架
+            abiFilters 'armeabi'// 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
     }
     buildTypes {
         release {
@@ -25,12 +29,21 @@ android {
             buildConfigField "String","BaseURL","\"http://211.136.156.114:9093/\""
         }
         debug {
-            buildConfigField "String", "BaseURL", "\"http://211.136.156.114:8081/\""
+            buildConfigField "String", "BaseURL", "\"http://211.136.156.114:9093/\""
 
         }
     }
 }
+//Bugtags 插件配置
+bugtags {
+    //自动上传符号表功能配置，如果需要根据 build varint 配置，请参考插件详细使用说明
+    appKey "61ece70d72dbf3a8252692c2fcc1602e"  //这里是你的 appKey
+    appSecret "05dcd0b8231f5c405b8af02d33828e89"    //这里是你的 appSecret，管理员在设置页可以查看
+    mappingUploadEnabled true
 
+    //网络跟踪功能配置(企业版)
+    trackingNetworkEnabled true
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
@@ -58,4 +71,5 @@ dependencies {
     compile 'com.flyco.tablayout:FlycoTabLayout_Lib:1.3.4@aar'
     compile 'com.jaredrummler:animated-svg-view:1.0.0'
     compile 'com.zhy:okhttputils:2.6.2'
+    compile 'com.bugtags.library:bugtags-lib:latest.integration'
 }

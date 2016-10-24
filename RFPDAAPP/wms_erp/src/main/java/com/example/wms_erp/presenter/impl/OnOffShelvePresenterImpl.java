@@ -4,6 +4,7 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 
+import com.bugtags.library.Bugtags;
 import com.example.wms_erp.adapter.OnshelveInfoAdapter;
 import com.example.wms_erp.fragment.OffshelveFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
@@ -38,7 +39,7 @@ private OffshelveFragment offshelveFragment;
     private OffshelveDialog offDialog;
     private  String unEdit = null;
     private ArrayList<String> unEdits;
-int unEditSize = 1000;
+int unEditSize = 100;
     public OnOffShelvePresenterImpl(final MainActivity activity, OnoffBlindFragment fragment) {
         this.activity = activity;
         this.fragment = fragment;
@@ -52,7 +53,7 @@ int unEditSize = 1000;
             public void run() {
                 super.run();
                 int x=0;
-                while (x<1000){
+                while (x<100){
                     unEdits.add(x+"");
                     x++;
                 }
@@ -64,19 +65,18 @@ int unEditSize = 1000;
         fragment.onshelveData.addOnItemTouchListener(new RecyclerItemClickListener(activity) {
             @Override
             protected void onItemClick(View view, int position) {
+                try {
                     showOnshelveDialog(onShelveInfos.get(position));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Bugtags.sendException(e);
+                }
 
             }
         });
 
     }
 
-    public OnOffShelvePresenterImpl(MainActivity activity, OffshelveFragment fragment){
-        serviceApi = RetrofitSingle.getInstance();
-        userID = SharePreUtil.getInteger(activity, "userID", 0);
-        onShelveInfos = new ArrayList<>();
-        offshelveFragment = fragment;
-    }
 
 
 
@@ -111,13 +111,21 @@ int unEditSize = 1000;
                     onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
                     if(OnoffBlindFragment.codes.size()>0&&OnoffBlindFragment.codes.contains(barCode)){
                         //如果已经扫过了 就什么都不做并提示
-                        showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
+                        try {
+                            showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 //                        activity.ToastCheese("请勿重复扫描");
                     }else {
                        unEdit=barCode;
                         OnoffBlindFragment.codes.add(barCode);
                         showOnShelveInfo(onShelveInfoBaseBean.getDATA());
-                        showOnshelveDialog(onShelveInfoBaseBean.getDATA());
+                        try {
+                            showOnshelveDialog(onShelveInfoBaseBean.getDATA());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }else{
                     activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
@@ -131,7 +139,7 @@ int unEditSize = 1000;
         onShelveInfos.add(info);
         Log.i("数据个数3",onShelveInfos.size()+"");
         if(adapter==null) {
-            adapter = new OnshelveInfoAdapter(activity, onShelveInfos);
+            adapter = new OnshelveInfoAdapter(activity, onShelveInfos,0);
             Log.i("数据个数1",onShelveInfos.size()+"");
            fragment.onshelveData.setAdapter(adapter);
         }else{
@@ -147,7 +155,7 @@ adapter.notifyDataSetChanged();
         return adapter!=null&&adapter.getItemCount()>0;
     }
 
-    private void showOnshelveDialog(OnShelveInfo info){
+    private void showOnshelveDialog(OnShelveInfo info)throws Exception{
         if(dialog==null) {
             dialog = OnshelveDialog.instanceDialog(info);
         }else{
@@ -314,7 +322,11 @@ private void handleInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBe
         if (OnoffBlindFragment.codes.size()>0&&OnoffBlindFragment.codes.contains(barCode)) {
             //如果已经扫过了 就什么都不做并提示
             Log.i("已扫描",barCode);
-            showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
+            try {
+                showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             Log.i("对象",onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)).toString());
 //            activity.ToastCheese("请勿重复扫描");
         } else {
@@ -323,8 +335,12 @@ private void handleInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBe
 //            Log.i("看数据",onShelveInfoBaseBean.getDATA().getMAXQTY()+"");
             unEdit = barCode;
             OnoffBlindFragment.codes.add(barCode);
-            showOffshelveDialog(onShelveInfoBaseBean.getDATA());
-            showOnshelveDialog(onShelveInfoBaseBean.getDATA());
+//            showOffshelveDialog(onShelveInfoBaseBean.getDATA());
+            try {
+                showOnshelveDialog(onShelveInfoBaseBean.getDATA());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

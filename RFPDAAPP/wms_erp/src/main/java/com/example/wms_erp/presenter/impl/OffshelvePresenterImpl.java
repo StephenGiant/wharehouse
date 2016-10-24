@@ -4,10 +4,10 @@ import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.View;
 
+import com.bugtags.library.Bugtags;
 import com.example.wms_erp.adapter.OffshelveAdapter;
 import com.example.wms_erp.adapter.OnshelveInfoAdapter;
 import com.example.wms_erp.fragment.OffshelveFragment;
-import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.model.BaseBean;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.retrofit.RetrofitSingle;
@@ -37,7 +37,7 @@ int userID;
     private OffshelveDialog offDialog;
     private  String unEdit = null;
   private OnshelveInfoAdapter adapter;
-    int unEditSize = 1000;
+    int unEditSize = 100;
     public OffshelvePresenterImpl(OffshelveFragment fragment, MainActivity activity) {
         this.fragment = fragment;
         this.activity = activity;
@@ -45,6 +45,7 @@ int userID;
         userID = SharePreUtil.getInteger(activity, "userID", 0);
         onShelveInfos = new ArrayList<>();
         unEdits = new ArrayList<>();
+        initUnEdits();
         fragment.onshelveData.addOnItemTouchListener(new RecyclerItemClickListener(activity) {
             @Override
             protected void onItemClick(View view, int position) {
@@ -75,6 +76,7 @@ int userID;
             public void onError(Throwable e) {
                 activity.hideLoadingDialog();
                 activity.ToastCheese(e.toString()+"下架");
+                Bugtags.sendException(e);
                 Log.i("获取下架信息有误",e.toString());
             }
 
@@ -91,6 +93,7 @@ int userID;
         if(onShelveInfoBaseBean.getDATA()!=null) {
 //        activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
             Log.i("下架","有数据");
+            Log.i("网络数据库存",onShelveInfoBaseBean.getDATA().getINVQTY()+"");
 //            onShelveInfos.clear();
 
             if("报损".equals(curType)) {
@@ -115,18 +118,21 @@ int userID;
     }
 
     private void showCodeInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBean){
-        if (OffshelveFragment.codes.size()>0&&OnoffBlindFragment.codes.contains(barCode)) {
+        if (OffshelveFragment.codes.size()>0&&OffshelveFragment.codes.contains(barCode)) {
             //如果已经扫过了 就什么都不做并提示
 
             Log.i("已扫描",barCode);
-            showOffshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
-            Log.i("对象",onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)).toString());
+            Log.i("codes长度",fragment.codes.size()+"");
+            if(onShelveInfos.size()>=OffshelveFragment.codes.indexOf(barCode)){
+                showOffshelveDialog(onShelveInfos.get(OffshelveFragment.codes.indexOf(barCode)));
+            }
+//            Log.i("对象",onShelveInfos.get(OffshelveFragment.codes.indexOf(barCode)).toString());
 //            activity.ToastCheese("请勿重复扫描");
         } else {
  onShelveInfos.add(onShelveInfoBaseBean.getDATA());
             fragment.codes.add(barCode);
             if(adapter==null){
-                adapter = new OnshelveInfoAdapter(activity,onShelveInfos);
+                adapter = new OnshelveInfoAdapter(activity,onShelveInfos,1);
                 fragment.onshelveData.setAdapter(adapter);
             }else{
                 adapter.refreshData(onShelveInfos);
@@ -134,7 +140,7 @@ int userID;
             Log.i("对象2",onShelveInfoBaseBean.getDATA().toString());
 //            Log.i("看数据",onShelveInfoBaseBean.getDATA().getMAXQTY()+"");
             unEdit = barCode;
-            OffshelveFragment.codes.add(barCode);
+//            OffshelveFragment.codes.add(barCode);
             showOffshelveDialog(onShelveInfoBaseBean.getDATA());
 //            showOnshelveDialog(onShelveInfoBaseBean.getDATA());
         }
@@ -146,16 +152,22 @@ int userID;
     public void clearInfo(){
         if(adapter!=null){
             onShelveInfos.clear();
-//            unEdits.clear();
+            unEdits.clear();
+            initUnEdits();
             adapter.refreshData(onShelveInfos);
-            OnoffBlindFragment.clearCodes();
+            OffshelveFragment.clearCodes();
             adapter.clearCountsDetail();
         }
     }
     private void showOffshelveDialog(OnShelveInfo info){
+        Log.i("看长度",onShelveInfos.size()+"");
         if(offDialog==null) {
             offDialog = OffshelveDialog.instanceDialog(info);
-        }else{
+//            offDialog.setCancelable(false);
+        }else if(!offDialog.isVisible()){
+            offDialog.setInfo(info);
+        }else if(offDialog.isVisible()){
+            offDialog.dismiss();
             offDialog.setInfo(info);
         }
         offDialog.setOnConfirmListenner(new OffshelveDialog.OnConfirmLitsenner() {
@@ -169,7 +181,9 @@ int userID;
                     offDialog.setQty(offDialog.getOpratorNum());
 
 //                    unEdit = null;
-                    unEdits.remove(unEdits.size() - 1);
+                    if(unEdits.size()>=1) {
+                        unEdits.remove(unEdits.size() - 1);
+                    }
                     offDialog.dismiss();
                 } else {
                     activity.ToastCheese("请输入正确数量");
@@ -179,7 +193,9 @@ int userID;
         });
         FragmentManager manager = activity.getSupportFragmentManager();
         android.app.FragmentManager activityFragmentManager = activity.getFragmentManager();
-        offDialog.show(activity.getFragmentManager(),"onshelve");
+
+            offDialog.show(activity.getFragmentManager(), "onshelve");
+
     }
     private boolean hasUnEdit(){
         if(unEditSize-unEdits.size()<onShelveInfos.size()){
@@ -216,5 +232,19 @@ int userID;
         }else{
             activity.ToastCheese("尚有未编辑的条目！");
         }
+    }
+
+    private void initUnEdits(){
+        new Thread(){
+            @Override
+            public void run() {
+                super.run();
+                int x=0;
+                while (x<100){
+                    unEdits.add(x+"");
+                    x++;
+                }
+            }
+        }.start();
     }
 }
