@@ -22,6 +22,64 @@ import java.util.Map;
 
 import butterknife.Bind;
 
+//                                                               ijGEGDGj:.
+//                                                            .:GDDEDEEDGGLGj.
+//                                                            LDEKEEEDGffDGEGDG
+//                                                          tjEKKGfjjjjfDDfDGDGG.
+//                                                         ,GEKEt;;;,;itLDGKEGDGG
+//                                                         GDKDi,,,,,;;ijLDGKEDLDL
+//                                                       ,LGKGi,,,,,;;;itfDDDKEDDGj
+//                                                       GDED;,,,,,,;;;itfGEGDEEKDD.
+//                                                      tGEKi,::,,,,;;;;ijLDDDEKDDEG
+//                                                .... .GEEj,::,,,,,,;;;itfGEDEDKDDG,
+//                                             ..:,;;,,fDKEtfL;,,,,,,;;;iijGDDDKEEKDf
+//                                          ..::,;ittttLEW;,;it;,,;;,;;;;itLDEEDKEEED:...
+//                                          ..::,;ittttLEW;,;it;,,;;,;;;;itLDEEDKEEED:............
+//                                       .:::,,;;iittttEKjjtti;,,;iji;;;;iijGEEGKEKKGjii;;;;;,,,,,.
+//                                      .,,,;;iiittttttEKif;Et;,;ittfLt;;;ijGEKDEKWEDLjjjjjjjjjjjj,.
+//                                      ,;iiiiiiitttttGG,,;itt:,;iii;ijj;;itLEKEEEKKKDjjjjjjjjjjjj:.
+//......                               .,iiiiiiii:,:ttG.:,,,,,,,;itLii;ij;itLEKEGEKWKGtjjjjjjjjjjj:.
+//tti;;,:.                             .,iiiiiii.:;,;tE.:,,::,,;;tftKjiiiiitLEKKKEEEWGtjjjjjjjjjjj:.
+//fjjjjjt,.......                     ..;iiiiii..;ttiED::,,::,,;;;tifKEi;;;ifEKKEDKKKGtttjjjjjjjjj:
+//jjjjjjjt;;;,,,,,::::::..............:,tttttt ::,EGjE;:,;;:,,,;,,;iiitj;;;ifEKKKKDEWEttjjjjjjjjjj:.
+//jjjjjjjjjjjjttttjjtttttttiiii;;;,,,;itttttt.,,,,,KDK,,,;,;;;,;,,,,,,,,;;;iLKKKKKEGEEjtjjjjjjjjjj:.
+//jjjjjjjjjjjjttttjttttjtttttttttttttttttttt ,;;,,,;WK;,;,,,tG;i;,,,,,,,;;;tDKKWWKEGEEjttjjjjjjjjj:.
+//jjjjttjttttttttttttttttttttttttttttttttttt;;;;,,,,;K,,,::;;iti;,,,,,,;;;ifKKKKWWKDGDttjjjjjjjjjt:.
+//jjjjjjtttjtttttttttttttttttttittttttttttttti;;;,,,,;,,ti;i;;;;;,,,,;;;;;iGKKEKEWWKDftjjtjjjjjjjt:.
+//jjjjtjjttttttttttttttttttttttiiitttttttttttt;;;;,,,,;,;i;jj;,;;;;;;;;;iijDEKKKKKWKEfjjjjjjjjjjjt:.
+//jjjjjjjtjjjtttttttttttttttttttitttttttttttttt;;;,,,,t,,,i;ijji;;;;;;;iitGGEDDEKKWKEGLtttttjjjjji:.
+//fjjjjjjjjjjjjttttjjjttttttttttttttttttttttttGK;;,:,,t,:;iijjLD;;;;;;;itfLfEDDKEEDKKDjtttjtttjjji:.
+//jfjjjjjjjjjjjjttjjjjtjjtjjtjtttttttttttttttfEKK,:::,t::;iitii;;;;;;;iitfjffDGEKDEKKEfttttttjjtji:
+//jjfjffffjjjjjtttjjjjjjjjjjtttttttttjjtttttjEKEKE.::,t::,,;;;;;;;;;;iitjEjjLEDWWEKEKEGfjtjjjtjjti:.
+//ffffjjjjjjjjttttjjjjjjjjjjjjtttttttjjjjjjtLGjEEK:::,t,:,,,,,;;;;iiittjGDKfLEWWKEKEDKGjjjjjjjjjji:.
+//jffjjtttjjjjtiiitjjttttjjjjttiiittjjtjttjGDELED.::,;jG,;;;,,;;iiitjjfLfGWWKWWWWKKDDELLfjjjjjjjji:.
+//ffjjttttttttii;ittttittttttti;;;itttttiitLDKfEL.::,;jEjiii;iitttjjfffffDW#KWWW#EKEDELLfjjjjjjjj;..
+//ffjtiiiiittti;;iiiiii;iiitti;;;;;itttiiiifGDjfL:::,ifKK###LLfLLfffffjjfE##KK##WKWEDEfDjjjjjjjjj;:.
+//ffjtiiiiittti;;iiiii;;;;iiti;;;;;iiii;;;;LGDfG ::,,ifKW##WLfffffffjjjjLG#WKWWWWEEEKKDEjjjjjjjjji:.
+//ffjttiiiitttiiiiiii;;;;;iiii;;;;;iiii;;;itDLff.:,,,iKW###WEfjjjjjjttjtjLW#W#W#WKKEKEDGfjjjjjjjji,...
+//ffjttittttttiiiitiii;;;;itiii;;;;iiii;;ijiDLf.:::,;iKEWW##KfjttttttttjjDWKWW#KEEEKWKGLLjjjjjjjji,:..
+//ffjtttttttttttttttii;;;iiitiiiiiiiiiii;;;iLfi.::,,;tKWWWWWEfjttttiiitjfEEKKEKEKKWWEKDLLjjjjjjjji,::.
+//ffjtttttttjtjtttttiiiiiiittttiiittiiiii;;iLf :::,,;GWK#WWWKGjttttiiitjGEtfittGWWKWWKEGfjjjjjjjji;:::
+//fjjtttttttttjjttttiiiiiiiitttttttttiiiji;if;.:::,,;WKKW#WKfDjjtttiiitLEK;,,,,;iK##WWDjjjjjjjjjji;,:,
+//jjjtttttttjjjttjttiiiiiiiitttttttttii;;;;if..::,,,;WKWWW#KEDLjjttiitjGE,,:,,,:,;j#WKDfjjjjjjjjjt;,,,
+//jjjjtttttjjjjttjjttiiiiiittttttttttiiiiitt,.:::,,,iKKWWW#KKKGfjjtttjfD,:::,,,,,:,WWWEGtjjjjjjjjti;;;
+//jjjjjjjtjjjjjttjjttttttttttttttttttiiiiijj..::,,,;jKKKWWWKWWGffjtttfE,:::,,,,,,::;WKDfjjjjjjjjjjtiii
+//jjjjjjjjjjjtttttttttttttttttttittttttittii.::::,,;EEKKWKWWKKDLffjjjL;:::,,,,,,,,::KKDGjjjjjjjjjjtiii
+//jjjjjjjjjjtjttttttjttttttttttiiittttiiijt :::::,,;DKEKKKWKKKDLfffffi,::,,,,,,,,,::;KEEjjjjjjjjjjtiii
+//jjjjjjjjjjjttttttjtttttttttttiiittttittfi.:::::,,iDKEKKWKKWEGfffffE;:::,,,,,,,,,,::DDLjjjjjjjjjttiii
+//jffjjjjjjjjjjtttjjtttttttttttitttttttttt ::::::,;iDEEKEKKEDDGfjffij,::,,,,,,,,,,,::iELjjjjjjjjjtiii;
+//ffffjjjjjjjjjttjjjjjttttttttttttttttttii.:::::,,;fGDDEEKKKLLfftjji,:::,,,,,,,;;,,,::DGjjjjjjjjjttiii
+//fffffffjjfjjtttjjjjjjjttttttttttttttttt .:::::,,;GKDGEEKEKfjfftftK::::,,,,,,;;;;,,,:iDjjjjjjjjjtiiii
+//fffffffffjjjjttjjjjjjjtttttttttttttttti.::::::,,;GDEDDEKGGfjjjjfj,:::,,,,,,,;;;;,,,::DLjjjjjjjjti;;;
+//ffLLLLfffffjtttjjjjjttttjttttiittttttt ::::::,,,;GGDDGEKGLffjjfEj::::,,,,,,;;;;;;,,,:,Ljjjjjjjjttiii
+//ffLLLLLLLfjtiiitjjjjjtttttttiiiittttt;.:::::,,,,iDGEGEWEGLffjjjfi:::,,,,,,,;;;;;;;,,,:Gjjjjjjjjtii;;
+//ffLGLLLGLfjti;iitjjjjttttttii;;;itjtt..:::::,,,;iDGGGEWDLfffjjjf::::,,,,,,;;;;;;;;,,,:Ejjjjjjjjti;;;
+//ffffffffffji;;;itjjjttttttti;;,;ittti.::::,,,,,;jLGDfDEGDfffjjGf:::,,,,,,,;;;;;;;;;,,,:jjjjjjjjttii;
+//ffjjttttjjti;;;ittjttiitttti;,,;itti.::::::,,,;;ELGLWDWDGfffjjj,:::,,,,,,;;;;;;i;;;,,,Ljjjjjjjjttiii
+//fjjtiiiiitttiiiitttiiiiittti;;;;itLi.:::::,,,,;;LLLKLGLDGfjjjjf:::,,,,,,,;;;;;iii;;;,,;Gjjjjjjjttiii
+
+
+//                                              哥哥的注释强大吧？？？
 /**
  * Created by Administrator on 2016/8/23.
  */

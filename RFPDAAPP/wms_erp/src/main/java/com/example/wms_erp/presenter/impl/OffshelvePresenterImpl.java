@@ -130,7 +130,8 @@ int userID;
             }catch (IndexOutOfBoundsException e){
                 Log.i("出错条码",barCode);
                 Log.i("出错时data",onShelveInfos.get(0).toString());
-                Bugtags.sendException(e);
+//                Bugtags.sendException(e);
+                Bugtags.invoke();
             }
 //            Log.i("对象",onShelveInfos.get(OffshelveFragment.codes.indexOf(barCode)).toString());
 //            activity.ToastCheese("请勿重复扫描");

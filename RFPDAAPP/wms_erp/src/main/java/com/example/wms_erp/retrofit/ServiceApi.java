@@ -10,6 +10,7 @@ import com.example.wms_erp.model.response.LocInfoResponse;
 import com.example.wms_erp.model.response.OffshelveInfo;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.model.response.UserInfo;
+import com.squareup.okhttp.ResponseBody;
 
 import java.util.List;
 
@@ -130,4 +131,7 @@ public interface ServiceApi {
     ,@Query("offShelvesDate")String date);
     @POST("OffShelvesOrder/SetOffShelves")
     public Observable<BaseBean<String>> postOffshelveOrder(@Query("userID") int userID,@Body List<OffshelveInfo> body);
+
+    @GET("/UpdateVersion/CheckAppVersion")
+    public Observable<ResponseBody> getNewVersion(@Query("majorId")String majorID,@Query("buildNo")String buildNo);
 }

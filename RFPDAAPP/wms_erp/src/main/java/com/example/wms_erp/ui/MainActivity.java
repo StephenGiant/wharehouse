@@ -68,6 +68,8 @@ package com.example.wms_erp.ui;
 
 import android.app.Application;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -219,6 +221,7 @@ public class MainActivity extends BaseActivity
         versionName = (TextView) view.findViewById(R.id.version_name);
         versionName.setText(this.application.getVersion());
         imageView.setOnClickListener(this);
+        showVersion();
         initViewPager();
 //        if(application.userInfo==null) {
 //            showMaterialDialog("当前未登陆", "请先登录!", new OncheckListenner() {
@@ -375,5 +378,17 @@ public class MainActivity extends BaseActivity
     protected void onDestroy() {
 //        application.rxManager.clear();
         super.onDestroy();
+    }
+
+    private void showVersion(){
+        PackageInfo packageInfo = null;
+        try {
+            packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            String versionName = packageInfo.versionName;
+            ToastCheese("当前版本号:"+versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.wms_erp.R;
@@ -39,14 +40,29 @@ public class OffshelveDialog extends DialogFragment {
     TextView tvTitle;
     @Bind(R.id.goods_code_dialog)
     TextView goodsCodeDialog;
+    @Bind(R.id.subtitle2)
+    TextView subtitle2;
+    @Bind(R.id.content2)
+    TextView content2;
+    @Bind(R.id.ll_kucun)
+    LinearLayout llKucun;
+    @Bind(R.id.ll_comimtinfo)
+    LinearLayout llComimtinfo;
     private Activity activity;
     private OnShelveInfo info;
     private LocInfo locInfo;
+    private static OffshelveDialog dialog;
+
+    //单例模式创建对话框
     public static OffshelveDialog instanceDialog(Object info) {
-        OffshelveDialog dialog = new OffshelveDialog();
-        if(info instanceof OnShelveInfo) {
+        if (dialog == null) {
+            synchronized (OffshelveDialog.class) {
+                dialog = new OffshelveDialog();
+            }
+        }
+        if (info instanceof OnShelveInfo) {
             dialog.info = (OnShelveInfo) info;
-        }else{
+        } else {
 //            LinearLayoutManager
         }
 
@@ -87,11 +103,12 @@ public class OffshelveDialog extends DialogFragment {
         try {
             tvTitle.setText(info.getGOODSNAME());
             etSmalluint.setFocusable(true);
+            content2.setText(info.getINVQTY()+"");
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
             goodsCodeDialog.setText(info.getGOODSBATCHCODE());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
             tvTitle.setText("异常");
             goodsCodeDialog.setText("异常，请检查批次");
@@ -106,11 +123,13 @@ public class OffshelveDialog extends DialogFragment {
         try {
             tvTitle.setText(info.getGOODSNAME());
             etSmalluint.setFocusable(true);
+            llKucun.setVisibility(View.VISIBLE);
+            content2.setText(info.getINVQTY()+"");
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
             goodsCodeDialog.setText(info.getGOODSBATCHCODE());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
             tvTitle.setText("异常");
             goodsCodeDialog.setText("异常，请检查批次");
@@ -143,35 +162,45 @@ public class OffshelveDialog extends DialogFragment {
     public void setOnConfirmListenner(OnConfirmLitsenner listenner) {
         this.listenner = listenner;
     }
-public double getOpratorNum(){
-    double num = 0;
-    double bigUnit = 0;
-    double smallunit=0;
-    if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
-        bigUnit = Double.parseDouble(etBigunit.getText().toString());
-    } else {
-        bigUnit = 0;
-    }
-    info.setMAXQTY(bigUnit);
-    Log.i("大单位", info.getMAXQTY() + "");
 
-    if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
-        smallunit = Double.parseDouble(etSmalluint.getText().toString());
-    } else {
-        smallunit = 0;
-    }
-    if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+    public double getOpratorNum() {
+        double num = 0;
+        double bigUnit = 0;
+        double smallunit = 0;
+        if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
+            bigUnit = Double.parseDouble(etBigunit.getText().toString());
+        } else {
+            bigUnit = 0;
+        }
+        info.setMAXQTY(bigUnit);
+        Log.i("大单位", info.getMAXQTY() + "");
 
-            num=bigUnit * info.getPURUNITQTY() + smallunit;
-    }else{
+        if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
+            smallunit = Double.parseDouble(etSmalluint.getText().toString());
+        } else {
+            smallunit = 0;
+        }
+        if (!info.getUNITNAME().equals(info.getPURUNITNAME())) {
 
-           num=bigUnit+smallunit;
+            num = bigUnit * info.getPURUNITQTY() + smallunit;
+        } else {
+
+            num = bigUnit + smallunit;
+        }
+        return num;
     }
-    return num;
-}
-    public void setQty(double qty){
+
+    public void setQty(double qty) {
         info.setQTY(qty);
-        Log.i("下架数",qty+"");
+        Log.i("下架数", qty + "");
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
 
@@ -190,7 +219,7 @@ public double getOpratorNum(){
         }
 
         public OffshelveDialog build() {
-                dialog.setCancelable(false);
+            dialog.setCancelable(false);
             return dialog;
         }
     }
@@ -198,24 +227,25 @@ public double getOpratorNum(){
     public String getCountDetail() {
         String small = etSmalluint.getText().toString();
         String big = etBigunit.getText().toString();
-        if(TextUtils.isEmpty(small)&&TextUtils.isEmpty(big)){
+        if (TextUtils.isEmpty(small) && TextUtils.isEmpty(big)) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+        if (!info.getUNITNAME().equals(info.getPURUNITNAME())) {
             sb.append(etBigunit.getText().toString());
             sb.append(info.getPURUNITNAME());
             sb.append(etSmalluint.getText().toString());
             sb.append(info.getUNITNAME());
-        }else{
-            sb.append((Double.parseDouble(TextUtils.isEmpty(big)?"0":big)+Double.parseDouble(TextUtils.isEmpty(small)?"0":small))+info.getPURUNITNAME());
+        } else {
+            sb.append((Double.parseDouble(TextUtils.isEmpty(big) ? "0" : big) + Double.parseDouble(TextUtils.isEmpty(small) ? "0" : small)) + info.getPURUNITNAME());
         }
         Log.i("看返回", sb.toString());
         return sb.toString();
 
     }
-public boolean compair(double num){
-    Log.i("看库存",info.getINVQTY()+"");
-    return num<=info.getINVQTY()&&num>0;
-}
+
+    public boolean compair(double num) {
+        Log.i("看库存", info.getINVQTY() + "");
+        return num <= info.getINVQTY() && num > 0;
+    }
 }
