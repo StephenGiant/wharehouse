@@ -13,9 +13,12 @@ import java.util.regex.Pattern;
  * Created by qianpeng on 2016/8/30.
  */
 public class HandleCodeUtil {
-
-    public static boolean checkDate(String code){
+        public static final int RIGHTDATE = 101;
+    public static final int OVERDATE = 102;
+    public static final int ERRORFORMAT=103;
+    public static int checkDate(String code){
         boolean flag = false;
+        int status = 101;
         Log.i("条码",code);
         String dateString = code.substring(code.length() - 8, code.length());
         dateString = "201"+dateString;
@@ -53,16 +56,19 @@ public class HandleCodeUtil {
             Log.i("过期日期",time.toString());
             if(curTime.before(time)&&curTime.after(createDate)){
                flag=true;
+                status = RIGHTDATE;
             }else{
                 Log.i("过期","不能上架");
+                status = OVERDATE;
                flag=false;
             }
-            return flag;
+            return status;
         } catch (ParseException e) {
             //日期格式异常
             e.printStackTrace();
             Log.i("异常",e.toString());
-            return false;
+
+            return ERRORFORMAT;
         }
 
     }

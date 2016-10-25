@@ -146,7 +146,13 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
             codes.clear();
         }
     }
-
+    {
+        if(codes==null){
+            synchronized (OnoffBlindFragment.class){
+                codes= new ArrayList<>();
+            }
+        }
+    }
     public OnoffBlindFragment() {
         codes = new ArrayList<>();
     }
@@ -155,7 +161,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
 
         OnoffBlindFragment f = new OnoffBlindFragment();
         f.setArguments(args);
-        codes = new ArrayList<>();
+
         return f;
     }
 
@@ -218,7 +224,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
 
     @Override
     public void dispatchCode(final String code) {
-        if (HandleCodeUtil.checkDate(code)) {
+        if (HandleCodeUtil.checkDate(code)==HandleCodeUtil.RIGHTDATE) {
             seBarCode.setText(code);
             switch (num){
                 case 0:
@@ -232,7 +238,7 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
 //            if (onOffShelvePresenter.isShowing()) {
 //
 //            }
-        } else {
+        } else if(HandleCodeUtil.checkDate(code)==HandleCodeUtil.OVERDATE){
             if(num==0) {
                 activity.ToastCheese("请检查条码!");
             }else if(!"报损".equals(curType)){
@@ -255,6 +261,8 @@ public static final int TAG_ONOFFFRAGMENT = 0x1001;
                 seBarCode.setText(code);
                 onOffShelvePresenter.getOnShelveInfo(code);
             }
+        }else{
+            activity.ToastCheese("条码有误!");
         }
 
     }

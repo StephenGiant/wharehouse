@@ -90,7 +90,7 @@ public class OffshelveDialog extends DialogFragment {
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
-            goodsCodeDialog.setText(info.getGOODSCODE());
+            goodsCodeDialog.setText(info.getGOODSBATCHCODE());
         }catch (NullPointerException e){
             e.printStackTrace();
             tvTitle.setText("异常");
@@ -109,7 +109,7 @@ public class OffshelveDialog extends DialogFragment {
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
-            goodsCodeDialog.setText(info.getGOODSCODE());
+            goodsCodeDialog.setText(info.getGOODSBATCHCODE());
         }catch (NullPointerException e){
             e.printStackTrace();
             tvTitle.setText("异常");

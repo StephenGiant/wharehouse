@@ -41,7 +41,7 @@ android:paddingBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="商品条码:"
+        android:text="商品批次:"
         android:textColor="@color/text_black"
 
         />

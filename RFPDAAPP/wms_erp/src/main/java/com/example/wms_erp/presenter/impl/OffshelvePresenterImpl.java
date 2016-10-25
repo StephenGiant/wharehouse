@@ -118,13 +118,19 @@ int userID;
     }
 
     private void showCodeInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBean){
-        if (OffshelveFragment.codes.size()>0&&OffshelveFragment.codes.contains(barCode)) {
+        if (fragment.codes.size()>0&&fragment.codes.contains(barCode)) {
             //如果已经扫过了 就什么都不做并提示
 
             Log.i("已扫描",barCode);
             Log.i("codes长度",fragment.codes.size()+"");
-            if(onShelveInfos.size()>=OffshelveFragment.codes.indexOf(barCode)){
-                showOffshelveDialog(onShelveInfos.get(OffshelveFragment.codes.indexOf(barCode)));
+            try {
+                if (onShelveInfos.size() >= OffshelveFragment.codes.indexOf(barCode) && onShelveInfos.size() > 0) {
+                    showOffshelveDialog(onShelveInfos.get(fragment.codes.indexOf(barCode)));
+                }
+            }catch (IndexOutOfBoundsException e){
+                Log.i("出错条码",barCode);
+                Log.i("出错时data",onShelveInfos.get(0).toString());
+                Bugtags.sendException(e);
             }
 //            Log.i("对象",onShelveInfos.get(OffshelveFragment.codes.indexOf(barCode)).toString());
 //            activity.ToastCheese("请勿重复扫描");

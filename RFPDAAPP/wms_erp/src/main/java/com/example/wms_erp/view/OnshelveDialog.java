@@ -91,7 +91,7 @@ public class OnshelveDialog extends DialogFragment {
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
-            goodsCodeDialog.setText(info.getGOODSCODE());
+            goodsCodeDialog.setText(info.getGOODSBATCHCODE());
         }catch (NullPointerException e){
             e.printStackTrace();
             tvTitle.setText("异常");
@@ -110,7 +110,7 @@ public class OnshelveDialog extends DialogFragment {
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
-            goodsCodeDialog.setText(info.getGOODSCODE());
+            goodsCodeDialog.setText(info.getGOODSBATCHCODE());
         }catch (NullPointerException e){
             e.printStackTrace();
             tvTitle.setText("异常");
@@ -209,5 +209,34 @@ public class OnshelveDialog extends DialogFragment {
         return sb.toString();
 
     }
+    public double getOpratorNum(){
+        double num = 0;
+        double bigUnit = 0;
+        double smallunit=0;
+        if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
+            bigUnit = Double.parseDouble(etBigunit.getText().toString());
+        } else {
+            bigUnit = 0;
+        }
+        info.setMAXQTY(bigUnit);
+        Log.i("大单位", info.getMAXQTY() + "");
 
+        if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
+            smallunit = Double.parseDouble(etSmalluint.getText().toString());
+        } else {
+            smallunit = 0;
+        }
+        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+
+            num=bigUnit * info.getPURUNITQTY() + smallunit;
+        }else{
+
+            num=bigUnit+smallunit;
+        }
+        return num;
+    }
+    public boolean compair(double num){
+        Log.i("看库存",info.getINVQTY()+"");
+        return num>0;
+    }
 }

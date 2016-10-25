@@ -165,7 +165,7 @@ adapter.notifyDataSetChanged();
                 @Override
                 public void onConfirmClick(OnShelveInfo info) {
                     boolean b = adapter.setCountShow(info, dialog.getCountDetail());
-                    if(b) {
+                    if(b&&dialog.compair(dialog.getOpratorNum())) {
 
 
 //                    unEdit = null;

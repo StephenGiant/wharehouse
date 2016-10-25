@@ -1,6 +1,130 @@
 package com.example.wms_erp.fragment;
+//                                      LWKKKKKKKWKKEGGDEEGGDfLEEKDLDKEEKDEGGEKKEDKG:
+//                                     i##W######EEKKW######LEKLLD#fGKKK#EEEKDGE#WK#K
+//                                     E#####WWEDK###########K#KfGDGf#EEKEKDLDDKK###KD:
+//                                    jW#####EDW#########W######K#fLLW#LGLDG#DGGDKWW#Kt
+//                                 .####K###DG######KEKW###KKKKE##LtDEKffLD##KDEGEKKW#Wj
+//                                ,#;DG####DK####DDLGGGGED###GEDD#WtDDDLftD###KLLGGKDDEWG
+//                                G.,KK###EK###KtiLKKW##KKDD##GDD##tDKL#;D#K#EGffLKK#####f
+//                               ;f; E###KW###DfLK#########KLDKLE##DG#f#tD###Kf;G#########
+//                               ;D  K##KE###DLjD######W#W##KfLEtK##E#DDGWE##EtE#KE#######t
+//                               ;L :W#WK##KDKLKK#######KW##EDDfDt##K#DEE#K##Df#DK#########
+//                                ffDKDK##WfKLKW############KffEftL#K#KKK#E##G#Gf#EK#######;
+//                                 D###KKKDKEKW###############fjDGtD##K#W#DK#K#t#DEK#W###W#D
+//                               G######WW############KK#####KEffGjGW#KK#EGW##KK#LLW####W###
+//                              t#########################KWWGfKEDKfK##K#Gj#W####GfLK####W#K
+//                               Lf#K###################WKDDWKWKEGfLGGGGEDDtfD##EEKEDW##WW##
+//                              :#########################DtGLfLi;ii;;itGLGtjGW#KLt;fK#####E
+//                             ;W############W###########EjGtii,:,: .::,iGGtitGW#WKWDGK#K##t
+//                             :E####WW#################KGLi,,:,:   ..:,iiLi:;iGKDiL##KW###
+//                              L##W############W######KGfti;,:.     ...:,;,::,ifEKDGW#E###
+//                             f####WW#######KWW#WW##EKGjti,::.       ..:,,:::::,LW#EGDf##L
+//                             ##EW#KWKW###WK##KEEDLGGj;,::...       . ..::...::,;G#DDEEW#;
+//                             ##ijfDEW###EE##f,,,,,;i,:::....         .......::,,tKELWW##i
+//                           j#####DGGGD#EK#Wt:::,,,,::::......      .........:::,tGELK###;
+//                          D#E#DG######WW#G,.::::,:...........  .     ........:::tDDfE###.
+//                        :#Ei##EKt:jDtEWD,.:::::,,;i;,.    ..    .  ..........:::tKKDL#KWf
+//                       t#t ###ftWtLLDEf,:,::::::,:;itL;,.  ..     .........:.::,jK#DK#KEt
+//                     D#f ,W###E .,:,:ii::::.::::,,,::.;tj;. .. . ............::;L##KK#WW;
+//                    Lf :iW##K##. .:.:i;,,::::..::,,::...:tf, ...............::;tE###E##K
+//                   ;L jL###K####.   :ii;,:::....:,iii;,:. iLi  .......:....::,ijW###K##G
+//                    i#####DW##K##Lij:it;,:,:.....:ijEEWGGt,ift:....:..:....:,;tf####W#W;
+//                     .f############W;it;,,,::.....:;ffEK#WEfitt,:::::::.::::,;iD######W.
+//                        ,#########Kjiiii;,,:::.....,,:tff;tEfiii::::::::::.::;;W#####WD:
+//                      :;;#W#######E;tii;;,,::......:,,,;. .fLi;;,::::::::,;fGEK#KW###GE:
+//                     ::.#K########E;tii;;,,,:.... ..:,,;;,iit,i::::,::ijLGGGLLE#KWW#KDj
+//                     .t;##########E;ti;;;,,,::...  ..:,;iitt,.,,..::jKE##ELtiiW#DW##LLi
+//                     :t###KW######E;t;;,;;,,::..   . .:::,::. ,, .:GEEKKff#KjW#KD#W#tLi
+//                     . ##D##W#####tit;;,;;,,::...   ....:....::: .iEi,tt :WWK###f#GKL;.
+//                      tKL#WDKKK##E;tt;;,;;,,,:...   .::......::: :j:,:,::tKtL#WEG#GfL::
+//                      DGWKL##E##D;;tt;,,;;,,,::.........   ...:. ,t::,iitGj;LfWLWDtG,..
+//                     ;GKWDWEjK#W,i;tt;,,,;,,:::.........  ....:  ;i:::,ifj,tL;ffEjEj;
+//                    .EEGtfEfKE#t,;;tt,,,,,,,,:::........  ..... .ii,::::,,,i;t;EjtL:
+//                    D#jGGfE#W#K,;;,tt,,,,,,,,,:::.............  .i;,:::,,,;:;.tEiEi
+//                   jKf;#tK#DK#;,,;;it,,,,,,,,,:::.....:.::::..  :i;:::::,,it,:GfDj.
+//                  :LK:GKKKE##L:,,,;it;,,,:,,:,,:::.:::::.::::   ,i;::::,,ii. GGLL;
+//                   EE:#EGW###,,,,,,it;,,:,::::::::::::..:,..:  .,i,::,,:;, jGGLLi
+//                   GGEKWK###t,,:,,,iti,,::::::::::::.   ,:...  .,i:::::,;iDEjffi:
+//                    j######ti,:,,,,;ti,:,::::::::::...  :i;..  .,;:::,,ifEE;;tt::
+//                     DjG##t:,,::,,,,it,,,:::::..:. .....  it,. .i;::,,i,;; .:t:::
+//                       ##f:,,,::,,,,;j;,,,::::..:it   ...  ,i.:fj,:,,it   .  i: ,
+//                      .#L:,,,::::,,,,tt,,,::::.:: iL,     ..ifLft,,;i: .i:   t  i
+//                       j:,,,,::::,,,,;f;,,::::::.  iLji,:... ,;;;;i,f:  .    i  t.
+//                     ,i,:::,::::::,,,,tj,,::::::.. ,;iLj;;,:,;,;;i,t#,  t    ;  :;
+//                   ,ii,::::,::::::,:,,;ft,,::::.....tt iDDjtttLit,t#f. .:    ,. :;
+//                :,ii,:::::,,:..::::::,,ifi,,:::.:...:ji::tjLLGji,t##E  :      : .,
+//            .:;;;,,:::::.,::.....:::::,,tf;,,::......:jt;,,iLf;;:f##f  :      .  ,
+//         .,i;;,::::::::.::::..:::::::::,;tj;,:::......,tLjjft;iG K#W:  :         ;
+//      :,;;;:::::....::::..::.::::::.::::,;tt;,::.......:,itti G ;KKG:         . .:
+//.:,,;;;;,:::::...........::.:.....::.::::,itf,::::.....:::;iiE .DWLG.          ::,
+//,;;;,,,,::::.............:.........::.:::,;tjf;:::...:::,,,fWiGLWttE           ;t .
+//:,,,,,,,,,,::.::..:......:..........:..::,,iijLi:::::::,,,t#WEfGt jL           ,i
+//::...:::,,;,,::::........:.............::,:,ittLj,::::::,f .  ;f iD:           ::
+//..:.....::,,;,,::......................::,,:,itjLGfi,,,tD#LG:jD.Lj,            j: .
+//.........:::,,i,,::.....:................:::,;ifLLKWKEDEDfDLGKGDtj      .     :t
+//
+//
+//                                         美女镇楼！！！
 
-import android.os.Bundle;
+//####################################################################################################
+//        ##################################################################WWW###############################
+//        ###############################################################Gfi,i;ifKW###########################
+//        ############################################################WKi;;,;,,;iitifW########################
+//        ############################################################t;,:,,,;ijj;i,i;i#######################
+//        ##########################################################Lf,::ijffffj;;j;i;iiW#####################
+//        #########################################################Ei,:,LDDDEDGLt;i:,i;ii#####################
+//        #########################################################i;:;GEEEEEDDGft;i:,;t;t####################
+//        #######################################################Eti:iGEEEEEDDDGLj;;;:,;;if###################
+//        #######################################################i;,;DEEEEEEDDDGLji,i;,,:;;W##################
+//        ######################################################Li,:GEKKEEEEDDDDGft;;;,:;;,i##################
+//        ################################################WWWW#Wi,,fEKKEEEEEEDDDGLji,;,;:;;iE#################
+//        #############################################WWKEDDEEj;:,LjtDEEEEEEDDDGGfi;;;:,,:;j#################
+//        ##########################################WWKKEDGLLLLt,.DEDGLDEEDDEDDDDGLt;,,;:,,,;KWWWWWWWWWWWW####
+//        #######################################WKKKEEDDGGLLLL,:ffLLGDEEDGfGDDDDGGfi,,i:,::ifGGDDDDDEEEEEW###
+//        ######################################WEEEDDGGGLLLLLL,:GjD,LDEDGLLjtLDDDGfi,:;,:.,;tffffffffffffEW##
+//        ######################################EDGGGGGGGLLLLLiiEEDGLLKEDGGGDGffDDGLt,:,,,:::;ffffffffffffKW##
+//        WWWWWW###############################WEGGGGGGGGKEKLLiWKEEEEEEEDGLtGGDGfDGLt,:,i,:.:iLfffffffffffKW##
+//        LLGDDEKW#############################WEGGGGGGGWKDEDL,WKEEKKEEDDLjL:fGGGGGLt,:::,,,.iLfffffffffffKW##
+//        jfffffLEWWWWWWW#####################WWDGGGGGGWWDLLG,;KKEEKKEEDDDLGj:,GDDDGj,::,;:::iLLLfffffffffK###
+//        fffffffLDDDEEEEEKKKKKKWWWWWWWWWWWWWWKELLLLLL#KKE,if,DKEDDKEEEDEEDGGGLfDDDGj,::::;,.,LLffffffffffKW##
+//        ffffffffffffLLLLffLLLLLLLGGGGDDDEEEDGLLLLLLWEEEEE:;:EEEDEDDDEDEEEEEEEEDDDGt:::::,i,,fLffffffffffKW##
+//        ffffffffffffLLLLfLLLLfLLLLLLLLLLLLLLLLLLLL#EDDEEED.:DEDEEELiDGDEEEEEEEDDDL;::..:,i,,fLLfffffffffKW##
+//        ffffLLfLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLDDDDEEEED:EEEKKDDGLGDEEEEEEDDDGj::::..:;i;LLfffffffffLKW##
+//        ffffffLLLfLLLLLLLLLLLLLLLLLLLGLLLLLLLLLLLLLGDDDEEEEDEELGDGDDDDDEEEEDDDDDGi::,:,..:;jLffLfffffffLKW##
+//        ffffLffLLLLLLLLLLLLLLLLLLLLLLGGGLLLLLLLLLLLLDDDDEEEEDEDGDffDEDDDDDDDDDGGf;,:::::.:,jfffffffffffLKW##
+//        fffffffLfffLLLLLLLLLLLLLLLLLLLGLLLLLLLLLLLLLLDDDEEEELEEEGDGffGDDDDDDDGGLii,;;,::.:,itLLLLLfffffGKW##
+//        jffffffffffffLLLLfffLLLLLLLLLLLLLLLLLLLLLLLLi:DDEKEELEKDGGfft;DDDDDDDGLjtj,;;:,,;::;fLLLfLLLfffGKW##
+//        fjffffffffffffLLffffLffLffLfLLLLLLLLLLLLLLLj,::EKKKELKKDGGLGGDDDDDDDGGLjfjj;i,:;,::,jLLLLLLffLfGK###
+//        ffjfjjjjfffffLLLffffffffffLLLLLLLLLffLLLLLf,:,:,WKKELKKEEDDDDDDDDDDGGLf,fft,;..,:,:,ijfLfffLffLGKW##
+//        jjjjffffffffLLLLffffffffffffLLLLLLLffffffLtif,,:KKKELEKEEEEEDDDDGGGLLfi;:jt,..:,:,;:iffffffffffGKW##
+//        fjjffLLLffffLGGGLffLLLLffffLLGGGLLffLfLLfi;,t,;WKKEDfiEDDDEEDDGGGLffjtji..:....::;;,ttjffffffffGKW##
+//        jjffLLLLLLLLGGDGLLLLGLLLLLLLGDDDGLLLLLGGLt;:j,tWKKEDf,fGGGDGGLLLffjjjjj;. :... ,:,;,ttjffffffffDWW##
+//        jjfLGGGGGLLLGDDGGGGGGDGGGLLGDDDDDGLLLGGGGji;fjtKKKEGj::   ttjttjjjjjffj,  ::  .:.,;,j;fffffffffDKW##
+//        jjfLGGGGGLLLGDDGGGGGDDDDGGLGDDDDDGGGGDDDDti;ji#KKEEGj:.  .tjjjjjjjffffti .:....,,,::;,fffffffffGKW##
+//        jjfLLGGGGLLLGGGGGGGDDDDDGGGGDDDDDGGGGDDDGL;tjjWKEEEG:.   .,jffffffLLfLft. . . .::,:,;ijffffffffGEWWW
+//        jjfLLGLLLLLLGGGGLGGGDDDDGLGGGDDDDGGGGDDGfG;tjWKKKEDG:,..  :jfLLLLLLLLff;.:.. :,,,:.:ittffffffffGEKWW
+//        jjfLLLLLLLLLLLLLLLGGDDDGGGLGGGGGGGGGGGDDDGtjGWKKEEDL:.....,jfLLLLGGGLfj,,::,:,::..,:;ttffffffffGEKKW
+//        jjfLLLLLLLfLfLLLLLGGGGGGGLLLLGGGLLGGGGGDDGtj#KKKEEDi.: ...:ifLLLLGGGLfi,LjGLLi..:..:,ijffffffffGDKKK
+//        jffLLLLLLLLLffLLLLGGGGGGGGLLLLLLLLLGGGfGDGjDWKKKEED.::. .:j;ffLLLGGGLt,:DEEEEDG:  ..;ffffffffffGDEKE
+//        fffLLLLLLLfffLLfLLGGGGGGGGLLLLLLLLLGGDDDDGjWWKKEEED.:... :,;tffLLGGLfi,EEKEEEKEDf .:;jfffffffffLDEEE
+//        ffffLLLLLffffLLffLLGGGGGGLLLLLLLLLLGGGGGLLEWKKKEEEG::... :::ijffLLLfj;EKKKEEEEEKE...,iLffffffffLGDDD
+//        fffffffLfffffLLffLLLLLLLLLLLLLLLLLLGGGGGffWWKKEEEDf:::...:..ijjfLLLj,EKKKEEEEEEKKD.:;jffffffffffLGGG
+//        fffffffffffLLLLLLLLLLLLLLLLLLLGLLLLLLGLLGGWKKKKEED,,::.:..::;tjjffftDKKKEEEEEEEEKK::;iffffffffffLGGG
+//        ffffffffffLfLLLLLLfLLLLLLLLLLGGGLLLLGGGfL#KKKKKEED;:,:::.:::;tjjjjjGEKKEEEEEEEEEKKD:,,ffffffffffLGGG
+//        fffffffffffLLLLLLfLLLLLLLLLLLGGGLLLLGLLjGWKKKKKEEG;:,::.::.,ijjjjj,DKKKEEEEEEEEEEKK;;tfffffffffLLGGG
+//        fjjffffffffffLLLffLLLLLLLLLLLGLLLLLLLLLL#KKKKKKEDG;,,:,::,;;ijfjjGfEKKEEEEEEEEEEEKKG,tfffffffffLGGGD
+//        jjjjfffffffffLLfffffLLLLLLLLLLLLLLLLLLGGWKKKKKEEDji;;,,:::ttjjLffGEKKKEEEEEEEDDEEEKK;ifffffffffLLGGG
+//        jjjjjjjffjffLLLfffffffLLLLLLLLLLLLLLLLL#WKKKKKEEDi:;i,,:,:jfjjLjL:KKKKEEEEEEDDDDEEEKG;fffffffffLGGGG
+//        jjjjjjjjjffffLLfffffffLLLLLLLLLLLLLLLLGWKKKKKKEEDi;,;;,:iijffffjfEKKKEEEEEEEDDDDEEEKK;tffffffffLGDDD
+//        jjttttjjjjjfLLLfffffLLLLfLLLLGGLLLLLLL#KKKKKKEEEDii;;i,:itjjffj,fKKKKEEEEEEDDDDDDEEEKEtffffffffLLGGG
+//        jjtttttttjfLGGGLfffffLLLLLLLGGGGLLLLLDWKKKKKEEEEG;i,i,.,itjjfffjGKKKEEEEEEEDDDDDDDEEEKiffffffffLGGDD
+//        jjtitttitjfLGDGGLffffLLLLLLGGDDDGLfLLWWKKKKKEEEDG;iii,.;tjjjfffjKKKKEEEEEEDDDDDDDDEEEK,ffffffffLGDDD
+//        jjjjjjjjjjfGDDDGLfffLLLLLLLGDDEDGLLLGWKKKKEEEEEDfti;j;,i;jjjffijKKKEEEEEEEDDDDDDDDDEEEKffffffffLLGGD
+//        jjffLLLLffLGDDDGLLfLLGGLLLLGDEEDGLLGWKKKKKKEEEDD,tit.;.;ijjjfffEKKKEEEEEEDDDDDDGDDDEEEtffffffffLLGGG
+//        jffLGGGGGLLLGGGGLLLGGGGGLLLGDDDDGLtGWKKKKKEEEEDDttt:tit;ijffffjKKKEEEEEEEDDDDDGGGDDDEEDifffffffLLGGG
+
+
+        import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +137,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import com.example.wms_erp.R;
 import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
@@ -56,10 +179,17 @@ public class OffshelveFragment extends BaseFragment {
     private MainActivity activity;
     //缓存的条码集合，去除重复扫描
     public static ArrayList<String> codes;
+    {
+        if(codes==null) {
+            synchronized (OffshelveFragment.class) {
+                codes = new ArrayList<>();
+            }
+        }
+    }
 public static final int TAG_OFFSHELVE = 0x1024;
 
     public OffshelveFragment() {
-        codes = new ArrayList<>();
+
     }
 
     public static void clearCodes() {
@@ -76,7 +206,7 @@ public static final int TAG_OFFSHELVE = 0x1024;
 
     @Override
     public void dispatchCode(final String code) {
-        if (HandleCodeUtil.checkDate(code)) {
+        if (HandleCodeUtil.checkDate(code)==HandleCodeUtil.RIGHTDATE) {
             seBarCode.setText(code);
 
                     offshelvePresenter.getOffShelveInfo(code,curType);
@@ -84,7 +214,7 @@ public static final int TAG_OFFSHELVE = 0x1024;
 //            if (onOffShelvePresenter.isShowing()) {
 //
 //            }
-        } else {
+        } else if(HandleCodeUtil.checkDate(code)==HandleCodeUtil.OVERDATE){
             if(!"报损".equals(curType)){
                 //报损下架
                 activity.showMaterialDialog("此商品已过期", "点确认将选报损下架", new BaseActivity.OncheckListenner() {
@@ -106,6 +236,8 @@ public static final int TAG_OFFSHELVE = 0x1024;
 
                 offshelvePresenter.getOffShelveInfo(code,curType);
             }
+        }else{
+            activity.ToastCheese("条码有误!");
         }
     }
 
