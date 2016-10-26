@@ -82,6 +82,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -134,6 +135,7 @@ public class MainActivity extends BaseActivity
     private BindLocGoodsFragment bindLocGoodsFragment;
     private OffshelveOrderFragment orderFragment;
     private OffshelveFragment offshelveFragment;
+    private View view;
 
     @Override
     protected void handleCode(String str) {
@@ -236,6 +238,7 @@ public class MainActivity extends BaseActivity
 //                }
 //            });
 //        }
+//        showToast();
 
     }
 
@@ -247,6 +250,12 @@ public class MainActivity extends BaseActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        showToast();
+        super.onPause();
     }
 
     @Override
@@ -372,15 +381,25 @@ public class MainActivity extends BaseActivity
         if (userID != -1) {
             account_name.setText(SharePreUtil.getString(this, "userName", ""));
         }
+        if(view!=null){
+            WindowManager windowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
+            windowManager.removeView(view);
+        }
     }
 
     @Override
     protected void onDestroy() {
 //        application.rxManager.clear();
+        if(view!=null){
+            WindowManager windowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
+            windowManager.removeView(view);
+        }
         super.onDestroy();
+
     }
 
     private void showVersion(){
+
         PackageInfo packageInfo = null;
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -389,6 +408,17 @@ public class MainActivity extends BaseActivity
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
+    }
+//不消失的悬浮窗
+    private void showToast(){
+        view = LayoutInflater.from(this).inflate(R.layout.toastlayout, null);
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
+        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        WindowManager windowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
+        windowManager.addView(view, params);
 
     }
 }

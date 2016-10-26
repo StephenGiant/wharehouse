@@ -38,7 +38,7 @@ public class MyApplication extends Application {
 
         super.onCreate();
 //        Bugtags.start("0fed9c24794039ea2325087e1f4ab1da", this, Bugtags.BTGInvocationEventBubble);
-        Bugtags.start("61ece70d72dbf3a8252692c2fcc1602e", this, Bugtags.BTGInvocationEventShake);
+        Bugtags.start("61ece70d72dbf3a8252692c2fcc1602e", this, Bugtags.BTGInvocationEventNone);
         Glide.get(this)
                 .register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(new OkHttpClient()));
         FlowManager.init(this);

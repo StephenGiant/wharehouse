@@ -181,7 +181,8 @@ private int type=0;
             }
             countsDetail.clear();
             if(edits.size()>0&&edits.size()>(getLayoutPosition()-1)) {
-                edits.remove(getLayoutPosition());
+                edits.remove(Integer.valueOf( getLayoutPosition()));
+
             }
             Log.i("codes长度",OnoffBlindFragment.codes.size()+"");
             return false;

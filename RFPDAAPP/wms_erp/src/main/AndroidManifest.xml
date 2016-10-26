@@ -29,6 +29,11 @@
         <activity android:name=".ui.GlideTest">
 
         </activity>
+        <activity android:name=".ui.NewHomeAct"
+            android:theme="@style/AppTheme.NoActionBar.MyTheme"
+            >
+
+        </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
