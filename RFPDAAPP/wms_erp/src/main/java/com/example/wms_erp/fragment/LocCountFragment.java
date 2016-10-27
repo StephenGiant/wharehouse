@@ -74,6 +74,36 @@ public class LocCountFragment extends BaseFragment {
 
         tabTitle.getTabAt(0).setText("调整");
         tabTitle.getTabAt(1).setText("清单");
+        tabTitle.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        tab.setText("调整");
+
+                        break;
+                    case 1:
+                        tab.setText("清单");
+                        break;
+                }
+                vpContent.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                switch (tab.getPosition()){
+                    case 0:
+                        break;
+                    case 1:
+                        break;
+                }
+            }
+        });
         Log.i("库存盘点","onResume");
 //        initData();
     }
@@ -147,36 +177,7 @@ public class LocCountFragment extends BaseFragment {
                         }
                     }
                 });
-        tabTitle.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0:
-                        tab.setText("调整");
 
-                        break;
-                    case 1:
-                        tab.setText("清单");
-                        break;
-                }
-                vpContent.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                }
-            }
-        });
     }
 
     @Override
@@ -212,7 +213,7 @@ Log.i("库存盘点","oncreateView");
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
-        application.rxManager.clear();//取消掉所有事件
+//        application.rxManager.clear();//取消掉所有事件
 //        vpContent.removeAllViews();
 //        vpContent = null;
         Log.i("库存盘点","onDestroyView");

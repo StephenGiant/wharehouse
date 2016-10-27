@@ -59,7 +59,6 @@ public class TiaoZhengFragment extends BaseFragment {
 public static final int TAG_TIAOZHENG = 0x1005;
     private LocInfoDao locInfoDao;
     private LocCountAdapter locCountAdapter;
-    private LocCountAdapter locCountAdapter1;
     private List<LocInfo> locInfos;
 //    private final MyApplication application;
 
@@ -143,12 +142,20 @@ public static final int TAG_TIAOZHENG = 0x1005;
                 }
             }
         });
+        locInfos = null;
+        if(locCountAdapter!=null){
+            Log.i("生命周期","保存了信息");
+        }
     }
+
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+Log.i("调整界面","销毁了");
+        locCountAdapter=null;
 //        application.rxManager.clear();
     }
 
@@ -195,6 +202,7 @@ public static final int TAG_TIAOZHENG = 0x1005;
                     public void onNext(final List<LocInfo> locInfos) {
                         //显示信息
 //                Log.i("查询到了",locInfos.get(0).getGOODSBATCHCODE());
+                        Log.i("查询库存",locInfos.toString());
                         if (locCountAdapter == null) {
                             locCountAdapter = new LocCountAdapter((MainActivity) getActivity(), locInfos);
                             locCountAdapter.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -205,9 +213,14 @@ public static final int TAG_TIAOZHENG = 0x1005;
                             });
                             rvDatas.setAdapter(locCountAdapter);
                         } else {
+                            Log.i("库存盘点","刷新数据");
+                            Log.i("看数据",locInfos.get(0).getGOODSNAME());
                             locCountAdapter.refreshData(locInfos);
+                           if(View.VISIBLE!= rvDatas.getVisibility()){
+                               Log.i("rv对象",rvDatas.toString());
+                           }
 //                        TiaoZhengFragment.this.locInfos = locInfos;
-                            locCountAdapter.notifyDataSetChanged();
+//                            locCountAdapter.notifyDataSetChanged();
                         }
 
 

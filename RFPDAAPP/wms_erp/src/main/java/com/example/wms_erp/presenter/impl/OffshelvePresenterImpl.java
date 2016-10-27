@@ -76,7 +76,7 @@ int userID;
             public void onError(Throwable e) {
                 activity.hideLoadingDialog();
                 activity.ToastCheese(e.toString()+"下架");
-                Bugtags.sendException(e);
+//                Bugtags.sendException(e);
                 Log.i("获取下架信息有误",e.toString());
             }
 

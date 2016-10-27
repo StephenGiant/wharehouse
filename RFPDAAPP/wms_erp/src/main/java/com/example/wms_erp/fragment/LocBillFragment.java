@@ -114,6 +114,7 @@ public class LocBillFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        locCountAdapter=null;
     }
 
     @OnClick(R.id.btn_comit)

@@ -89,10 +89,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.wms_erp.BuildConfig;
 import com.example.wms_erp.R;
 import com.example.wms_erp.adapter.FunctionsAdapter;
+import com.example.wms_erp.apiconfig.ApiConfig;
 import com.example.wms_erp.application.MyApplication;
 import com.example.wms_erp.event.CodeEvent;
 import com.example.wms_erp.event.RxBus;
@@ -105,16 +107,20 @@ import com.example.wms_erp.fragment.OffshelveFragment;
 import com.example.wms_erp.fragment.OffshelveOrderFragment;
 import com.example.wms_erp.fragment.OnoffBlindFragment;
 import com.example.wms_erp.fragment.TiaoZhengFragment;
+import com.example.wms_erp.model.VersionInfo;
 import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
 import com.example.wms_erp.util.SharePreUtil;
 import com.example.wms_erp.view.NoScrollViewPager;
 import com.example.wms_erp.view.OnshelveDialog;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import im.fir.sdk.FIR;
+import im.fir.sdk.VersionCheckCallback;
 import rx.Subscriber;
 
 public class MainActivity extends BaseActivity
@@ -239,6 +245,7 @@ public class MainActivity extends BaseActivity
 //            });
 //        }
 //        showToast();
+        test();
 
     }
 
@@ -254,7 +261,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onPause() {
-        showToast();
+//        showToast();
         super.onPause();
     }
 
@@ -300,7 +307,7 @@ public class MainActivity extends BaseActivity
                 curTag = OffshelveOrderFragment.TAG_OFFSHELVEORDER;
             vpFunctions.setCurrentItem(6);
         } else if (id == R.id.nav_slideshow) {
-            toolbar.setTitle("库存盘点");
+            toolbar.setTitle("库存调整");
             try {
                 curTag = TiaoZhengFragment.TAG_TIAOZHENG;
                 vpFunctions.setCurrentItem(2);
@@ -381,10 +388,10 @@ public class MainActivity extends BaseActivity
         if (userID != -1) {
             account_name.setText(SharePreUtil.getString(this, "userName", ""));
         }
-        if(view!=null){
-            WindowManager windowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
-            windowManager.removeView(view);
-        }
+//        if(view!=null){
+//            WindowManager windowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
+//            windowManager.removeView(view);
+//        }
     }
 
     @Override
@@ -411,14 +418,45 @@ public class MainActivity extends BaseActivity
 
     }
 //不消失的悬浮窗
-    private void showToast(){
-        view = LayoutInflater.from(this).inflate(R.layout.toastlayout, null);
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
-        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
-        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        WindowManager windowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
-        windowManager.addView(view, params);
+//    private void showToast(){
+//        view = LayoutInflater.from(this).inflate(R.layout.toastlayout, null);
+//        WindowManager.LayoutParams params = new WindowManager.LayoutParams(WindowManager.LayoutParams.TYPE_TOAST);
+//        params.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+//        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+//        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+//        WindowManager windowManager = (WindowManager) getApplication().getSystemService(getApplication().WINDOW_SERVICE);
+//        windowManager.addView(view, params);
+//
+//    }
+
+    private void test(){
+
+        FIR.checkForUpdateInFIR(ApiConfig.FIRTOKEN, new VersionCheckCallback() {
+            @Override
+            public void onSuccess(String versionJson) {
+                Log.i("fir","check from fir.im success! " + "\n" + versionJson);
+                Gson gson = new Gson();
+                VersionInfo versionInfo = gson.fromJson(versionJson, VersionInfo.class);
+                ToastCheese(versionInfo.getInstallUrl());
+
+            }
+
+            @Override
+            public void onFail(Exception exception) {
+                Log.i("fir", "check fir.im fail! " + "\n" + exception.getMessage());
+            }
+
+            @Override
+            public void onStart() {
+                Toast.makeText(getApplicationContext(), "正在获取", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFinish() {
+                Toast.makeText(getApplicationContext(), "获取完成", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 }

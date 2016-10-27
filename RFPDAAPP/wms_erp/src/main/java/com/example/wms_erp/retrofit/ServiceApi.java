@@ -15,8 +15,10 @@ import com.squareup.okhttp.ResponseBody;
 import java.util.List;
 
 import retrofit.http.Body;
+import retrofit.http.Field;
 import retrofit.http.GET;
 import retrofit.http.POST;
+import retrofit.http.Path;
 import retrofit.http.Query;
 import rx.Observable;
 
@@ -130,8 +132,7 @@ public interface ServiceApi {
     public Observable<BaseBean<List<OffshelveInfo>>> getOffshelveOrderInfo(@Query("cellNo") String cellNO,@Query("batchNo")String batchNo,@Query("userID") int userID
     ,@Query("offShelvesDate")String date);
     @POST("OffShelvesOrder/SetOffShelves")
-    public Observable<BaseBean<String>> postOffshelveOrder(@Query("userID") int userID,@Body List<OffshelveInfo> body);
-
-    @GET("/UpdateVersion/CheckAppVersion")
-    public Observable<ResponseBody> getNewVersion(@Query("majorId")String majorID,@Query("buildNo")String buildNo);
+    public Observable<BaseBean<String>> postOffshelveOrder(@Query("userID") int userID, @Body List<OffshelveInfo> body);
+    @GET("{download}")
+    public Observable<ResponseBody> getNewVersion(@Path("download")String url);
 }

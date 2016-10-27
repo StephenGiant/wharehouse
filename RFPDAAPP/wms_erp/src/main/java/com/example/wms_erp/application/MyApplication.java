@@ -16,6 +16,8 @@ import com.squareup.okhttp.OkHttpClient;
 
 import java.io.InputStream;
 
+import im.fir.sdk.FIR;
+
 /**
  * Created by Administrator on 2016/8/22.
  */
@@ -43,6 +45,7 @@ public class MyApplication extends Application {
                 .register(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory(new OkHttpClient()));
         FlowManager.init(this);
         rxManager = new RxManager();
+        FIR.init(this);
     }
 
     public String getVersion(){

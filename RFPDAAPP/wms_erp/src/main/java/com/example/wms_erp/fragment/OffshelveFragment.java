@@ -239,6 +239,7 @@ public static final int TAG_OFFSHELVE = 0x1024;
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        codes.clear();
     }
 
     @OnClick(R.id.submit)

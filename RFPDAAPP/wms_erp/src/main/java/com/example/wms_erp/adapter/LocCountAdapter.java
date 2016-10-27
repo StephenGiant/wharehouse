@@ -1,6 +1,7 @@
 package com.example.wms_erp.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
 
     @Override
     protected void bindItemData(LocCountViewHolder holder, LocInfo data, int position) {
+        Log.i("刷数据了",position+"!");
         holder.goodsCode.setText(data.getGOODSBATCHCODE());
         holder.goodsName.setText(data.getGOODSNAME());
         holder.tvQTY.setText((data.getStoreQty()+data.getBuyQty()*data.getPURUNITQTY())+"");
@@ -44,7 +46,14 @@ public class LocCountAdapter extends MyBaseAdapter<LocInfo, LocCountAdapter.LocC
         return new LocCountViewHolder(view);
     }
 
-     class LocCountViewHolder extends MyBaseViewHolder {
+    @Override
+    public void refreshData(List<LocInfo> data) {
+        mData.clear();
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
+
+    class LocCountViewHolder extends MyBaseViewHolder {
         @Bind(R.id.goodsCode)
         TextView goodsCode;
         @Bind(R.id.goodsName)

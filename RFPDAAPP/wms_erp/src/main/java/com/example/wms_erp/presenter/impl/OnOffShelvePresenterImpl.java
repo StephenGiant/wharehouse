@@ -109,7 +109,7 @@ int unEditSize = 100;
 //                activity.ToastCheese(onShelveInfoBaseBean.getDATA().toString());
                 if(onShelveInfoBaseBean.getDATA()!=null) {
                     onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
-                    if(OnoffBlindFragment.codes.size()>0&&OnoffBlindFragment.codes.contains(barCode)){
+                    if(fragment.codes.size()>0&&fragment.codes.contains(barCode)){
                         //如果已经扫过了 就什么都不做并提示
                         try {
                             showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
@@ -352,7 +352,7 @@ private void handleInfo(String barCode,BaseBean<OnShelveInfo> onShelveInfoBaseBe
             onShelveInfos.clear();
 //            unEdits.clear();
             adapter.refreshData(onShelveInfos);
-            OnoffBlindFragment.clearCodes();
+            fragment.clearCodes();
             adapter.clearCountsDetail();
         }
     }
