@@ -48,6 +48,10 @@ public class OffshelveDialog extends DialogFragment {
     LinearLayout llKucun;
     @Bind(R.id.ll_comimtinfo)
     LinearLayout llComimtinfo;
+    @Bind(R.id.title_bigunit)
+    TextView titleBigunit;
+    @Bind(R.id.title_smallunit)
+    TextView titleSmallunit;
     private Activity activity;
     private OnShelveInfo info;
     private LocInfo locInfo;
@@ -103,7 +107,9 @@ public class OffshelveDialog extends DialogFragment {
         try {
             tvTitle.setText(info.getGOODSNAME());
             etSmalluint.setFocusable(true);
-            content2.setText(info.getINVQTY()+"");
+            titleBigunit.setText(info.getPURUNITNAME());
+            titleSmallunit.setText(info.getUNITNAME());
+            content2.setText(info.getINVQTY() + "");
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
@@ -123,8 +129,10 @@ public class OffshelveDialog extends DialogFragment {
         try {
             tvTitle.setText(info.getGOODSNAME());
             etSmalluint.setFocusable(true);
+            titleBigunit.setText(info.getPURUNITNAME());
+            titleSmallunit.setText(info.getUNITNAME());
             llKucun.setVisibility(View.VISIBLE);
-            content2.setText(info.getINVQTY()+"");
+            content2.setText(info.getINVQTY() + "");
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
@@ -195,13 +203,7 @@ public class OffshelveDialog extends DialogFragment {
         Log.i("下架数", qty + "");
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
-        return rootView;
-    }
 
 
     public static interface OnConfirmLitsenner {

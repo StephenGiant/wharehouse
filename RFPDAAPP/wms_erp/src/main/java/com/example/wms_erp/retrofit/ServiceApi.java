@@ -10,6 +10,7 @@ import com.example.wms_erp.model.response.LocInfoResponse;
 import com.example.wms_erp.model.response.OffshelveInfo;
 import com.example.wms_erp.model.response.OnShelveInfo;
 import com.example.wms_erp.model.response.UserInfo;
+import com.squareup.okhttp.Response;
 import com.squareup.okhttp.ResponseBody;
 
 import java.util.List;
@@ -20,6 +21,8 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.Query;
+import retrofit.http.Streaming;
+import retrofit.http.Url;
 import rx.Observable;
 
 /**
@@ -133,6 +136,8 @@ public interface ServiceApi {
     ,@Query("offShelvesDate")String date);
     @POST("OffShelvesOrder/SetOffShelves")
     public Observable<BaseBean<String>> postOffshelveOrder(@Query("userID") int userID, @Body List<OffshelveInfo> body);
-    @GET("{download}")
-    public Observable<ResponseBody> getNewVersion(@Path("download")String url);
+
+    @Streaming
+    @GET
+    public Observable<Response> getNewVersion(@Url String url);
 }

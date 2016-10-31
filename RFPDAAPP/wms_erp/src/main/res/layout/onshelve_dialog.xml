@@ -115,17 +115,6 @@ android:paddingBottom="5dp"
         android:layout_marginRight="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="大单位"
-            android:textSize="16sp"
-            android:textColor="@color/text_black"
-
-            android:id="@+id/textView" />
-
         <com.example.wms_erp.view.ClearEditText
             android:id="@+id/et_bigunit"
             android:layout_marginLeft="10dp"
@@ -137,14 +126,17 @@ android:paddingBottom="5dp"
             android:maxLines="1"
             android:inputType="numberDecimal"
             />
+
         <TextView
 
+            android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="小单位"
+            android:text="大单位"
             android:textSize="16sp"
             android:textColor="@color/text_black"
-            />
+
+            android:id="@+id/title_bigunit" />
         <com.example.wms_erp.view.ClearEditText
             android:id="@+id/et_smalluint"
             android:layout_marginLeft="10dp"
@@ -156,6 +148,16 @@ android:paddingBottom="5dp"
             android:maxLines="1"
             android:inputType="numberDecimal"
             />
+        <TextView
+            android:id="@+id/title_smallunit"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="小单位"
+            android:textSize="16sp"
+            android:textColor="@color/text_black"
+            />
+
     </LinearLayout>
     <View
         android:layout_marginTop="5dp"

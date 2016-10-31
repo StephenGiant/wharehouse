@@ -70,7 +70,9 @@ import android.app.Application;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -110,18 +112,30 @@ import com.example.wms_erp.fragment.TiaoZhengFragment;
 import com.example.wms_erp.model.VersionInfo;
 import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
+import com.example.wms_erp.util.OkHttpClientManager;
 import com.example.wms_erp.util.SharePreUtil;
 import com.example.wms_erp.view.NoScrollViewPager;
 import com.example.wms_erp.view.OnshelveDialog;
 import com.google.gson.Gson;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+import com.squareup.okhttp.ResponseBody;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import im.fir.sdk.FIR;
 import im.fir.sdk.VersionCheckCallback;
+import rx.Observable;
 import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
@@ -320,7 +334,7 @@ public class MainActivity extends BaseActivity
 
 
         } else if (id == R.id.nav_manage) {
-            toolbar.setTitle("货位查询");
+            toolbar.setTitle("库存查询");
             curTag = LocQueryFragment.TAG_LOCQUERY;
             vpFunctions.setCurrentItem(3);
         } else if (id == R.id.nav_setting) {
@@ -438,6 +452,48 @@ public class MainActivity extends BaseActivity
                 Gson gson = new Gson();
                 VersionInfo versionInfo = gson.fromJson(versionJson, VersionInfo.class);
                 ToastCheese(versionInfo.getInstallUrl());
+//                serviceApi.getNewVersion(versionInfo.getInstallUrl()).subscribeOn(Schedulers.io())
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribe(new Subscriber<Response>() {
+//                            @Override
+//                            public void onCompleted() {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(Throwable e) {
+//                                ToastCheese(e.toString());
+//                            }
+//
+//                            @Override
+//                            public void onNext(final Response body) {
+////                                ToastCheese("下载成功");
+//                        new Thread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                updateVersion(body);
+//                            }
+//                        }).start();
+//
+//
+//                            }
+//                        });
+                OkHttpClientManager.downloadAsyn(versionInfo.getInstallUrl(), Environment.getExternalStorageDirectory().getAbsolutePath(), "wms.apk"
+                        , new OkHttpClientManager.ResultCallback<String>() {
+                            @Override
+                            public void onError(Request request, Exception e) {
+
+                            }
+
+                            @Override
+                            public void onResponse(String response) {
+                                   ToastCheese(response+"okhttp!!!");
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setDataAndType(Uri.fromFile(new File(response)), "application/vnd.android.package-archive");
+                                startActivity(intent);
+                                installNewVersion();
+                            }
+                        });
 
             }
 
@@ -448,15 +504,56 @@ public class MainActivity extends BaseActivity
 
             @Override
             public void onStart() {
-                Toast.makeText(getApplicationContext(), "正在获取", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "正在获取", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFinish() {
-                Toast.makeText(getApplicationContext(), "获取完成", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "获取完成", Toast.LENGTH_SHORT).show();
             }
         });
 
 
+    }
+
+
+    private void updateVersion(Response body){
+
+        InputStream is = null;
+        byte[] buf = new byte[2048];
+        int len = 0;
+        FileOutputStream fos = null;
+
+        try {
+            is = body.body().byteStream();
+
+            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "wms.apk");
+            fos = new FileOutputStream(file);
+            while ((len = is.read(buf)) != -1) {
+                fos.write(buf, 0, len);
+                Log.i("下载","完成"+len);
+            }
+            Log.i("下载",file.getAbsolutePath()+"完成");
+            fos.flush();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    installNewVersion();
+                }
+            });
+
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            Log.e("IO","出错");
+        }
+    }
+
+    private void installNewVersion(){
+        String dir = Environment.getExternalStorageDirectory() + "wms.apk";
+        ToastCheese(dir+"试试");
+//        Intent intent = new Intent(Intent.ACTION_VIEW);
+//        intent.setDataAndType(Uri.fromFile(new File(dir)), "application/vnd.android.package-archive");
+//        startActivity(intent);
     }
 }

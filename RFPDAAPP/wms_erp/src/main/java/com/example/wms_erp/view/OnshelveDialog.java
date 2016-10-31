@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,14 +39,19 @@ public class OnshelveDialog extends DialogFragment {
     TextView tvTitle;
     @Bind(R.id.goods_code_dialog)
     TextView goodsCodeDialog;
+    @Bind(R.id.title_bigunit)
+    TextView titleBigunit;
+    @Bind(R.id.title_smallunit)
+    TextView titleSmallunit;
     private Activity activity;
     private OnShelveInfo info;
     private LocInfo locInfo;
+
     public static OnshelveDialog instanceDialog(Object info) {
         OnshelveDialog dialog = new OnshelveDialog();
-        if(info instanceof OnShelveInfo) {
+        if (info instanceof OnShelveInfo) {
             dialog.info = (OnShelveInfo) info;
-        }else{
+        } else {
 //            LinearLayoutManager
         }
 
@@ -88,11 +92,13 @@ public class OnshelveDialog extends DialogFragment {
         try {
             tvTitle.setText(info.getGOODSNAME());
             etSmalluint.setFocusable(true);
+            titleBigunit.setText(info.getPURUNITNAME());
+            titleSmallunit.setText(info.getUNITNAME());
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
             goodsCodeDialog.setText(info.getGOODSBATCHCODE());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
             tvTitle.setText("异常");
             goodsCodeDialog.setText("异常，请检查批次");
@@ -106,12 +112,14 @@ public class OnshelveDialog extends DialogFragment {
 //        setInfo(info);
         try {
             tvTitle.setText(info.getGOODSNAME());
+            titleBigunit.setText(info.getPURUNITNAME());
+            titleSmallunit.setText(info.getUNITNAME());
             etSmalluint.setFocusable(true);
             if (info.getPURUNITNAME().equals(info.getUNITNAME())) {
                 etSmalluint.setFocusable(false);
             }
             goodsCodeDialog.setText(info.getGOODSBATCHCODE());
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
             tvTitle.setText("异常");
             goodsCodeDialog.setText("异常，请检查批次");
@@ -133,28 +141,28 @@ public class OnshelveDialog extends DialogFragment {
     @OnClick(R.id.btn_comit)
     public void onClick() {
         double bigUnit = 0;
-        double smallunit=0;
+        double smallunit = 0;
 
-            test = etBigunit.getText().toString();
-            Log.i("大单位", etBigunit.getText().toString());
+        test = etBigunit.getText().toString();
+        Log.i("大单位", etBigunit.getText().toString());
 
-            if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
-                bigUnit = Double.parseDouble(etBigunit.getText().toString());
-            } else {
-                bigUnit = 0;
-            }
-            info.setMAXQTY(bigUnit);
-            Log.i("大单位", info.getMAXQTY() + "");
+        if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
+            bigUnit = Double.parseDouble(etBigunit.getText().toString());
+        } else {
+            bigUnit = 0;
+        }
+        info.setMAXQTY(bigUnit);
+        Log.i("大单位", info.getMAXQTY() + "");
 
-            if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
-                smallunit = Double.parseDouble(etSmalluint.getText().toString());
-            } else {
-                smallunit = 0;
-            }
-        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+        if (!TextUtils.isEmpty(etSmalluint.getText().toString())) {
+            smallunit = Double.parseDouble(etSmalluint.getText().toString());
+        } else {
+            smallunit = 0;
+        }
+        if (!info.getUNITNAME().equals(info.getPURUNITNAME())) {
             info.setQTY(bigUnit * info.getPURUNITQTY() + smallunit);
-        }else{
-            info.setQTY(bigUnit+smallunit);
+        } else {
+            info.setQTY(bigUnit + smallunit);
         }
         if (listenner != null) {
             listenner.onConfirmClick(info);
@@ -167,6 +175,7 @@ public class OnshelveDialog extends DialogFragment {
     public void setOnConfirmListenner(OnConfirmLitsenner listenner) {
         this.listenner = listenner;
     }
+
 
 
 
@@ -185,7 +194,7 @@ public class OnshelveDialog extends DialogFragment {
         }
 
         public OnshelveDialog build() {
-                dialog.setCancelable(false);
+            dialog.setCancelable(false);
             return dialog;
         }
     }
@@ -193,26 +202,27 @@ public class OnshelveDialog extends DialogFragment {
     public String getCountDetail() {
         String small = etSmalluint.getText().toString();
         String big = etBigunit.getText().toString();
-        if(TextUtils.isEmpty(small)&&TextUtils.isEmpty(big)){
+        if (TextUtils.isEmpty(small) && TextUtils.isEmpty(big)) {
             return null;
         }
         StringBuilder sb = new StringBuilder();
-        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+        if (!info.getUNITNAME().equals(info.getPURUNITNAME())) {
             sb.append(etBigunit.getText().toString());
             sb.append(info.getPURUNITNAME());
             sb.append(etSmalluint.getText().toString());
             sb.append(info.getUNITNAME());
-        }else{
-            sb.append((Double.parseDouble(TextUtils.isEmpty(big)?"0":big)+Double.parseDouble(TextUtils.isEmpty(small)?"0":small))+info.getPURUNITNAME());
+        } else {
+            sb.append((Double.parseDouble(TextUtils.isEmpty(big) ? "0" : big) + Double.parseDouble(TextUtils.isEmpty(small) ? "0" : small)) + info.getPURUNITNAME());
         }
         Log.i("看返回", sb.toString());
         return sb.toString();
 
     }
-    public double getOpratorNum(){
+
+    public double getOpratorNum() {
         double num = 0;
         double bigUnit = 0;
-        double smallunit=0;
+        double smallunit = 0;
         if (!TextUtils.isEmpty(etBigunit.getText().toString())) {
             bigUnit = Double.parseDouble(etBigunit.getText().toString());
         } else {
@@ -226,17 +236,18 @@ public class OnshelveDialog extends DialogFragment {
         } else {
             smallunit = 0;
         }
-        if(!info.getUNITNAME().equals(info.getPURUNITNAME())) {
+        if (!info.getUNITNAME().equals(info.getPURUNITNAME())) {
 
-            num=bigUnit * info.getPURUNITQTY() + smallunit;
-        }else{
+            num = bigUnit * info.getPURUNITQTY() + smallunit;
+        } else {
 
-            num=bigUnit+smallunit;
+            num = bigUnit + smallunit;
         }
         return num;
     }
-    public boolean compair(double num){
-        Log.i("看库存",info.getINVQTY()+"");
-        return num>0;
+
+    public boolean compair(double num) {
+        Log.i("看库存", info.getINVQTY() + "");
+        return num > 0;
     }
 }

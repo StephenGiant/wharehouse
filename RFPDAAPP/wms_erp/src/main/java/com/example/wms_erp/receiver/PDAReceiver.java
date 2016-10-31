@@ -26,6 +26,7 @@ public abstract class PDAReceiver extends BroadcastReceiver {
         }
 
         //分发条码处理
+        str = str.trim();//去掉空格
         dispathCode(str);
     }
 
