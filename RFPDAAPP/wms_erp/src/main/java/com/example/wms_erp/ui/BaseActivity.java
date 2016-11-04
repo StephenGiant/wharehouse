@@ -30,13 +30,16 @@ package com.example.wms_erp.ui;
 //                  奔驰宝马贵者趣，公交自行程序员。
 //                  别人笑我忒疯癫，我笑自己命太贱；
 //                  不见满街漂亮妹，哪个归得程序员？
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -81,12 +84,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppManager.getAppManager().addActivity(this);
 
+
         receiver = new PDAReceiver() {
             @Override
             protected void dispathCode(String str) {
                 handleCode(str);
             }
         };
+        setStatusBar();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏 一些手机如果有虚拟键盘的话,虚拟键盘就会变成透明的,挡住底部按钮点击事件所以,最后不要用
+            //getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            int barColor = getWindow().getStatusBarColor();
+            Log.i("barcolor",barColor+"");
+        }
+
+
 
         scanDataIntentFilter = new IntentFilter();
         //前台输出
@@ -94,6 +109,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         //后台输出
         scanDataIntentFilter.addAction("com.android.scanservice.scancontext");
         serviceApi = RetrofitSingle.getInstance();
+
+
+
+    }
+    @TargetApi(23)
+    private void setStatusBar() {
+//        getWindow().setStatusBarColor(444444);
     }
 
     protected abstract void handleCode(String str);

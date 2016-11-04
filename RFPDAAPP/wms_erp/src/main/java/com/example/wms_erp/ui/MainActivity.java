@@ -259,7 +259,7 @@ public class MainActivity extends BaseActivity
 //            });
 //        }
 //        showToast();
-        test();
+        checkUpdate();
 
     }
 
@@ -443,15 +443,16 @@ public class MainActivity extends BaseActivity
 //
 //    }
 
-    private void test(){
+    private void checkUpdate(){
+        if(!BuildConfig.DEBUG) {
 
-        FIR.checkForUpdateInFIR(ApiConfig.FIRTOKEN, new VersionCheckCallback() {
-            @Override
-            public void onSuccess(String versionJson) {
-                Log.i("fir","check from fir.im success! " + "\n" + versionJson);
-                Gson gson = new Gson();
-                VersionInfo versionInfo = gson.fromJson(versionJson, VersionInfo.class);
-                ToastCheese(versionInfo.getInstallUrl());
+            FIR.checkForUpdateInFIR(ApiConfig.FIRTOKEN, new VersionCheckCallback() {
+                @Override
+                public void onSuccess(String versionJson) {
+                    Log.i("fir", "check from fir.im success! " + "\n" + versionJson);
+                    Gson gson = new Gson();
+                    VersionInfo versionInfo = gson.fromJson(versionJson, VersionInfo.class);
+                    ToastCheese(versionInfo.getInstallUrl());
 //                serviceApi.getNewVersion(versionInfo.getInstallUrl()).subscribeOn(Schedulers.io())
 //                        .observeOn(AndroidSchedulers.mainThread())
 //                        .subscribe(new Subscriber<Response>() {
@@ -478,41 +479,41 @@ public class MainActivity extends BaseActivity
 //
 //                            }
 //                        });
-                OkHttpClientManager.downloadAsyn(versionInfo.getInstallUrl(), Environment.getExternalStorageDirectory().getAbsolutePath(), "wms.apk"
-                        , new OkHttpClientManager.ResultCallback<String>() {
-                            @Override
-                            public void onError(Request request, Exception e) {
+                    OkHttpClientManager.downloadAsyn(versionInfo.getInstallUrl(), Environment.getExternalStorageDirectory().getAbsolutePath(), "wms.apk"
+                            , new OkHttpClientManager.ResultCallback<String>() {
+                                @Override
+                                public void onError(Request request, Exception e) {
 
-                            }
+                                }
 
-                            @Override
-                            public void onResponse(String response) {
-                                   ToastCheese(response+"okhttp!!!");
-                                Intent intent = new Intent(Intent.ACTION_VIEW);
-                                intent.setDataAndType(Uri.fromFile(new File(response)), "application/vnd.android.package-archive");
-                                startActivity(intent);
-                                installNewVersion();
-                            }
-                        });
+                                @Override
+                                public void onResponse(String response) {
+                                    ToastCheese(response + "okhttp!!!");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    intent.setDataAndType(Uri.fromFile(new File(response)), "application/vnd.android.package-archive");
+                                    startActivity(intent);
+                                    installNewVersion();
+                                }
+                            });
 
-            }
+                }
 
-            @Override
-            public void onFail(Exception exception) {
-                Log.i("fir", "check fir.im fail! " + "\n" + exception.getMessage());
-            }
+                @Override
+                public void onFail(Exception exception) {
+                    Log.i("fir", "check fir.im fail! " + "\n" + exception.getMessage());
+                }
 
-            @Override
-            public void onStart() {
+                @Override
+                public void onStart() {
 //                Toast.makeText(getApplicationContext(), "正在获取", Toast.LENGTH_SHORT).show();
-            }
+                }
 
-            @Override
-            public void onFinish() {
+                @Override
+                public void onFinish() {
 //                Toast.makeText(getApplicationContext(), "获取完成", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+                }
+            });
+        }
 
     }
 
