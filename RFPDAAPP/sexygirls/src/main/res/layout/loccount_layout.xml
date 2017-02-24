@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_white"
+    >
+<android.support.design.widget.TabLayout
+    android:id="@+id/tab_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:tabMode="fixed"
+    app:tabIndicatorColor="@color/button_normal"
+    app:tabGravity="fill"
+    app:tabIndicatorHeight="1dp"
+    app:tabBackground="@color/white"
+
+    >
+    <android.support.design.widget.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="调整"
+
+        />
+
+    <android.support.design.widget.TabItem
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="清单"
+
+        />
+</android.support.design.widget.TabLayout>
+    <com.example.wms_erp.view.NoScrollViewPager
+        android:layout_marginTop="5dp"
+        android:id="@+id/vp_content"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+    </com.example.wms_erp.view.NoScrollViewPager>
+</LinearLayout>

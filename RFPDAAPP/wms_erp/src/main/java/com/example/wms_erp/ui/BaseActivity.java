@@ -92,7 +92,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         };
         setStatusBar();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT&&Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏 一些手机如果有虚拟键盘的话,虚拟键盘就会变成透明的,挡住底部按钮点击事件所以,最后不要用
@@ -260,7 +260,9 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void showMaterialDialog(String title, String message, OncheckListenner listenner) {
         mListenner = listenner;
-        materialDialog = new MaterialDialog(this);
+        if(materialDialog==null) {
+            materialDialog = new MaterialDialog(this);
+        }
 
         materialDialog.setTitle(title).setMessage(message).setPositiveButton("确定", new View.OnClickListener() {
 
@@ -295,29 +297,33 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void showMaterialDialog(String title, View view, OncheckListenner listenner) {
         mListenner = listenner;
-        materialDialog = new MaterialDialog(this);
-        materialDialog.setTitle(title).setContentView(view).setPositiveButton("确定", new View.OnClickListener() {
+        if(materialDialog==null) {
+            materialDialog = new MaterialDialog(this);
+        }
+        if(materialDialog!=null) {
+            materialDialog.setTitle(title).setContentView(view).setPositiveButton("确定", new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                if (mListenner != null) {
-                    mListenner.onPositiveClick();
+                @Override
+                public void onClick(View v) {
+                    if (mListenner != null) {
+                        mListenner.onPositiveClick();
+                    }
+                    materialDialog.dismiss();
+                    materialDialog = null;
                 }
-                materialDialog.dismiss();
-                materialDialog = null;
-            }
-        }).setNegativeButton("取消", new View.OnClickListener() {
+            }).setNegativeButton("取消", new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                if (mListenner != null) {
-                    mListenner.onNagativeClick();
+                @Override
+                public void onClick(View v) {
+                    if (mListenner != null) {
+                        mListenner.onNagativeClick();
+                    }
+                    materialDialog.dismiss();
+                    materialDialog = null;
+
                 }
-                materialDialog.dismiss();
-                materialDialog = null;
-
-            }
-        }).setCanceledOnTouchOutside(false).show();
+            }).setCanceledOnTouchOutside(false).show();
+        }
         ;
     }
     public void setOncheckListenner(OncheckListenner listenner) {

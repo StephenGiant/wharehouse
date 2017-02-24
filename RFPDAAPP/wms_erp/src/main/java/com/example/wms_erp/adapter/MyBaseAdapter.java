@@ -65,7 +65,11 @@ protected abstract void bindItemData(VH holder,T data,int position);
 //        if(data!=null){
 //            mData.addAll(data);
 //        }
-        mData=data;
+        if(data!=null) {
+            mData = data;
+        }else{
+            mData.clear();
+        }
         notifyDataSetChanged();
     }
 

@@ -202,7 +202,7 @@ public static final int TAG_OFFSHELVE = 0x1024;
             @Override
             public void onNext(Object o) {
                 if (o instanceof CodeEvent) {
-                    Log.i("RxBus", ((CodeEvent) o).getCode());
+//                    Log.i("RxBus", ((CodeEvent) o).getCode());
                     if(((CodeEvent) o).getTag()==TAG_OFFSHELVE) {
                         dispatchCode(((CodeEvent) o).getCode());
                     }

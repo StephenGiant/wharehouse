@@ -16,4 +16,5 @@
     <color name="card_shadow">#10000000</color>
     <color name="window_background">#00000000</color>
     <color name="click_button">#E1C154</color>
+    <color name="yellow_red">#F4A460</color>
 </resources>

@@ -16,10 +16,11 @@ public class RetrofitSingle  {
      */
     public static ServiceApi getInstance(){
             if(serviceApi==null){
-                synchronized (RetrofitSingle.class){
-                    serviceApi = new RetrofitBuilder().createServiceClass(ServiceApi.class);
-                }
+             serviceApi = ServiceApiHolder.serviceApi;
             }
         return serviceApi;
+    }
+    private static class ServiceApiHolder{
+        private static final ServiceApi serviceApi = new RetrofitBuilder().createServiceClass(ServiceApi.class);
     }
 }

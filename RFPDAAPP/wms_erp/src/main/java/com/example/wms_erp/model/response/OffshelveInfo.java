@@ -26,6 +26,24 @@ public class OffshelveInfo {
     public String WAREHOUSEID;
     public String LOCATIONID;
     public int BATCHNO;
+    public String CELLNO;//库位
+    private double PURUNITQTY;
+
+    public String getCELLNO() {
+        return CELLNO;
+    }
+
+    public void setCELLNO(String CELLNO) {
+        this.CELLNO = CELLNO;
+    }
+
+    public double getPURUNITQTY() {
+        return PURUNITQTY;
+    }
+
+    public void setPURUNITQTY(double PURUNITQTY) {
+        this.PURUNITQTY = PURUNITQTY;
+    }
 
     public double getQTY() {
         return QTY;

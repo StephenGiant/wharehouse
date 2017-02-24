@@ -16,6 +16,8 @@ public class HandleCodeUtil {
         public static final int RIGHTDATE = 101;
     public static final int OVERDATE = 102;
     public static final int ERRORFORMAT=103;
+
+
     public static int checkDate(String code){
         boolean flag = false;
         int status = 101;
@@ -33,6 +35,7 @@ public class HandleCodeUtil {
         if(keepTime!=null) {
            keepDays = Integer.parseInt(keepTime);
         }
+        Log.i("保质期",keepDays+"");
         Calendar calendar = Calendar.getInstance();
         Date curTime = calendar.getTime();
         Log.i("当前日期",curTime.toString());

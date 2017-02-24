@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/ll_reson"
+        android:paddingBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+
+        >
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="商品批次:"
+            android:textColor="@color/text_black"
+
+            />
+        <TextView
+            android:id="@+id/goods_code_dialog"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1111111111111111111111"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textColor="@color/text_gray"
+
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/ll_reson"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#44999999"
+        />
+    <LinearLayout
+        android:layout_below="@id/ll_reson"
+        android:id="@+id/ll_goodsName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="商品名称:"
+            android:textColor="@color/text_black"
+
+            />
+        <TextView
+            android:id="@+id/goods_name_dialog"
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="阿德速度阿斯顿阿斯顿阿斯顿阿斯顿"
+            android:maxLines="1"
+            android:textSize="12sp"
+            android:textColor="@color/text_gray"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_kucun"
+        android:paddingBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+
+        android:layout_below="@+id/ll_goodsName"
+        android:layout_alignLeft="@+id/ll_reson"
+        android:layout_alignStart="@+id/ll_reson"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/subtitle2"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="商品库存:"
+            android:textColor="@color/text_black"
+
+            />
+        <TextView
+            android:id="@+id/content2"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="111111111"
+            android:textSize="13sp"
+            android:textColor="@color/text_gray"
+
+            ></TextView>
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/ll_kucun"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#44999999"
+        />
+    <LinearLayout
+        android:id="@+id/ll_comimtinfo"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/ll_kucun"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+
+        <TextView
+
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="库存数"
+            android:textSize="14sp"
+            android:textColor="@color/text_black"
+
+            android:id="@+id/title_bigunit" />
+        <TextView
+            android:id="@+id/tv_tuijian"
+            android:layout_marginLeft="5dp"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            android:text="5555"
+            />
+
+        <TextView
+            android:id="@+id/title_smallunit"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下架数"
+            android:textSize="14sp"
+            android:textColor="@color/text_black"
+            />
+        <com.example.wms_erp.view.ClearEditText
+            android:id="@+id/et_actuallyNum"
+            android:layout_marginLeft="5dp"
+            android:layout_width="95dp"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:hint="下架数"
+            android:textColorHint="#888888"
+            android:background="@null"
+            android:maxLines="1"
+            android:inputType="numberDecimal"
+            />
+
+
+    </LinearLayout>
+    <View
+        android:layout_below="@id/ll_comimtinfo"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#44999999"
+        />
+    <!--确认下架数-->
+    <Button
+        android:id="@+id/btn_confirmNum"
+        android:layout_below="@id/ll_comimtinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyButtonTheme"
+        android:text="确定下架"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        />
+
+</RelativeLayout>

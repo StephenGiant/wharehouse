@@ -9,21 +9,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
+
 
          >
 
         <TextView
+            android:paddingLeft="5dp"
             android:id="@+id/tv_goodscode"
-            android:layout_width="111dp"
+            android:layout_width="95dp"
             android:layout_height="25dp"
             android:layout_marginLeft="2dp"
             android:layout_marginTop="5dp"
-            android:text="WO"
+            android:text="WOC000000"
             android:textColor="#555555"
-            android:textSize="16sp"
+            android:textSize="13sp"
             android:visibility="visible" >
         </TextView>
 
@@ -32,17 +34,125 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:background="#44000000" />
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
         <TextView
             android:id="@+id/tv_goodsname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:paddingLeft="5dp"
-
+            android:maxLines="1"
+            android:ellipsize="end"
             android:text="精选蜜柚一只精选蜜柚一只精选蜜柚一只"
             android:textColor="#555555"
-            android:textSize="14sp" />
+            android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tv_goods_batchCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:text="批次号:010010101010101"
+        android:textColor="#555555"
+        android:textSize="13sp"
+        />
+</LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/black_de"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+
+
+        >
+
+        <TextView
+
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:background="#00000000"
+            android:padding="5dp"
+            android:text="货位号"
+            android:textColor="#555555"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="wrap_content"
+            android:background="#44000000" />
+
+        <TextView
+
+            android:layout_width="58dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="库存数"
+            android:textColor="#555555"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="wrap_content"
+            android:background="#44000000" />
+
+        <TextView
+
+            android:layout_width="58dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:maxLines="1"
+            android:text="计划数"
+            android:textColor="#555555"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:background="#44000000" />
+
+        <TextView
+            android:layout_marginLeft="5dp"
+         android:padding="5dp"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+
+          android:text="操作数"
+            android:inputType="numberDecimal"
+
+           android:maxLines="1"
+            android:textColor="#555555"
+            android:textSize="15sp"
+
+            />
+
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:background="#44000000" />
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="单位"
+            android:textColor="#555555"
+            android:textSize="15sp"
+            />
+
+
     </LinearLayout>
 <View
     android:layout_width="match_parent"
@@ -60,7 +170,7 @@
 
         <TextView
             android:id="@+id/tv_huowei"
-            android:layout_width="58dp"
+            android:layout_width="57dp"
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:padding="5dp"
@@ -104,24 +214,21 @@
             android:background="#44000000" />
 
         <EditText
+            android:layout_marginLeft="5dp"
             android:id="@+id/et_actuallyNum"
-            android:layout_width="61dp"
+            android:layout_width="55dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
             android:hint="下架数"
            android:inputType="numberDecimal"
             android:paddingBottom="5dp"
-            android:singleLine="true"
+      android:maxLines="1"
+            android:gravity="center"
             android:textColor="#555555"
             android:textSize="13sp"
             android:background="@null"
             />
 
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="2dp"
-            android:background="#44000000" />
 
         <TextView
             android:id="@+id/tv_unitName"
@@ -136,13 +243,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
-            android:padding="5dp" />
-    </LinearLayout>
+            android:padding="5dp"
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:background="#44000000" />
+            android:clickable="false"
+            />
+    </LinearLayout>
 
 
 </LinearLayout>

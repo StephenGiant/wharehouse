@@ -20,8 +20,10 @@ import com.example.wms_erp.view.RecyclerItemClickListener;
 
 import java.util.ArrayList;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -85,13 +87,66 @@ int unEditSize = 100;
      */
     public void getOnShelveInfo(final String barCode){
         String code = barCode;
-        serviceApi.getOnShelveInfo(code.substring(0,code.length()-8)).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<OnShelveInfo>>() {
+//        serviceApi.getOnShelveInfo(code.substring(0,code.length()-8)).subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<BaseBean<OnShelveInfo>>() {
+//            @Override
+//            public void onStart() {
+//                activity.showLoadingDialog("");
+//            }
+//
+//            @Override
+//            public void onCompleted() {
+//
+//            }
+//
+//            @Override
+//            public void onError(Throwable e) {
+//                activity.ToastCheese(e.toString()+"上架");
+//                activity.hideLoadingDialog();
+//            }
+//
+//            @Override
+//            public void onNext(BaseBean<OnShelveInfo> onShelveInfoBaseBean) {
+//                activity.hideLoadingDialog();
+////                activity.ToastCheese(onShelveInfoBaseBean.getDATA().toString());
+//                if(onShelveInfoBaseBean.getDATA()!=null) {
+//                    onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
+//                    if(fragment.codes.size()>0&&fragment.codes.contains(barCode)){
+//                        //如果已经扫过了 就什么都不做并提示
+//                        try {
+//                            showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+////                        activity.ToastCheese("请勿重复扫描");
+//                    }else {
+//                       unEdit=barCode;
+//                        OnoffBlindFragment.codes.add(barCode);
+//                        showOnShelveInfo(onShelveInfoBaseBean.getDATA());
+//                        try {
+//                            showOnshelveDialog(onShelveInfoBaseBean.getDATA());
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }else{
+//                    activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
+//                }
+//
+//            }
+//        });
+        //新方式
+        serviceApi.getOnShelveInfo(code.substring(0,code.length()-8)).flatMap(new Func1<BaseBean<OnShelveInfo>, Observable<OnShelveInfo>>() {
             @Override
-            public void onStart() {
-                activity.showLoadingDialog("");
+            public Observable<OnShelveInfo> call(BaseBean<OnShelveInfo> onShelveInfoBaseBean) {
+                if(onShelveInfoBaseBean!=null)
+                return Observable.just(onShelveInfoBaseBean.getDATA());
+                else {
+                    activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
+                    return null;
+                }
             }
-
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<OnShelveInfo>() {
             @Override
             public void onCompleted() {
 
@@ -99,17 +154,14 @@ int unEditSize = 100;
 
             @Override
             public void onError(Throwable e) {
-                activity.ToastCheese(e.toString()+"上架");
-                activity.hideLoadingDialog();
+
             }
 
             @Override
-            public void onNext(BaseBean<OnShelveInfo> onShelveInfoBaseBean) {
-                activity.hideLoadingDialog();
-//                activity.ToastCheese(onShelveInfoBaseBean.getDATA().toString());
-                if(onShelveInfoBaseBean.getDATA()!=null) {
-                    onShelveInfoBaseBean.getDATA().setGOODSBATCHCODE(barCode);
-                    if(fragment.codes.size()>0&&fragment.codes.contains(barCode)){
+            public void onNext(OnShelveInfo info) {
+                if(info!=null) {
+                    info.setGOODSBATCHCODE(barCode);
+                    if (fragment.codes.size() > 0 && fragment.codes.contains(barCode)) {
                         //如果已经扫过了 就什么都不做并提示
                         try {
                             showOnshelveDialog(onShelveInfos.get(OnoffBlindFragment.codes.indexOf(barCode)));
@@ -117,20 +169,19 @@ int unEditSize = 100;
                             e.printStackTrace();
                         }
 //                        activity.ToastCheese("请勿重复扫描");
-                    }else {
-                       unEdit=barCode;
+                    } else {
+                        unEdit = barCode;
                         OnoffBlindFragment.codes.add(barCode);
-                        showOnShelveInfo(onShelveInfoBaseBean.getDATA());
+                        showOnShelveInfo(info);
                         try {
-                            showOnshelveDialog(onShelveInfoBaseBean.getDATA());
+                            showOnshelveDialog(info);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }else{
-                    activity.ToastCheese(onShelveInfoBaseBean.getMESSAGE());
-                }
 
+                }
             }
         });
     }
@@ -176,8 +227,8 @@ adapter.notifyDataSetChanged();
                     }
                 }
             });
-        FragmentManager manager = activity.getSupportFragmentManager();
-        android.app.FragmentManager activityFragmentManager = activity.getFragmentManager();
+//        FragmentManager manager = activity.getSupportFragmentManager();
+//        android.app.FragmentManager activityFragmentManager = activity.getFragmentManager();
         dialog.show(activity.getFragmentManager(),"onshelve");
     }
 

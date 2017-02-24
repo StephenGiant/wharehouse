@@ -84,6 +84,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -112,6 +113,7 @@ import com.example.wms_erp.fragment.TiaoZhengFragment;
 import com.example.wms_erp.model.VersionInfo;
 import com.example.wms_erp.retrofit.RetrofitSingle;
 import com.example.wms_erp.retrofit.ServiceApi;
+import com.example.wms_erp.util.HandleCodeUtil;
 import com.example.wms_erp.util.OkHttpClientManager;
 import com.example.wms_erp.util.SharePreUtil;
 import com.example.wms_erp.view.NoScrollViewPager;
@@ -126,6 +128,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.InterfaceAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -201,6 +206,10 @@ public class MainActivity extends BaseActivity
         toolbar.setTitle("盲扫上下架");
         setSupportActionBar(toolbar);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+//        int checkDate = HandleCodeUtil.checkDate("011601020160414720");
+//        if(checkDate==HandleCodeUtil.OVERDATE){
+//            ToastCheese("过期了");
+//        }
 
 //        Log.i("testConfig",BuildConfig.URL);
 //        RxBus.getDefault().toObserverable().subscribe(new Subscriber<Object>() {
@@ -259,7 +268,7 @@ public class MainActivity extends BaseActivity
 //            });
 //        }
 //        showToast();
-        checkUpdate();
+//        checkUpdate();
 
     }
 
@@ -444,7 +453,7 @@ public class MainActivity extends BaseActivity
 //    }
 
     private void checkUpdate(){
-        if(!BuildConfig.DEBUG) {
+        if(BuildConfig.DEBUG) {
 
             FIR.checkForUpdateInFIR(ApiConfig.FIRTOKEN, new VersionCheckCallback() {
                 @Override
@@ -452,7 +461,10 @@ public class MainActivity extends BaseActivity
                     Log.i("fir", "check from fir.im success! " + "\n" + versionJson);
                     Gson gson = new Gson();
                     VersionInfo versionInfo = gson.fromJson(versionJson, VersionInfo.class);
-                    ToastCheese(versionInfo.getInstallUrl());
+                    String versionShort = versionInfo.getVersionShort();
+
+
+//                    ToastCheese(versionInfo.getInstallUrl());
 //                serviceApi.getNewVersion(versionInfo.getInstallUrl()).subscribeOn(Schedulers.io())
 //                        .observeOn(AndroidSchedulers.mainThread())
 //                        .subscribe(new Subscriber<Response>() {
@@ -515,6 +527,23 @@ public class MainActivity extends BaseActivity
             });
         }
 
+        NetworkInterface iface = null;
+        try {
+            iface = NetworkInterface.getByName("https://www.baidu.com");
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+        if (iface != null) {
+
+            for (InterfaceAddress address : iface.getInterfaceAddresses()) {
+                String ip = address.getAddress().getHostAddress();
+                if (ip.length() <= 15) {
+                    Log.i("ip", "ip:" + ip);
+                }
+            }
+        }else{
+            Log.i("ip地址","获取失败");
+        }
     }
 
 
@@ -552,9 +581,39 @@ public class MainActivity extends BaseActivity
 
     private void installNewVersion(){
         String dir = Environment.getExternalStorageDirectory() + "wms.apk";
-        ToastCheese(dir+"试试");
+//        ToastCheese(dir+"试试");
 //        Intent intent = new Intent(Intent.ACTION_VIEW);
 //        intent.setDataAndType(Uri.fromFile(new File(dir)), "application/vnd.android.package-archive");
 //        startActivity(intent);
+    }
+    long curTime = 0;
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        switch (keyCode){
+            case KeyEvent.KEYCODE_BACK:
+                //返回键
+                if(curTime!=0) {
+                    if(System.currentTimeMillis()-curTime<1000){
+                        //视为双击
+                        finish();
+                        return false;
+                    }else{
+                        curTime = System.currentTimeMillis();
+                        ToastCheese("再点击一次返回键退出");
+                        return false;
+                    }
+                }else{
+                    curTime = System.currentTimeMillis();
+                    ToastCheese("再点击一次返回键退出");
+                    return false;
+                }
+
+
+
+            default:
+                return super.onKeyDown(keyCode, event);
+        }
+
     }
 }

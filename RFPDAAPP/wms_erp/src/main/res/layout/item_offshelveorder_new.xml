@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:id="@+id/title_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="条码"
+        />
+    <TextView
+        android:layout_marginLeft="63dp"
+        android:id="@+id/title_goodsName"
+        android:layout_toRightOf="@id/title_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="名称"
+
+
+        />
+
+
+<TextView
+    android:layout_marginLeft="10dp"
+    android:layout_below="@id/title_code"
+    android:id="@+id/tv_code"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="0148010010"
+
+    />
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:id="@+id/tv_goodsName"
+        android:layout_below="@id/title_goodsName"
+        android:layout_toRightOf="@id/tv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+android:maxLines="1"
+        android:text="大豆油"
+
+        />
+    <View
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:id="@+id/line"
+        android:layout_below="@id/tv_goodsName"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#666666"
+        />
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:id="@+id/title_goodsLoc"
+        android:layout_below="@id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="货位"
+
+
+        />
+    <TextView
+        android:layout_marginLeft="12dp"
+        android:id="@+id/tv_goodsLoc"
+        android:layout_below="@id/title_goodsLoc"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CY1Y2"
+        />
+
+    <TextView
+        android:layout_marginLeft="25dp"
+        android:id="@+id/title_planNum"
+        android:layout_toRightOf="@id/title_goodsLoc"
+        android:layout_below="@id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="计划"
+
+
+        />
+    <TextView
+        android:layout_marginLeft="15dp"
+        android:id="@+id/tltle_invNum"
+        android:layout_below="@id/line"
+        android:layout_toRightOf="@id/title_planNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="库存"
+android:visibility="gone"
+
+        />
+
+
+
+    <TextView
+
+        android:layout_marginLeft="5dp"
+        android:gravity="center"
+        android:layout_below="@id/title_planNum"
+        android:id="@+id/tv_planQty"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:text="1.0"
+        android:textSize="14sp"
+        android:layout_toRightOf="@id/tv_goodsLoc"
+        android:background="@null"
+
+      />
+
+    <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/tv_planQty"
+        android:id="@+id/tv_invQty"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+android:gravity="center"
+        android:text="0.0"
+        android:layout_below="@+id/tltle_invNum"
+        android:visibility="gone"
+        />
+
+    <TextView
+        android:layout_marginLeft="20dp"
+        android:id="@+id/title_oprateNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已下"
+        android:layout_toRightOf="@id/title_planNum"
+        android:layout_below="@id/line"
+        />
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_width="40dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_invNum"
+        android:text="0.00"
+        android:layout_below="@+id/title_oprateNum"
+        android:layout_toRightOf="@id/tv_invQty"
+        />
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/title_unit"
+        android:layout_toRightOf="@id/title_oprateNum"
+        android:layout_below="@id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="单位"
+        />
+    <TextView
+        android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/tv_invNum"
+        android:id="@+id/tv_unitName"
+        android:layout_below="@id/title_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="unit"
+
+        />
+    <View
+        android:layout_marginTop="2dp"
+     android:layout_below="@id/tv_unitName"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#666666"
+
+        />
+
+</RelativeLayout>

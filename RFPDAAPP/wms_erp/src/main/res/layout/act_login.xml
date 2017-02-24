@@ -2,12 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-<include
 
-    layout="@layout/toolbar_layout"
+    <include
 
-    />
+        layout="@layout/toolbar_layout"
+
+        />
+
     <FrameLayout
+
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <LinearLayout
@@ -50,7 +54,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     style="@style/MyButtonTheme"
-    android:text="登陆"
+    android:text="登录"
 
     />
     </LinearLayout>
@@ -66,7 +70,7 @@
             <TextView
                 android:id="@+id/tv_userName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" 
+                android:layout_height="wrap_content"
                 android:text="用户名:"
                 android:textSize="18sp"
                 android:textColor="@color/text_black"
@@ -75,6 +79,7 @@
         </LinearLayout>
     </FrameLayout>
     <Button
+
         android:layout_marginTop="20dp"
         android:id="@+id/btn_quit"
         android:layout_marginLeft="16dp"
@@ -85,4 +90,5 @@
         android:text="注销"
 
         />
+
 </LinearLayout>

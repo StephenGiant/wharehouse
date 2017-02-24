@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include
+    layout="@layout/toolbar_layout"
+
+    />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/ll_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+<com.example.wms_erp.view.ClearEditText
+    android:id="@+id/et_userName"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="18sp"
+    android:hint="输入账号"
+    android:textColorHint="#999999"
+    android:textColor="#666666"
+
+    />
+    <com.example.wms_erp.view.ClearEditText
+        android:id="@+id/et_password"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:hint="输入密码"
+        android:textColorHint="#999999"
+        android:textColor="#666666"
+
+        />
+
+<Button
+    android:id="@+id/btn_login"
+    android:layout_marginTop="30dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/MyButtonTheme"
+    android:text="登陆"
+
+    />
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_userInfo"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:background="@color/white"
+            >
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" 
+                android:text="用户名:"
+                android:textSize="18sp"
+                android:textColor="@color/text_black"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/btn_quit"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/MyButtonTheme"
+        android:text="注销"
+
+        />
+</LinearLayout>

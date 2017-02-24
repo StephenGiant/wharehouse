@@ -1,6 +1,7 @@
 package com.example.wms_erp.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -46,7 +47,7 @@ import rx.schedulers.Schedulers;
  * Created by Administrator on 2016/8/18.
  */
 public class LoginAct extends BaseActivity {
-
+//
     @Bind(R.id.titile_toolbar)
     Toolbar titileToolbar;
     @Bind(R.id.et_userName)
@@ -77,7 +78,7 @@ public class LoginAct extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
         ButterKnife.bind(this);
-        titileToolbar.setTitle("登陆界面");
+        titileToolbar.setTitle("登录界面");
         userID = getIntent().getIntExtra("userID", -1);
         titileToolbar.setBackgroundResource(R.color.colorPrimary);
         titileToolbar.setTitleTextColor(Color.parseColor("#FFFFFF"));
@@ -112,7 +113,8 @@ public class LoginAct extends BaseActivity {
                     SharePreUtil.putInteger(LoginAct.this, "userID", userInfoBaseBean.getDATA().getUSERID());
                     SharePreUtil.putString(LoginAct.this, "userName", userInfoBaseBean.getDATA().getUSERNAME());
                     application.userInfo = userInfoBaseBean.getDATA();
-                    finish();
+                    toMain();
+
                 } else {
                     ToastCheese(userInfoBaseBean.getMESSAGE());
                 }
@@ -187,7 +189,12 @@ public class LoginAct extends BaseActivity {
         OkHttpClient okHttpClient = new OkHttpClient();
         okHttpClient.setSocketFactory(sslSocketFactory);
     }
-
+private void toMain(){
+    Intent intent = new Intent(this, MainActivity.class);
+    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    startActivity(intent);
+    finish();
+}
 
 
     }

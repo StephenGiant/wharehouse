@@ -12,17 +12,18 @@
 
         >
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.LoginAct"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme"
+       >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginAct"
-            android:theme="@style/AppTheme.NoActionBar.MyTheme"
+        <activity android:name=".ui.MainActivity"
+            android:theme="@style/AppTheme.MyTheme"
             >
 
         </activity>
@@ -30,7 +31,7 @@
 
         </activity>
         <activity android:name=".ui.NewHomeAct"
-            android:theme="@style/AppTheme.NoActionBar.MyTheme"
+            android:theme="@style/AppTheme"
             >
 
         </activity>

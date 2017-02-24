@@ -1,1 +1,1 @@
-include ':app', ':wms_erp'
+include ':app', ':wms_erp', ':mdstyle'

@@ -1,6 +1,7 @@
 package com.example.wms_erp.retrofit;
 
 import com.example.wms_erp.model.BaseBean;
+import com.example.wms_erp.model.post.OffshelveOrderRequest_sign;
 import com.example.wms_erp.model.post.OnShelvebean;
 import com.example.wms_erp.model.response.GoodsLocInfo;
 import com.example.wms_erp.model.response.Kuwei;
@@ -115,6 +116,8 @@ public interface ServiceApi {
     @POST("OffShelvesOrder/SetOffShelves")
     public Observable<BaseBean<String>> offshelveOrder();
 
+    //----------------------------------------------------------------------------
+    //以下是指令下架
     /**
      * 获取库位，填充sp
      * @param userID
@@ -134,9 +137,35 @@ public interface ServiceApi {
     @GET("OffShelvesOrder/GetOffShelvesInfo")
     public Observable<BaseBean<List<OffshelveInfo>>> getOffshelveOrderInfo(@Query("cellNo") String cellNO,@Query("batchNo")String batchNo,@Query("userID") int userID
     ,@Query("offShelvesDate")String date);
+
+    /**
+     * 提交下架
+     * @param userID
+     * @param body
+     * @return
+     */
     @POST("OffShelvesOrder/SetOffShelves")
     public Observable<BaseBean<String>> postOffshelveOrder(@Query("userID") int userID, @Body List<OffshelveInfo> body);
 
+    /**
+     * 检查扫描批次
+     * @param goodsBatchCode
+     * @return
+     */
+    @GET("OffShelvesOrder/CheckLocationInventory")
+    public Observable<BaseBean<OffshelveInfo>> getLocationInventoryOrder(@Query("GoodsBatchCode")String goodsBatchCode);
+
+    /**
+     * 将指令标记为进行中
+     * @param setType
+     * @param requestList
+     * @return
+     */
+    @POST("OffShelvesOrder/SetOffShelvesState")
+    public Observable<BaseBean<Boolean>> SetOffShelvesState(@Query("setType")String setType,@Body List<OffshelveInfo> requestList);
+
+    //------------------------------------------------------------------------------
+    //获取新版本
     @Streaming
     @GET
     public Observable<Response> getNewVersion(@Url String url);
